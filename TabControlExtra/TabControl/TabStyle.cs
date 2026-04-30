@@ -5,7 +5,7 @@
 
 using System.Windows.Forms;
 
-namespace TradeWright.UI.Forms 
+namespace Adiict.UI.Forms
 {
 	public enum TabStyle{
 		None = 0,

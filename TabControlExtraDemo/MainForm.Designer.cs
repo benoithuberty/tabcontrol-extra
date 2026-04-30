@@ -41,7 +41,7 @@ namespace CSCustomTabControlDemo
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.panel1 = new System.Windows.Forms.Panel();
-            this.tabControlExtra7 = new TradeWright.UI.Forms.TabControlExtra();
+            this.tabControlExtra7 = new Adiict.UI.Forms.TabControlExtra();
             this.tabPage32 = new System.Windows.Forms.TabPage();
             this.tabPage33 = new System.Windows.Forms.TabPage();
             this.tabPage34 = new System.Windows.Forms.TabPage();
@@ -52,7 +52,7 @@ namespace CSCustomTabControlDemo
             this.tabPage47 = new System.Windows.Forms.TabPage();
             this.tabPage48 = new System.Windows.Forms.TabPage();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.tabControlExtra9 = new TradeWright.UI.Forms.TabControlExtra();
+            this.tabControlExtra9 = new Adiict.UI.Forms.TabControlExtra();
             this.tabPage69 = new System.Windows.Forms.TabPage();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.tabPage70 = new System.Windows.Forms.TabPage();
@@ -63,7 +63,7 @@ namespace CSCustomTabControlDemo
             this.tabPage75 = new System.Windows.Forms.TabPage();
             this.tabPage76 = new System.Windows.Forms.TabPage();
             this.panel3 = new System.Windows.Forms.Panel();
-            this.tabControlExtra10 = new TradeWright.UI.Forms.TabControlExtra();
+            this.tabControlExtra10 = new Adiict.UI.Forms.TabControlExtra();
             this.tabPage77 = new System.Windows.Forms.TabPage();
             this.tabPage78 = new System.Windows.Forms.TabPage();
             this.tabPage79 = new System.Windows.Forms.TabPage();
@@ -73,7 +73,7 @@ namespace CSCustomTabControlDemo
             this.tabPage83 = new System.Windows.Forms.TabPage();
             this.tabPage84 = new System.Windows.Forms.TabPage();
             this.tabPage85 = new System.Windows.Forms.TabPage();
-            this.tabControlExtra8 = new TradeWright.UI.Forms.TabControlExtra();
+            this.tabControlExtra8 = new Adiict.UI.Forms.TabControlExtra();
             this.tabPage36 = new System.Windows.Forms.TabPage();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.tabPage37 = new System.Windows.Forms.TabPage();
@@ -84,13 +84,13 @@ namespace CSCustomTabControlDemo
             this.tabPage42 = new System.Windows.Forms.TabPage();
             this.tabPage43 = new System.Windows.Forms.TabPage();
             this.tabPage44 = new System.Windows.Forms.TabPage();
-            this.tabControlExtra2 = new TradeWright.UI.Forms.TabControlExtra();
+            this.tabControlExtra2 = new Adiict.UI.Forms.TabControlExtra();
             this.tabPage6 = new System.Windows.Forms.TabPage();
             this.tabPage7 = new System.Windows.Forms.TabPage();
             this.tabPage8 = new System.Windows.Forms.TabPage();
             this.tabPage9 = new System.Windows.Forms.TabPage();
             this.tabPage10 = new System.Windows.Forms.TabPage();
-            this.tabControlExtra1 = new TradeWright.UI.Forms.TabControlExtra();
+            this.tabControlExtra1 = new Adiict.UI.Forms.TabControlExtra();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
@@ -107,25 +107,25 @@ namespace CSCustomTabControlDemo
             this.tabPage66 = new System.Windows.Forms.TabPage();
             this.tabPage67 = new System.Windows.Forms.TabPage();
             this.tabPage68 = new System.Windows.Forms.TabPage();
-            this.tabControlExtra6 = new TradeWright.UI.Forms.TabControlExtra();
+            this.tabControlExtra6 = new Adiict.UI.Forms.TabControlExtra();
             this.tabPage26 = new System.Windows.Forms.TabPage();
             this.tabPage27 = new System.Windows.Forms.TabPage();
             this.tabPage28 = new System.Windows.Forms.TabPage();
             this.tabPage29 = new System.Windows.Forms.TabPage();
             this.tabPage30 = new System.Windows.Forms.TabPage();
-            this.tabControlExtra5 = new TradeWright.UI.Forms.TabControlExtra();
+            this.tabControlExtra5 = new Adiict.UI.Forms.TabControlExtra();
             this.tabPage21 = new System.Windows.Forms.TabPage();
             this.tabPage22 = new System.Windows.Forms.TabPage();
             this.tabPage23 = new System.Windows.Forms.TabPage();
             this.tabPage24 = new System.Windows.Forms.TabPage();
             this.tabPage25 = new System.Windows.Forms.TabPage();
-            this.tabControlExtra3 = new TradeWright.UI.Forms.TabControlExtra();
+            this.tabControlExtra3 = new Adiict.UI.Forms.TabControlExtra();
             this.tabPage11 = new System.Windows.Forms.TabPage();
             this.tabPage12 = new System.Windows.Forms.TabPage();
             this.tabPage13 = new System.Windows.Forms.TabPage();
             this.tabPage14 = new System.Windows.Forms.TabPage();
             this.tabPage15 = new System.Windows.Forms.TabPage();
-            this.tabControlExtra4 = new TradeWright.UI.Forms.TabControlExtra();
+            this.tabControlExtra4 = new Adiict.UI.Forms.TabControlExtra();
             this.tabPage16 = new System.Windows.Forms.TabPage();
             this.tabPage17 = new System.Windows.Forms.TabPage();
             this.tabPage18 = new System.Windows.Forms.TabPage();
@@ -202,11 +202,11 @@ namespace CSCustomTabControlDemo
             this.tabControlExtra7.Controls.Add(this.tabPage46);
             this.tabControlExtra7.Controls.Add(this.tabPage47);
             this.tabControlExtra7.Controls.Add(this.tabPage48);
-            this.tabControlExtra7.DisplayStyle = TradeWright.UI.Forms.TabStyle.VS2010;
+            this.tabControlExtra7.DisplayStyle = Adiict.UI.Forms.TabStyle.VS2010;
             // 
             // 
             // 
-            this.tabControlExtra7.DisplayStyleProvider.BlendStyle = TradeWright.UI.Forms.BlendStyle.Normal;
+            this.tabControlExtra7.DisplayStyleProvider.BlendStyle = Adiict.UI.Forms.BlendStyle.Normal;
             this.tabControlExtra7.DisplayStyleProvider.BorderColorDisabled = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(57)))), ((int)(((byte)(85)))));
             this.tabControlExtra7.DisplayStyleProvider.BorderColorFocused = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(243)))), ((int)(((byte)(205)))));
             this.tabControlExtra7.DisplayStyleProvider.BorderColorHighlighted = System.Drawing.Color.FromArgb(((int)(((byte)(155)))), ((int)(((byte)(167)))), ((int)(((byte)(183)))));
@@ -385,11 +385,11 @@ namespace CSCustomTabControlDemo
             this.tabControlExtra9.Controls.Add(this.tabPage74);
             this.tabControlExtra9.Controls.Add(this.tabPage75);
             this.tabControlExtra9.Controls.Add(this.tabPage76);
-            this.tabControlExtra9.DisplayStyle = TradeWright.UI.Forms.TabStyle.Rectangular;
+            this.tabControlExtra9.DisplayStyle = Adiict.UI.Forms.TabStyle.Rectangular;
             // 
             // 
             // 
-            this.tabControlExtra9.DisplayStyleProvider.BlendStyle = TradeWright.UI.Forms.BlendStyle.Normal;
+            this.tabControlExtra9.DisplayStyleProvider.BlendStyle = Adiict.UI.Forms.BlendStyle.Normal;
             this.tabControlExtra9.DisplayStyleProvider.BorderColorDisabled = System.Drawing.SystemColors.Control;
             this.tabControlExtra9.DisplayStyleProvider.BorderColorFocused = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(122)))), ((int)(((byte)(204)))));
             this.tabControlExtra9.DisplayStyleProvider.BorderColorHighlighted = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(151)))), ((int)(((byte)(234)))));
@@ -570,11 +570,11 @@ namespace CSCustomTabControlDemo
             this.tabControlExtra10.Controls.Add(this.tabPage84);
             this.tabControlExtra10.Controls.Add(this.tabPage85);
             this.tabControlExtra10.Cursor = System.Windows.Forms.Cursors.Arrow;
-            this.tabControlExtra10.DisplayStyle = TradeWright.UI.Forms.TabStyle.VS2012;
+            this.tabControlExtra10.DisplayStyle = Adiict.UI.Forms.TabStyle.VS2012;
             // 
             // 
             // 
-            this.tabControlExtra10.DisplayStyleProvider.BlendStyle = TradeWright.UI.Forms.BlendStyle.Normal;
+            this.tabControlExtra10.DisplayStyleProvider.BlendStyle = Adiict.UI.Forms.BlendStyle.Normal;
             this.tabControlExtra10.DisplayStyleProvider.BorderColorDisabled = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(57)))), ((int)(((byte)(85)))));
             this.tabControlExtra10.DisplayStyleProvider.BorderColorFocused = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(243)))), ((int)(((byte)(205)))));
             this.tabControlExtra10.DisplayStyleProvider.BorderColorHighlighted = System.Drawing.Color.FromArgb(((int)(((byte)(155)))), ((int)(((byte)(167)))), ((int)(((byte)(183)))));
@@ -745,11 +745,11 @@ namespace CSCustomTabControlDemo
             this.tabControlExtra8.Controls.Add(this.tabPage42);
             this.tabControlExtra8.Controls.Add(this.tabPage43);
             this.tabControlExtra8.Controls.Add(this.tabPage44);
-            this.tabControlExtra8.DisplayStyle = TradeWright.UI.Forms.TabStyle.VS2010;
+            this.tabControlExtra8.DisplayStyle = Adiict.UI.Forms.TabStyle.VS2010;
             // 
             // 
             // 
-            this.tabControlExtra8.DisplayStyleProvider.BlendStyle = TradeWright.UI.Forms.BlendStyle.Normal;
+            this.tabControlExtra8.DisplayStyleProvider.BlendStyle = Adiict.UI.Forms.BlendStyle.Normal;
             this.tabControlExtra8.DisplayStyleProvider.BorderColorDisabled = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(57)))), ((int)(((byte)(85)))));
             this.tabControlExtra8.DisplayStyleProvider.BorderColorFocused = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(243)))), ((int)(((byte)(205)))));
             this.tabControlExtra8.DisplayStyleProvider.BorderColorHighlighted = System.Drawing.Color.FromArgb(((int)(((byte)(155)))), ((int)(((byte)(167)))), ((int)(((byte)(183)))));
@@ -921,11 +921,11 @@ namespace CSCustomTabControlDemo
             this.tabControlExtra2.Controls.Add(this.tabPage8);
             this.tabControlExtra2.Controls.Add(this.tabPage9);
             this.tabControlExtra2.Controls.Add(this.tabPage10);
-            this.tabControlExtra2.DisplayStyle = TradeWright.UI.Forms.TabStyle.VisualStudio;
+            this.tabControlExtra2.DisplayStyle = Adiict.UI.Forms.TabStyle.VisualStudio;
             // 
             // 
             // 
-            this.tabControlExtra2.DisplayStyleProvider.BlendStyle = TradeWright.UI.Forms.BlendStyle.Normal;
+            this.tabControlExtra2.DisplayStyleProvider.BlendStyle = Adiict.UI.Forms.BlendStyle.Normal;
             this.tabControlExtra2.DisplayStyleProvider.BorderColorDisabled = System.Drawing.SystemColors.ControlLight;
             this.tabControlExtra2.DisplayStyleProvider.BorderColorFocused = System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(157)))), ((int)(((byte)(185)))));
             this.tabControlExtra2.DisplayStyleProvider.BorderColorHighlighted = System.Drawing.SystemColors.ControlDark;
@@ -1062,7 +1062,7 @@ namespace CSCustomTabControlDemo
             // 
             // 
             // 
-            this.tabControlExtra1.DisplayStyleProvider.BlendStyle = TradeWright.UI.Forms.BlendStyle.Normal;
+            this.tabControlExtra1.DisplayStyleProvider.BlendStyle = Adiict.UI.Forms.BlendStyle.Normal;
             this.tabControlExtra1.DisplayStyleProvider.BorderColorDisabled = System.Drawing.SystemColors.ControlLight;
             this.tabControlExtra1.DisplayStyleProvider.BorderColorFocused = System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(157)))), ((int)(((byte)(185)))));
             this.tabControlExtra1.DisplayStyleProvider.BorderColorHighlighted = System.Drawing.SystemColors.ControlDark;
@@ -1298,11 +1298,11 @@ namespace CSCustomTabControlDemo
             this.tabControlExtra6.Controls.Add(this.tabPage28);
             this.tabControlExtra6.Controls.Add(this.tabPage29);
             this.tabControlExtra6.Controls.Add(this.tabPage30);
-            this.tabControlExtra6.DisplayStyle = TradeWright.UI.Forms.TabStyle.IE8;
+            this.tabControlExtra6.DisplayStyle = Adiict.UI.Forms.TabStyle.IE8;
             // 
             // 
             // 
-            this.tabControlExtra6.DisplayStyleProvider.BlendStyle = TradeWright.UI.Forms.BlendStyle.Normal;
+            this.tabControlExtra6.DisplayStyleProvider.BlendStyle = Adiict.UI.Forms.BlendStyle.Normal;
             this.tabControlExtra6.DisplayStyleProvider.BorderColorDisabled = System.Drawing.SystemColors.ControlLight;
             this.tabControlExtra6.DisplayStyleProvider.BorderColorFocused = System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(157)))), ((int)(((byte)(185)))));
             this.tabControlExtra6.DisplayStyleProvider.BorderColorHighlighted = System.Drawing.SystemColors.ControlDark;
@@ -1430,11 +1430,11 @@ namespace CSCustomTabControlDemo
             this.tabControlExtra5.Controls.Add(this.tabPage23);
             this.tabControlExtra5.Controls.Add(this.tabPage24);
             this.tabControlExtra5.Controls.Add(this.tabPage25);
-            this.tabControlExtra5.DisplayStyle = TradeWright.UI.Forms.TabStyle.Chrome;
+            this.tabControlExtra5.DisplayStyle = Adiict.UI.Forms.TabStyle.Chrome;
             // 
             // 
             // 
-            this.tabControlExtra5.DisplayStyleProvider.BlendStyle = TradeWright.UI.Forms.BlendStyle.Normal;
+            this.tabControlExtra5.DisplayStyleProvider.BlendStyle = Adiict.UI.Forms.BlendStyle.Normal;
             this.tabControlExtra5.DisplayStyleProvider.BorderColorDisabled = System.Drawing.SystemColors.ControlLight;
             this.tabControlExtra5.DisplayStyleProvider.BorderColorFocused = System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(157)))), ((int)(((byte)(185)))));
             this.tabControlExtra5.DisplayStyleProvider.BorderColorHighlighted = System.Drawing.SystemColors.ControlDark;
@@ -1561,11 +1561,11 @@ namespace CSCustomTabControlDemo
             this.tabControlExtra3.Controls.Add(this.tabPage13);
             this.tabControlExtra3.Controls.Add(this.tabPage14);
             this.tabControlExtra3.Controls.Add(this.tabPage15);
-            this.tabControlExtra3.DisplayStyle = TradeWright.UI.Forms.TabStyle.Rounded;
+            this.tabControlExtra3.DisplayStyle = Adiict.UI.Forms.TabStyle.Rounded;
             // 
             // 
             // 
-            this.tabControlExtra3.DisplayStyleProvider.BlendStyle = TradeWright.UI.Forms.BlendStyle.Normal;
+            this.tabControlExtra3.DisplayStyleProvider.BlendStyle = Adiict.UI.Forms.BlendStyle.Normal;
             this.tabControlExtra3.DisplayStyleProvider.BorderColorDisabled = System.Drawing.SystemColors.ControlLight;
             this.tabControlExtra3.DisplayStyleProvider.BorderColorFocused = System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(157)))), ((int)(((byte)(185)))));
             this.tabControlExtra3.DisplayStyleProvider.BorderColorHighlighted = System.Drawing.SystemColors.ControlDark;
@@ -1703,11 +1703,11 @@ namespace CSCustomTabControlDemo
             this.tabControlExtra4.Controls.Add(this.tabPage57);
             this.tabControlExtra4.Controls.Add(this.tabPage58);
             this.tabControlExtra4.Controls.Add(this.tabPage59);
-            this.tabControlExtra4.DisplayStyle = TradeWright.UI.Forms.TabStyle.Angled;
+            this.tabControlExtra4.DisplayStyle = Adiict.UI.Forms.TabStyle.Angled;
             // 
             // 
             // 
-            this.tabControlExtra4.DisplayStyleProvider.BlendStyle = TradeWright.UI.Forms.BlendStyle.Normal;
+            this.tabControlExtra4.DisplayStyleProvider.BlendStyle = Adiict.UI.Forms.BlendStyle.Normal;
             this.tabControlExtra4.DisplayStyleProvider.BorderColorDisabled = System.Drawing.SystemColors.ControlLight;
             this.tabControlExtra4.DisplayStyleProvider.BorderColorFocused = System.Drawing.Color.Red;
             this.tabControlExtra4.DisplayStyleProvider.BorderColorHighlighted = System.Drawing.Color.Black;
@@ -1987,46 +1987,46 @@ namespace CSCustomTabControlDemo
 		private System.Windows.Forms.TabPage tabPage34;
 		private System.Windows.Forms.TabPage tabPage33;
         private System.Windows.Forms.TabPage tabPage32;
-		private TradeWright.UI.Forms.TabControlExtra tabControlExtra7;
+		private Adiict.UI.Forms.TabControlExtra tabControlExtra7;
 		private System.Windows.Forms.TabPage tabPage30;
 		private System.Windows.Forms.TabPage tabPage29;
 		private System.Windows.Forms.TabPage tabPage28;
 		private System.Windows.Forms.TabPage tabPage27;
 		private System.Windows.Forms.TabPage tabPage26;
-		private TradeWright.UI.Forms.TabControlExtra tabControlExtra6;
+		private Adiict.UI.Forms.TabControlExtra tabControlExtra6;
 		private System.Windows.Forms.TabPage tabPage25;
 		private System.Windows.Forms.TabPage tabPage24;
 		private System.Windows.Forms.TabPage tabPage23;
 		private System.Windows.Forms.TabPage tabPage22;
 		private System.Windows.Forms.TabPage tabPage21;
-		private TradeWright.UI.Forms.TabControlExtra tabControlExtra5;
+		private Adiict.UI.Forms.TabControlExtra tabControlExtra5;
 		private System.Windows.Forms.TabPage tabPage20;
 		private System.Windows.Forms.TabPage tabPage19;
 		private System.Windows.Forms.TabPage tabPage18;
 		private System.Windows.Forms.TabPage tabPage17;
 		private System.Windows.Forms.TabPage tabPage16;
-		private TradeWright.UI.Forms.TabControlExtra tabControlExtra4;
+		private Adiict.UI.Forms.TabControlExtra tabControlExtra4;
 		private System.Windows.Forms.TabPage tabPage15;
 		private System.Windows.Forms.TabPage tabPage14;
 		private System.Windows.Forms.TabPage tabPage13;
 		private System.Windows.Forms.TabPage tabPage12;
 		private System.Windows.Forms.TabPage tabPage11;
-		private TradeWright.UI.Forms.TabControlExtra tabControlExtra3;
+		private Adiict.UI.Forms.TabControlExtra tabControlExtra3;
 		private System.Windows.Forms.TabPage tabPage10;
 		private System.Windows.Forms.TabPage tabPage9;
 		private System.Windows.Forms.TabPage tabPage8;
 		private System.Windows.Forms.TabPage tabPage7;
 		private System.Windows.Forms.TabPage tabPage6;
-		private TradeWright.UI.Forms.TabControlExtra tabControlExtra2;
+		private Adiict.UI.Forms.TabControlExtra tabControlExtra2;
 		private System.Windows.Forms.TabPage tabPage3;
 		private System.Windows.Forms.TabPage tabPage5;
 		private System.Windows.Forms.TabPage tabPage4;
 		private System.Windows.Forms.TabPage tabPage2;
 		private System.Windows.Forms.TabPage tabPage1;
-		private TradeWright.UI.Forms.TabControlExtra tabControlExtra1;
+		private Adiict.UI.Forms.TabControlExtra tabControlExtra1;
 		private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
 		private System.Windows.Forms.ImageList imageList1;
-        private TradeWright.UI.Forms.TabControlExtra tabControlExtra8;
+        private Adiict.UI.Forms.TabControlExtra tabControlExtra8;
         private System.Windows.Forms.TabPage tabPage36;
         private System.Windows.Forms.TabPage tabPage37;
         private System.Windows.Forms.TabPage tabPage38;
@@ -2062,7 +2062,7 @@ namespace CSCustomTabControlDemo
         private System.Windows.Forms.TabPage tabPage66;
         private System.Windows.Forms.TabPage tabPage67;
         private System.Windows.Forms.TabPage tabPage68;
-        private TradeWright.UI.Forms.TabControlExtra tabControlExtra9;
+        private Adiict.UI.Forms.TabControlExtra tabControlExtra9;
         private System.Windows.Forms.TabPage tabPage69;
         private System.Windows.Forms.TabPage tabPage70;
         private System.Windows.Forms.PictureBox pictureBox2;
@@ -2074,7 +2074,7 @@ namespace CSCustomTabControlDemo
         private System.Windows.Forms.TabPage tabPage76;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Panel panel3;
-        private TradeWright.UI.Forms.TabControlExtra tabControlExtra10;
+        private Adiict.UI.Forms.TabControlExtra tabControlExtra10;
         private System.Windows.Forms.TabPage tabPage77;
         private System.Windows.Forms.TabPage tabPage78;
         private System.Windows.Forms.TabPage tabPage79;

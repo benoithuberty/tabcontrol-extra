@@ -9,13 +9,17 @@ using System.ComponentModel;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
+#if NETFRAMEWORK
 using System.Security.Permissions;
+#endif
 using System.Windows.Forms;
 
-namespace TradeWright.UI.Forms {
+namespace Adiict.UI.Forms
+{
 
     [ToolboxBitmapAttribute(typeof(TabControl))]
-    public class TabControlExtra : TabControl {
+    public class TabControlExtra : TabControl
+    {
 
         #region constants
 
@@ -32,7 +36,8 @@ namespace TradeWright.UI.Forms {
 
         #region	Construction
 
-        public TabControlExtra() {
+        public TabControlExtra()
+        {
 
             this.SetStyle(ControlStyles.UserPaint | ControlStyles.AllPaintingInWmPaint | ControlStyles.Opaque | ControlStyles.ResizeRedraw, true);
 
@@ -40,21 +45,27 @@ namespace TradeWright.UI.Forms {
             this._BackBufferGraphics = Graphics.FromImage(this._BackBuffer);
             this._TabBuffer = new Bitmap(this.Width, this.Height);
             this._TabBufferGraphics = Graphics.FromImage(this._TabBuffer);
-            
+
             this.SuspendLayout();
             this.DisplayStyle = TabStyle.Default;
             this.ResumeLayout();
 
         }
 
-        protected override void OnCreateControl() {
+        protected override void OnCreateControl()
+        {
             base.OnCreateControl();
+
+            _Dpi = (int)_TabBufferGraphics.DpiX;
+            this.ApplyDpi(_Dpi);
             this.OnFontChanged(EventArgs.Empty);
         }
 
         protected override CreateParams CreateParams
         {
+#if NETFRAMEWORK
             [SecurityPermission(SecurityAction.LinkDemand, Flags = SecurityPermissionFlag.UnmanagedCode)]
+#endif
             get
             {
                 CreateParams cp = base.CreateParams;
@@ -67,24 +78,31 @@ namespace TradeWright.UI.Forms {
         protected override void Dispose(bool disposing)
         {
             base.Dispose(disposing);
-            if (disposing) {
-                if (this._BackImage != null) {
+            if (disposing)
+            {
+                if (this._BackImage != null)
+                {
                     this._BackImage.Dispose();
                 }
-                if (this._BackBufferGraphics != null) {
+                if (this._BackBufferGraphics != null)
+                {
                     this._BackBufferGraphics.Dispose();
                 }
-                if (this._BackBuffer != null) {
+                if (this._BackBuffer != null)
+                {
                     this._BackBuffer.Dispose();
                 }
-                if (this._TabBufferGraphics != null) {
+                if (this._TabBufferGraphics != null)
+                {
                     this._TabBufferGraphics.Dispose();
                 }
-                if (this._TabBuffer != null) {
+                if (this._TabBuffer != null)
+                {
                     this._TabBuffer.Dispose();
                 }
 
-                if (this._StyleProvider != null) {
+                if (this._StyleProvider != null)
+                {
                     this._StyleProvider.Dispose();
                 }
             }
@@ -101,7 +119,7 @@ namespace TradeWright.UI.Forms {
         private Graphics _TabBufferGraphics;
 
         private GraphicsPath _PrevTabCloserButtonPath;
-        
+
         private int _oldValue;
         private Point _dragStartPosition = Point.Empty;
 
@@ -112,29 +130,38 @@ namespace TradeWright.UI.Forms {
 
         private bool _SuspendDrawing;
 
+        private int _Dpi;
+
         #endregion
 
         #region Public properties
 
         [Category("Appearance"), DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
-        public TabStyleProvider DisplayStyleProvider {
-            get {
-                if (this._StyleProvider == null) {
+        public TabStyleProvider DisplayStyleProvider
+        {
+            get
+            {
+                if (this._StyleProvider == null)
+                {
                     this.DisplayStyle = TabStyle.Default;
                 }
 
                 return this._StyleProvider;
             }
-            set {
+            set
+            {
                 this._StyleProvider = value;
             }
         }
 
         [Category("Appearance"), DefaultValue(typeof(TabStyle), "Default"), RefreshProperties(RefreshProperties.All)]
-        public TabStyle DisplayStyle {
+        public TabStyle DisplayStyle
+        {
             get { return this._Style; }
-            set {
-                if (this._Style != value) {
+            set
+            {
+                if (this._Style != value)
+                {
                     this._Style = value;
                     this._StyleProvider = TabStyleProvider.CreateProvider(this);
                 }
@@ -152,12 +179,17 @@ namespace TradeWright.UI.Forms {
             }
         }
 
-        [Category("Appearance"), RefreshProperties(RefreshProperties.All)]
-        public new bool Multiline {
-            get {
+        [Category("Appearance"), 
+            RefreshProperties(RefreshProperties.All), 
+            DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+        public new bool Multiline
+        {
+            get
+            {
                 return base.Multiline;
             }
-            set {
+            set
+            {
                 base.Multiline = value;
             }
         }
@@ -166,17 +198,22 @@ namespace TradeWright.UI.Forms {
         //	Hide the Padding attribute so it can not be changed
         //	We are handling this on the Style Provider
         [Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
-        public new Point Padding {
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public new Point Padding
+        {
             get { return this.DisplayStyleProvider.Padding; }
-            set {
+            set
+            {
                 this.DisplayStyleProvider.Padding = value;
             }
         }
 
         [Category("Appearance"), RefreshProperties(RefreshProperties.All)]
-        public override bool RightToLeftLayout {
+        public override bool RightToLeftLayout
+        {
             get { return base.RightToLeftLayout; }
-            set {
+            set
+            {
                 base.RightToLeftLayout = value;
                 this.UpdateStyles();
             }
@@ -185,19 +222,25 @@ namespace TradeWright.UI.Forms {
         //	Hide the HotTrack attribute so it can not be changed
         //	We are handling this on the Style Provider
         [Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
-        public new bool HotTrack {
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public new bool HotTrack
+        {
             get { return this.DisplayStyleProvider.HotTrack; }
-            set {
+            set
+            {
                 this.DisplayStyleProvider.HotTrack = value;
             }
         }
 
-        [Category("Appearance")]
-        public new TabAlignment Alignment {
+        [Category("Appearance"), DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+        public new TabAlignment Alignment
+        {
             get { return base.Alignment; }
-            set {
+            set
+            {
                 base.Alignment = value;
-                switch (value) {
+                switch (value)
+                {
                     case TabAlignment.Top:
                     case TabAlignment.Bottom:
                         this.Multiline = false;
@@ -213,38 +256,51 @@ namespace TradeWright.UI.Forms {
         //	Hide the Appearance attribute so it can not be changed
         //	We don't want it as we are doing all the painting.
         [Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "value")]
-        public new TabAppearance Appearance {
-            get {
+        public new TabAppearance Appearance
+        {
+            get
+            {
                 return base.Appearance;
             }
 #pragma warning disable RECS0029 // Warns about property or indexer setters and event adders or removers that do not use the value parameter
-            set {
+            set
+            {
 #pragma warning restore RECS0029 // Warns about property or indexer setters and event adders or removers that do not use the value parameter
                 //	Don't permit setting to other appearances as we are doing all the painting
                 base.Appearance = TabAppearance.Normal;
             }
         }
 
-        public override Rectangle DisplayRectangle {
-            get {
+        public override Rectangle DisplayRectangle
+        {
+            get
+            {
                 //	Special processing to hide tabs
-                if (this._Style == TabStyle.None) {
+                if (this._Style == TabStyle.None)
+                {
                     return new Rectangle(0, 0, Width, Height);
-                } else {
+                }
+                else
+                {
                     int tabStripHeight = 0;
                     int itemHeight = 0;
 
-                    if (this.Alignment <= TabAlignment.Bottom) {
+                    if (this.Alignment <= TabAlignment.Bottom)
+                    {
                         itemHeight = this.ItemSize.Height;
-                    } else {
+                    }
+                    else
+                    {
                         itemHeight = this.ItemSize.Width;
                     }
 
                     tabStripHeight = 5 + (itemHeight * this.RowCount);
 
                     Rectangle rect = new Rectangle(4, tabStripHeight, Width - 8, Height - tabStripHeight - 4);
-                    switch (this.Alignment) {
+                    switch (this.Alignment)
+                    {
                         case TabAlignment.Top:
                             rect = new Rectangle(4, tabStripHeight, Width - 8, Height - tabStripHeight - 4);
                             break;
@@ -264,25 +320,36 @@ namespace TradeWright.UI.Forms {
         }
 
         [System.Diagnostics.DebuggerStepThrough()]
-        public int GetActiveIndex(Point mousePosition) {
+        public int GetActiveIndex(Point mousePosition)
+        {
             NativeMethods.TCHITTESTINFO hitTestInfo = new NativeMethods.TCHITTESTINFO(mousePosition);
             int index = SendMessage(NativeMethods.TCM_HITTEST, IntPtr.Zero, NativeMethods.ToIntPtr(hitTestInfo)).ToInt32();
-            if (index == -1) {
+            if (index == -1)
+            {
                 return -1;
-            } else {
-                if (this.TabPages[index].Enabled) {
+            }
+            else
+            {
+                if (this.TabPages[index].Enabled)
+                {
                     return index;
-                } else {
+                }
+                else
+                {
                     return -1;
                 }
             }
         }
 
-        public TabPage GetActiveTab(Point mousePosition) {
+        public TabPage GetActiveTab(Point mousePosition)
+        {
             int activeIndex = this.GetActiveIndex(mousePosition);
-            if (activeIndex > -1) {
+            if (activeIndex > -1)
+            {
                 return this.TabPages[activeIndex];
-            } else {
+            }
+            else
+            {
                 return null;
             }
         }
@@ -291,39 +358,52 @@ namespace TradeWright.UI.Forms {
 
         #region	Public methods
 
-        public void HideTab(TabPage page) {
-            if (page != null && this.TabPages.Contains(page)) {
+        public void HideTab(TabPage page)
+        {
+            if (page != null && this.TabPages.Contains(page))
+            {
                 this.BackupTabPages();
                 this.TabPages.Remove(page);
             }
         }
 
-        public void HideTab(int index) {
-            if (this.IsValidTabIndex(index)) {
+        public void HideTab(int index)
+        {
+            if (this.IsValidTabIndex(index))
+            {
                 this.HideTab(this._TabPages[index]);
             }
         }
 
-        public void HideTab(string key) {
-            if (this.TabPages.ContainsKey(key)) {
+        public void HideTab(string key)
+        {
+            if (this.TabPages.ContainsKey(key))
+            {
                 this.HideTab(this.TabPages[key]);
             }
         }
 
-        public void ShowTab(TabPage page) {
-            if (page != null) {
-                if (this._TabPages != null) {
+        public void ShowTab(TabPage page)
+        {
+            if (page != null)
+            {
+                if (this._TabPages != null)
+                {
                     if (!this.TabPages.Contains(page)
-                        && this._TabPages.Contains(page)) {
+                        && this._TabPages.Contains(page))
+                    {
 
                         //	Get insert point from backup of pages
                         int pageIndex = this._TabPages.IndexOf(page);
-                        if (pageIndex > 0) {
+                        if (pageIndex > 0)
+                        {
                             int start = pageIndex - 1;
 
                             //	Check for presence of earlier pages in the visible tabs
-                            for (int index = start; index >= 0; index--) {
-                                if (this.TabPages.Contains(this._TabPages[index])) {
+                            for (int index = start; index >= 0; index--)
+                            {
+                                if (this.TabPages.Contains(this._TabPages[index]))
+                                {
 
                                     //	Set insert point to the right of the last present tab
                                     pageIndex = this.TabPages.IndexOf(this._TabPages[index]) + 1;
@@ -333,40 +413,52 @@ namespace TradeWright.UI.Forms {
                         }
 
                         //	Insert the page, or add to the end
-                        if ((pageIndex >= 0) && (pageIndex < this.TabPages.Count)) {
+                        if ((pageIndex >= 0) && (pageIndex < this.TabPages.Count))
+                        {
                             this.TabPages.Insert(pageIndex, page);
-                        } else {
+                        }
+                        else
+                        {
                             this.TabPages.Add(page);
                         }
                     }
-                } else {
+                }
+                else
+                {
 
                     //	If the page is not found at all then just add it
-                    if (!this.TabPages.Contains(page)) {
+                    if (!this.TabPages.Contains(page))
+                    {
                         this.TabPages.Add(page);
                     }
                 }
             }
         }
 
-        public void ShowTab(int index) {
-            if (this.IsValidTabIndex(index)) {
+        public void ShowTab(int index)
+        {
+            if (this.IsValidTabIndex(index))
+            {
                 this.ShowTab(this._TabPages[index]);
             }
         }
 
-        public void ShowTab(string key) {
-            if (this._TabPages != null) {
-                TabPage tab = this._TabPages.Find(delegate(TabPage page) { return page.Name.Equals(key, StringComparison.OrdinalIgnoreCase); });
+        public void ShowTab(string key)
+        {
+            if (this._TabPages != null)
+            {
+                TabPage tab = this._TabPages.Find(delegate (TabPage page) { return page.Name.Equals(key, StringComparison.OrdinalIgnoreCase); });
                 this.ShowTab(tab);
             }
         }
 
-        public void ResumeDrawing() {
+        public void ResumeDrawing()
+        {
             _SuspendDrawing = false;
         }
 
-        public void SuspendDrawing() {
+        public void SuspendDrawing()
+        {
             _SuspendDrawing = true;
         }
 
@@ -374,41 +466,51 @@ namespace TradeWright.UI.Forms {
 
         #region Drag 'n' Drop
 
-        protected override void OnMouseDown(MouseEventArgs e) {
+        protected override void OnMouseDown(MouseEventArgs e)
+        {
             var mousePosition = new Point(e.X, e.Y);
             int index = this.GetActiveIndex(mousePosition);
-            if (!this.DesignMode && index > -1 && this._StyleProvider.ShowTabCloser && this.GetTabCloserButtonRect(index).Contains(mousePosition)) {
+            if (!this.DesignMode && index > -1 && this._StyleProvider.ShowTabCloser && this.GetTabCloserButtonRect(index).Contains(mousePosition))
+            {
 
                 //	If we are clicking on a closer then remove the tab instead of raising the standard mouse down event
                 //	But raise the tab closing event first
                 TabPage tab = this.GetActiveTab(mousePosition);
                 TabControlCancelEventArgs args = new TabControlCancelEventArgs(tab, index, false, TabControlAction.Deselecting);
                 this.OnTabClosing(args);
-            } else {
+            }
+            else
+            {
                 base.OnMouseDown(e);
-                if (this.AllowDrop) {
+                if (this.AllowDrop)
+                {
                     this._dragStartPosition = new Point(e.X, e.Y);
                 }
             }
         }
 
-        protected override void OnMouseUp(MouseEventArgs e) {
+        protected override void OnMouseUp(MouseEventArgs e)
+        {
             base.OnMouseUp(e);
-            if (this.AllowDrop) {
+            if (this.AllowDrop)
+            {
                 this._dragStartPosition = Point.Empty;
             }
         }
 
-        protected override void OnDragOver(DragEventArgs drgevent) {
+        protected override void OnDragOver(DragEventArgs drgevent)
+        {
             base.OnDragOver(drgevent);
 
-            if (drgevent.Data.GetDataPresent(typeof(TabPage))) {
+            if (drgevent.Data.GetDataPresent(typeof(TabPage)))
+            {
 
                 TabPage dragTab = (TabPage)drgevent.Data.GetData(typeof(TabPage));
                 this.Cursor = Cursors.Arrow;
                 dragTab.Cursor = Cursors.Arrow;
 
-                if (this.GetActiveTab(new Point(drgevent.X,drgevent.Y)) == dragTab) {
+                if (this.GetActiveTab(new Point(drgevent.X, drgevent.Y)) == dragTab)
+                {
                     return;
                 }
 
@@ -429,20 +531,26 @@ namespace TradeWright.UI.Forms {
                 this.Invalidate();
 
                 //	deal with hidden tab handling?
-            } else {
+            }
+            else
+            {
                 drgevent.Effect = DragDropEffects.None;
             }
         }
 
-        private void StartDragDrop() {
-            if (!this._dragStartPosition.IsEmpty) {
+        private void StartDragDrop()
+        {
+            if (!this._dragStartPosition.IsEmpty)
+            {
                 TabPage dragTab = this.SelectedTab;
-                if (dragTab != null) {
+                if (dragTab != null)
+                {
                     //	Test for movement greater than the drag activation trigger area
                     Rectangle dragTestRect = new Rectangle(this._dragStartPosition, Size.Empty);
                     dragTestRect.Inflate(SystemInformation.DragSize);
                     Point pt = this.PointToClient(Control.MousePosition);
-                    if (!dragTestRect.Contains(pt)) {
+                    if (!dragTestRect.Contains(pt))
+                    {
                         this.DoDragDrop(dragTab, DragDropEffects.Move);
                         this._dragStartPosition = Point.Empty;
                     }
@@ -467,7 +575,8 @@ namespace TradeWright.UI.Forms {
 
         #region	Base class event processing
 
-        protected override void OnFontChanged(EventArgs e) {
+        protected override void OnFontChanged(EventArgs e)
+        {
             //IntPtr hFont = this.Font.ToHfont();
             //NativeMethods.SendMessage(this.Handle, NativeMethods.WM_SETFONT, hFont, (IntPtr)(-1));
             //NativeMethods.SendMessage(this.Handle, NativeMethods.WM_FONTCHANGE, IntPtr.Zero, IntPtr.Zero);
@@ -516,40 +625,50 @@ namespace TradeWright.UI.Forms {
             }
         }
 
-        protected override void OnResize(EventArgs e) {
+        protected override void OnResize(EventArgs e)
+        {
             //var start = DateTime.Now;
             CreateGraphicsBuffers();
             base.OnResize(e);
             //System.Diagnostics.Debug.WriteLine(DateTime.Now.ToString() + " TabControl " + this.GetHashCode() + " resized: " + DateTime.Now.Subtract(start).TotalMilliseconds + "ms; size: " + this.Size.ToString() + " location: " + this.Location.ToString());
         }
 
-        protected override void OnParentBackColorChanged(EventArgs e) {
-            if (this._BackImage != null) {
+        protected override void OnParentBackColorChanged(EventArgs e)
+        {
+            if (this._BackImage != null)
+            {
                 this._BackImage.Dispose();
                 this._BackImage = null;
             }
             base.OnParentBackColorChanged(e);
         }
 
-        protected override void OnParentBackgroundImageChanged(EventArgs e) {
-            if (this._BackImage != null) {
+        protected override void OnParentBackgroundImageChanged(EventArgs e)
+        {
+            if (this._BackImage != null)
+            {
                 this._BackImage.Dispose();
                 this._BackImage = null;
             }
             base.OnParentBackgroundImageChanged(e);
         }
 
-        protected override void OnSelecting(TabControlCancelEventArgs e) {
+        protected override void OnSelecting(TabControlCancelEventArgs e)
+        {
             //	Do not allow selecting of disabled tabs
-            if (e.Action == TabControlAction.Selecting && e.TabPage != null && !e.TabPage.Enabled) {
+            if (e.Action == TabControlAction.Selecting && e.TabPage != null && !e.TabPage.Enabled)
+            {
                 e.Cancel = true;
             }
             base.OnSelecting(e);
         }
 
-        protected override void OnMove(EventArgs e) {
-            if (this.Width > 0 && this.Height > 0) {
-                if (this._BackImage != null) {
+        protected override void OnMove(EventArgs e)
+        {
+            if (this.Width > 0 && this.Height > 0)
+            {
+                if (this._BackImage != null)
+                {
                     this._BackImage.Dispose();
                     this._BackImage = null;
                 }
@@ -558,24 +677,33 @@ namespace TradeWright.UI.Forms {
             this.Invalidate();
         }
 
-        protected override void OnEnter(EventArgs e) {
+        protected override void OnEnter(EventArgs e)
+        {
             base.OnEnter(e);
-            if (this.Visible) {
+            if (this.Visible)
+            {
                 this.OnPaint(new PaintEventArgs(this.CreateGraphics(), this.ClientRectangle));
             }
         }
 
-        protected override void OnLeave(EventArgs e) {
+        protected override void OnLeave(EventArgs e)
+        {
             base.OnLeave(e);
-            if (this.Visible) {
+            if (this.Visible)
+            {
                 this.OnPaint(new PaintEventArgs(this.CreateGraphics(), this.ClientRectangle));
             }
         }
 
+#if NETFRAMEWORK
         [UIPermission(SecurityAction.LinkDemand, Window = UIPermissionWindow.AllWindows)]
-        protected override bool ProcessMnemonic(char charCode) {
-            foreach (TabPage page in this.TabPages) {
-                if (IsMnemonic(charCode, page.Text)) {
+#endif
+        protected override bool ProcessMnemonic(char charCode)
+        {
+            foreach (TabPage page in this.TabPages)
+            {
+                if (IsMnemonic(charCode, page.Text))
+                {
                     this.SelectedTab = page;
                     return true;
                 }
@@ -583,15 +711,20 @@ namespace TradeWright.UI.Forms {
             return base.ProcessMnemonic(charCode);
         }
 
-        protected override void OnSelectedIndexChanged(EventArgs e) {
+        protected override void OnSelectedIndexChanged(EventArgs e)
+        {
             base.OnSelectedIndexChanged(e);
         }
 
+#if NETFRAMEWORK
         [SecurityPermission(SecurityAction.LinkDemand, Flags = SecurityPermissionFlag.UnmanagedCode)]
+#endif
         [System.Diagnostics.DebuggerStepThrough()]
-        protected override void WndProc(ref Message m) {
+        protected override void WndProc(ref Message m)
+        {
 
-            switch (m.Msg) {
+            switch (m.Msg)
+            {
                 case NativeMethods.WM_HSCROLL:
 
                     //	Raise the scroll event when the scroller is scrolled
@@ -605,29 +738,34 @@ namespace TradeWright.UI.Forms {
             }
         }
 
-        protected override void OnMouseClick(MouseEventArgs e) {
+        protected override void OnMouseClick(MouseEventArgs e)
+        {
             int index = this.GetActiveIndex(new Point(e.X, e.Y));
 
             //	If we are clicking on an image then raise the ImageClicked event before raising the standard mouse click event
             //	if there if a handler.
             if (index > -1 && this.TabImageClick != null
                 && TabHasImage(index)
-                && this.GetTabImageRect(index).Contains(this.MousePosition)) {
+                && this.GetTabImageRect(index).Contains(this.MousePosition))
+            {
                 this.OnTabImageClick(new TabControlEventArgs(this.TabPages[index], index, TabControlAction.Selected));
             }
             //	Fire the base event
             base.OnMouseClick(e);
         }
 
-        protected virtual void OnTabImageClick(TabControlEventArgs e) {
+        protected virtual void OnTabImageClick(TabControlEventArgs e)
+        {
             TabImageClick?.Invoke(this, e);
         }
 
-        protected virtual void OnTabClosed(TabControlEventArgs e) {
+        protected virtual void OnTabClosed(TabControlEventArgs e)
+        {
             TabClosed?.Invoke(this, e);
         }
 
-        protected virtual void OnTabClosing(TabControlCancelEventArgs e) {
+        protected virtual void OnTabClosing(TabControlCancelEventArgs e)
+        {
             TabClosing?.Invoke(this, e);
             if (e.Cancel)
                 return;
@@ -635,36 +773,46 @@ namespace TradeWright.UI.Forms {
             var selectedIndex = this.SelectedIndex;
             this.TabPages.Remove(e.TabPage);
             e.TabPage.Dispose();
-            if (selectedIndex == this.TabPages.Count) {
+            if (selectedIndex == this.TabPages.Count)
+            {
                 this.SelectedIndex = selectedIndex - 1;
-            } else {
+            }
+            else
+            {
                 this.SelectedIndex = selectedIndex;
             }
 
             OnTabClosed(new TabControlEventArgs(e.TabPage, e.TabPageIndex, e.Action));
         }
 
-        protected virtual void OnHScroll(ScrollEventArgs e) {
+        protected virtual void OnHScroll(ScrollEventArgs e)
+        {
             //	repaint the moved tabs
             this.Invalidate();
 
             //	Raise the event
             HScroll?.Invoke(this, e);
 
-            if (e.Type == ScrollEventType.EndScroll) {
+            if (e.Type == ScrollEventType.EndScroll)
+            {
                 this._oldValue = e.NewValue;
             }
         }
 
-        protected override void OnMouseMove(MouseEventArgs e) {
+        protected override void OnMouseMove(MouseEventArgs e)
+        {
             base.OnMouseMove(e);
             var mousePos = this.MousePosition;
-            
-            if (_PrevTabCloserButtonPath != null && _PrevTabCloserButtonPath.IsVisible(mousePos)) {
+
+            if (_PrevTabCloserButtonPath != null && _PrevTabCloserButtonPath.IsVisible(mousePos))
+            {
                 // mouse is still in highlighted tab closer
-            } else {
+            }
+            else
+            {
                 var needsRepainting = false;
-                if (_PrevTabCloserButtonPath != null) {
+                if (_PrevTabCloserButtonPath != null)
+                {
                     _PrevTabCloserButtonPath.Dispose();
                     _PrevTabCloserButtonPath = null;
                     needsRepainting = true;
@@ -675,16 +823,31 @@ namespace TradeWright.UI.Forms {
             }
 
             //	Initialise Drag Drop
-            if (this.AllowDrop && e.Button == MouseButtons.Left) {
+            if (this.AllowDrop && e.Button == MouseButtons.Left)
+            {
                 this.StartDragDrop();
             }
+        }
+
+        private void ApplyDpi(int dpi)
+        {
+            if (dpi == _Dpi) return;
+           
+            _Dpi = dpi;
+            this.DisplayStyleProvider.Radius = AdaptDpi(this.DisplayStyleProvider.Radius);
+            this.DisplayStyleProvider.TabPageRadius = AdaptDpi(this.DisplayStyleProvider.TabPageRadius);
+            this.DisplayStyleProvider.Overlap = AdaptDpi(this.DisplayStyleProvider.Overlap);
+            this.DisplayStyleProvider.Padding = AdaptDpi(this.DisplayStyleProvider.Padding);
+            this.DisplayStyleProvider.TabPageMargin = AdaptDpi(this.DisplayStyleProvider.TabPageMargin);
+            this.PerformLayout();
         }
 
         #endregion
 
         #region	Basic drawing methods
 
-        protected override void OnPaint(PaintEventArgs e) {
+        protected override void OnPaint(PaintEventArgs e)
+        {
             if (_SuspendDrawing) return;
 
             //	We must always paint the entire area of the tab control, since our actual tab sizes 
@@ -699,7 +862,8 @@ namespace TradeWright.UI.Forms {
             System.Diagnostics.Debug.WriteLine(DateTime.Now.ToString() + " TabControl " + this.GetHashCode() + " painted: " + DateTime.Now.Subtract(start).TotalMilliseconds + "ms; size: " + this.Size.ToString() + " location: " + this.Location.ToString() + " clip: " + e.ClipRectangle.ToString());
         }
 
-        private void CustomPaint(Point mousePosition) {
+        private void CustomPaint(Point mousePosition)
+        {
             //	We render into a bitmap that is then drawn in one shot rather than using
             //	double buffering built into the control as the built in buffering
             // 	messes up the background painting.
@@ -708,8 +872,10 @@ namespace TradeWright.UI.Forms {
 
             //	Buffer code from Gil. Schmidt http://www.codeproject.com/KB/graphics/DoubleBuffering.aspx
 
-            if (this.Width > 0 && this.Height > 0) {
-                if (this._BackImage == null) {
+            if (this.Width > 0 && this.Height > 0)
+            {
+                if (this._BackImage == null)
+                {
                     //	Cached Background Image
                     this._BackImage = new Bitmap(this.Width, this.Height);
                     Graphics backGraphics = Graphics.FromImage(this._BackImage);
@@ -720,7 +886,8 @@ namespace TradeWright.UI.Forms {
                 this._BackBufferGraphics.Clear(Color.Transparent);
                 this._BackBufferGraphics.DrawImageUnscaled(this._BackImage, 0, 0);
 
-                if (this.EffectiveRightToLeft) {
+                if (this.EffectiveRightToLeft)
+                {
                     var m = new Matrix();
                     m.Translate(this._TabBuffer.Width, 0f);
                     m.Scale(-1f, 1f);
@@ -730,11 +897,13 @@ namespace TradeWright.UI.Forms {
 
                 this._TabBufferGraphics.Clear(Color.Transparent);
 
-                if (this.TabCount > 0) {
+                if (this.TabCount > 0)
+                {
 
                     //	When top or bottom and scrollable we need to clip the sides from painting the tabs.
                     //	Left and right are always multiline.
-                    if (this.Alignment <= TabAlignment.Bottom && !this.Multiline) {
+                    if (this.Alignment <= TabAlignment.Bottom && !this.Multiline)
+                    {
                         var rect = this.ClientRectangle;
                         this._TabBufferGraphics.Clip = new Region(new RectangleF(rect.X + 4 - this._StyleProvider.TabPageMargin.Left,
                                                                                     rect.Y,
@@ -744,24 +913,33 @@ namespace TradeWright.UI.Forms {
 
                     //	Draw each tabpage from right to left.  We do it this way to handle
                     //	the overlap correctly.
-                    if (this.Multiline) {
-                        for (int row = 0; row < this.RowCount; row++) {
-                            for (int index = this.TabCount - 1; index >= 0; index--) {
-                                if (index != this.SelectedIndex && (this.RowCount == 1 || this.GetTabRow(index) == row)) {
+                    if (this.Multiline)
+                    {
+                        for (int row = 0; row < this.RowCount; row++)
+                        {
+                            for (int index = this.TabCount - 1; index >= 0; index--)
+                            {
+                                if (index != this.SelectedIndex && (this.RowCount == 1 || this.GetTabRow(index) == row))
+                                {
                                     this.DrawTabPage(index, mousePosition, this._TabBufferGraphics);
                                 }
                             }
                         }
-                    } else {
-                        for (int index = this.TabCount - 1; index >= 0; index--) {
-                            if (index != this.SelectedIndex) {
+                    }
+                    else
+                    {
+                        for (int index = this.TabCount - 1; index >= 0; index--)
+                        {
+                            if (index != this.SelectedIndex)
+                            {
                                 this.DrawTabPage(index, mousePosition, this._TabBufferGraphics);
                             }
                         }
                     }
 
                     //	The selected tab must be drawn last so it appears on top.
-                    if (this.SelectedIndex > -1) {
+                    if (this.SelectedIndex > -1)
+                    {
                         this.DrawTabPage(this.SelectedIndex, mousePosition, this._TabBufferGraphics);
                     }
                 }
@@ -776,7 +954,8 @@ namespace TradeWright.UI.Forms {
 
                 // Create a new image attribute object and set the color matrix to
                 // the one just created
-                using (ImageAttributes alphaAttributes = new ImageAttributes()) {
+                using (ImageAttributes alphaAttributes = new ImageAttributes())
+                {
 
                     alphaAttributes.SetColorMatrix(alphaMatrix);
 
@@ -796,19 +975,25 @@ namespace TradeWright.UI.Forms {
                 //	so that the hot areas update correctly, along with any overlaps
 
                 //	paint the tabs etc.
-                using (var g = this.CreateGraphics()) {
-                    if (this.EffectiveRightToLeft) {
+                using (var g = this.CreateGraphics())
+                {
+                    if (this.EffectiveRightToLeft)
+                    {
                         g.DrawImageUnscaled(this._BackBuffer, -1, 0);
-                    } else {
+                    }
+                    else
+                    {
                         g.DrawImageUnscaled(this._BackBuffer, 0, 0);
                     }
                 }
             }
         }
 
-        protected void PaintTransparentBackground(Graphics graphics, Rectangle clipRect) {
+        protected void PaintTransparentBackground(Graphics graphics, Rectangle clipRect)
+        {
 
-            if ((this.Parent != null)) {
+            if ((this.Parent != null))
+            {
 
                 //	Set the cliprect to be relative to the parent
                 clipRect.Offset(this.Location);
@@ -822,10 +1007,13 @@ namespace TradeWright.UI.Forms {
 
                 //	Paint the parent
                 PaintEventArgs e = new PaintEventArgs(graphics, clipRect);
-                try {
+                try
+                {
                     this.InvokePaintBackground(this.Parent, e);
                     this.InvokePaint(this.Parent, e);
-                } finally {
+                }
+                finally
+                {
                     //	Restore the graphics state and the clipRect to their original locations
                     graphics.Restore(state);
                     clipRect.Offset(-this.Location.X, -this.Location.Y);
@@ -833,12 +1021,13 @@ namespace TradeWright.UI.Forms {
             }
         }
 
-        private void DrawTabPage(int index, Point mousePosition, Graphics graphics) {
+        private void DrawTabPage(int index, Point mousePosition, Graphics graphics)
+        {
             graphics.SmoothingMode = SmoothingMode.AntiAlias;
 
             var baseTabRect = this.GetBaseTabRect(index);
             var pageBounds = this.GetPageBounds(index);
-            
+
             var tabBounds = this._StyleProvider.GetTabRect(baseTabRect, pageBounds, this.SelectedIndex == index);
             var tabContentRect = Rectangle.Intersect(baseTabRect, tabBounds);
 
@@ -847,14 +1036,16 @@ namespace TradeWright.UI.Forms {
             var isTabVisible = this._Style != TabStyle.None && this.IsTabVisible(tabBounds, pageBounds);
 
             using (GraphicsPath tabPageBorder = this.GetTabPageBorder(pageBounds, tabBounds),
-                    tabBorder = this._StyleProvider.GetTabBorder(tabBounds)) {
+                    tabBorder = this._StyleProvider.GetTabBorder(tabBounds))
+            {
 
                 Rectangle tabCloserButtonRect = Rectangle.Empty;
                 if (this._StyleProvider.ShowTabCloser) tabCloserButtonRect = GetTabCloserButtonRect(tabContentRect, tabBorder);
 
                 Image tabImage = null;
                 Rectangle tabImageRect = Rectangle.Empty;
-                if (this.TabHasImage(index)) {
+                if (this.TabHasImage(index))
+                {
                     tabImage = GetTabImage(index);
                     tabImageRect = GetTabImageRect(tabContentRect, tabBorder);
                 }
@@ -862,11 +1053,13 @@ namespace TradeWright.UI.Forms {
                 Rectangle tabTextRect = this.GetTabTextRect(tabBorder, tabContentRect, tabCloserButtonRect, tabImageRect);
 
                 //	Paint the background
-                using (Brush fillBrush = this._StyleProvider.GetPageBackgroundBrush(state)) {
+                using (Brush fillBrush = this._StyleProvider.GetPageBackgroundBrush(state))
+                {
                     graphics.FillPath(fillBrush, tabPageBorder);
                 }
 
-                if (isTabVisible) {
+                if (isTabVisible)
+                {
                     //	Paint the tab
                     this.PaintTab(tabBorder, tabCloserButtonRect, state, graphics, mousePosition);
 
@@ -884,7 +1077,8 @@ namespace TradeWright.UI.Forms {
             }
         }
 
-        private void PaintTab(GraphicsPath tabBorder, Rectangle tabCloserButtonRect, TabState state, Graphics graphics, Point mousePosition) {
+        private void PaintTab(GraphicsPath tabBorder, Rectangle tabCloserButtonRect, TabState state, Graphics graphics, Point mousePosition)
+        {
             this._StyleProvider.PaintTabBackground(tabBorder, state, graphics);
 
             //	Paint a focus indication
@@ -893,42 +1087,48 @@ namespace TradeWright.UI.Forms {
             this._StyleProvider.DrawTabCloser(tabCloserButtonRect, graphics, state, mousePosition);
         }
 
-        private void DrawTabPageBorder(GraphicsPath path, TabState state, Graphics graphics) {
+        private void DrawTabPageBorder(GraphicsPath path, TabState state, Graphics graphics)
+        {
             graphics.SmoothingMode = SmoothingMode.AntiAlias;
             Color borderColor = Color.Empty;
 
-            switch (state){
-            case TabState.Disabled:
-                borderColor = this._StyleProvider.BorderColorDisabled;
-                break;
-            case TabState.Focused:
-                borderColor = this._StyleProvider.BorderColorFocused;
-                break;
-            case TabState.Highlighted:
-                borderColor = this._StyleProvider.BorderColorHighlighted;
-                break;
-            case TabState.Selected:
-                borderColor = this._StyleProvider.BorderColorSelected;
-                break;
-            case TabState.Unselected:
-                borderColor = this._StyleProvider.BorderColorUnselected;
-                break;
+            switch (state)
+            {
+                case TabState.Disabled:
+                    borderColor = this._StyleProvider.BorderColorDisabled;
+                    break;
+                case TabState.Focused:
+                    borderColor = this._StyleProvider.BorderColorFocused;
+                    break;
+                case TabState.Highlighted:
+                    borderColor = this._StyleProvider.BorderColorHighlighted;
+                    break;
+                case TabState.Selected:
+                    borderColor = this._StyleProvider.BorderColorSelected;
+                    break;
+                case TabState.Unselected:
+                    borderColor = this._StyleProvider.BorderColorUnselected;
+                    break;
             }
 
-            if (borderColor != Color.Empty) {
-                using (Pen borderPen = new Pen(borderColor)) {
+            if (borderColor != Color.Empty)
+            {
+                using (Pen borderPen = new Pen(borderColor))
+                {
                     graphics.DrawPath(borderPen, path);
                 }
             }
         }
 
-        private void DrawTabText(string text, TabState state, Graphics graphics, Rectangle textBounds) {
+        private void DrawTabText(string text, TabState state, Graphics graphics, Rectangle textBounds)
+        {
             graphics.SmoothingMode = SmoothingMode.AntiAlias;
             graphics.TextRenderingHint = System.Drawing.Text.TextRenderingHint.ClearTypeGridFit;
 
             Color textColor = Color.Empty;
 
-            switch (state) {
+            switch (state)
+            {
                 case TabState.Disabled:
                     textColor = this._StyleProvider.TextColorDisabled;
                     break;
@@ -946,16 +1146,22 @@ namespace TradeWright.UI.Forms {
                     break;
             }
 
-            using (Brush textBrush = new SolidBrush(textColor)) {
-                using (StringFormat format = this.GetStringFormat()) {
-                    if (this.EffectiveRightToLeft) {
-                        using (Matrix oldTransform = graphics.Transform, m = new Matrix()) {
+            using (Brush textBrush = new SolidBrush(textColor))
+            {
+                using (StringFormat format = this.GetStringFormat())
+                {
+                    if (this.EffectiveRightToLeft)
+                    {
+                        using (Matrix oldTransform = graphics.Transform, m = new Matrix())
+                        {
                             m.Translate(this.Width - textBounds.Right - textBounds.Left, 0f);
                             graphics.Transform = m;
                             graphics.DrawString(text, this.Font, textBrush, textBounds, format);
                             graphics.Transform = oldTransform;
                         }
-                    } else {
+                    }
+                    else
+                    {
                         graphics.DrawString(text, this.Font, textBrush, textBounds, format);
                     }
                 }
@@ -963,16 +1169,21 @@ namespace TradeWright.UI.Forms {
 
         }
 
-        private void DrawTabImage(Image tabImage, Rectangle imageRect, Graphics graphics, bool isTabEnabled) {
+        private void DrawTabImage(Image tabImage, Rectangle imageRect, Graphics graphics, bool isTabEnabled)
+        {
             if (tabImage == null) return;
 
-            if (this.EffectiveRightToLeft) {
+            if (this.EffectiveRightToLeft)
+            {
                 tabImage.RotateFlip(RotateFlipType.RotateNoneFlipX);
             }
-         
-            if (isTabEnabled) {
+
+            if (isTabEnabled)
+            {
                 graphics.DrawImage(tabImage, imageRect);
-            } else {
+            }
+            else
+            {
                 ControlPaint.DrawImageDisabled(graphics, tabImage, imageRect.X, imageRect.Y, Color.Transparent);
             }
         }
@@ -981,11 +1192,13 @@ namespace TradeWright.UI.Forms {
 
         #region String formatting
 
-        private StringFormat GetStringFormat() {
+        private StringFormat GetStringFormat()
+        {
             StringFormat format = null;
 
             //	Rotate Text by 90 degrees for left and right tabs
-            switch (this.Alignment) {
+            switch (this.Alignment)
+            {
                 case TabAlignment.Top:
                 case TabAlignment.Bottom:
                     format = new StringFormat(StringFormatFlags.NoWrap);
@@ -997,12 +1210,16 @@ namespace TradeWright.UI.Forms {
             }
             format.Alignment = StringAlignment.Center;
             format.LineAlignment = StringAlignment.Center;
-            if (this.FindForm() != null && this.FindForm().KeyPreview) {
+            if (this.FindForm() != null && this.FindForm().KeyPreview)
+            {
                 format.HotkeyPrefix = System.Drawing.Text.HotkeyPrefix.Show;
-            } else {
+            }
+            else
+            {
                 format.HotkeyPrefix = System.Drawing.Text.HotkeyPrefix.Hide;
             }
-            if (this.RightToLeft == RightToLeft.Yes) {
+            if (this.RightToLeft == RightToLeft.Yes)
+            {
                 format.FormatFlags = format.FormatFlags | StringFormatFlags.DirectionRightToLeft;
             }
             return format;
@@ -1012,17 +1229,23 @@ namespace TradeWright.UI.Forms {
 
         #region Tab borders and bounds properties
 
-        private void AdjustPoint(ref Point point, bool adjustHorizontally, int increment) {
-            if (adjustHorizontally) {
+        private void AdjustPoint(ref Point point, bool adjustHorizontally, int increment)
+        {
+            if (adjustHorizontally)
+            {
                 point.X += increment;
-            } else {
+            }
+            else
+            {
                 point.Y += increment;
             }
         }
 
-        private Point AdjustPointForRightToLeft(Point point) {
+        private Point AdjustPointForRightToLeft(Point point)
+        {
             Point newPoint = new Point(point.X, point.Y);
-            switch (this.Alignment) {
+            switch (this.Alignment)
+            {
                 case TabAlignment.Bottom:
                 case TabAlignment.Top:
                     if (this.EffectiveRightToLeft) newPoint.X = (this.Width - newPoint.X);
@@ -1035,19 +1258,24 @@ namespace TradeWright.UI.Forms {
             return newPoint;
         }
 
-        private void BackupTabPages() {
-            if (this._TabPages == null) {
+        private void BackupTabPages()
+        {
+            if (this._TabPages == null)
+            {
                 this._TabPages = new List<TabPage>();
-                foreach (TabPage page in this.TabPages) {
+                foreach (TabPage page in this.TabPages)
+                {
                     this._TabPages.Add(page);
                 }
             }
         }
 
-        private Rectangle AdjustRectangleDimensionsToFitInPath(Rectangle rect, GraphicsPath path) {
+        private Rectangle AdjustRectangleDimensionsToFitInPath(Rectangle rect, GraphicsPath path)
+        {
             Rectangle newRect = rect;
             int offset;
-            switch (this.Alignment) {
+            switch (this.Alignment)
+            {
                 case TabAlignment.Bottom:
                     offset = GetOffsetToEnsurePointIsWithinPath(path, newRect.Right, newRect.Bottom, true, -1, (p) => p.X > newRect.X);
                     newRect.Width += offset;
@@ -1080,10 +1308,12 @@ namespace TradeWright.UI.Forms {
             return newRect;
         }
 
-        private void AddPageBorder(GraphicsPath path, Rectangle pageBounds, Rectangle tabBounds) {
+        private void AddPageBorder(GraphicsPath path, Rectangle pageBounds, Rectangle tabBounds)
+        {
             var radius = this._StyleProvider.TabPageRadius;
 
-            if (!IsTabVisible(tabBounds, pageBounds)) {
+            if (!IsTabVisible(tabBounds, pageBounds))
+            {
                 AddRoundedRectangle(path, pageBounds, radius);
                 return;
             }
@@ -1093,12 +1323,18 @@ namespace TradeWright.UI.Forms {
             var diamY = Math.Min(2 * radius, pageBounds.Height);
             var radY = diamY / 2;
 
-            switch (this.Alignment) {
+            switch (this.Alignment)
+            {
                 case TabAlignment.Top:
-                    if (tabBounds.Right > pageBounds.Right && tabBounds.Left < pageBounds.Right) {
-                    } else if (tabBounds.Right > pageBounds.Right - radX) {
+                    if (tabBounds.Right > pageBounds.Right && tabBounds.Left < pageBounds.Right)
+                    {
+                    }
+                    else if (tabBounds.Right > pageBounds.Right - radX)
+                    {
                         path.AddLine(tabBounds.Right, pageBounds.Top, pageBounds.Right, pageBounds.Top + radY);
-                    } else {
+                    }
+                    else
+                    {
                         path.AddLine(tabBounds.Right, pageBounds.Top, pageBounds.Right - radX, pageBounds.Top);
                         if (radius != 0) path.AddArc(pageBounds.Right - diamX, pageBounds.Top, diamX, diamY, 270, 90);
                     }
@@ -1109,19 +1345,29 @@ namespace TradeWright.UI.Forms {
                     if (radius != 0) path.AddArc(pageBounds.Left, pageBounds.Bottom - diamY, diamX, diamY, 90, 90);
                     path.AddLine(pageBounds.Left, pageBounds.Bottom - radY, pageBounds.Left, pageBounds.Top + radY);
 
-                    if (tabBounds.Left < pageBounds.Left && tabBounds.Right > pageBounds.Left) {
-                    } else if (tabBounds.Left < pageBounds.Left + radX) {
+                    if (tabBounds.Left < pageBounds.Left && tabBounds.Right > pageBounds.Left)
+                    {
+                    }
+                    else if (tabBounds.Left < pageBounds.Left + radX)
+                    {
                         path.AddLine(pageBounds.Left, pageBounds.Top + radY, tabBounds.Left, pageBounds.Top);
-                    } else {
+                    }
+                    else
+                    {
                         if (radius != 0) path.AddArc(pageBounds.Left, pageBounds.Top, diamX, diamY, 180, 90);
                         path.AddLine(pageBounds.Left + radX, pageBounds.Top, tabBounds.Left, pageBounds.Top);
                     }
                     break;
                 case TabAlignment.Bottom:
-                    if (tabBounds.Left < pageBounds.Left && tabBounds.Right > pageBounds.Left) {
-                    } else if (tabBounds.Left < pageBounds.Left + radX) {
+                    if (tabBounds.Left < pageBounds.Left && tabBounds.Right > pageBounds.Left)
+                    {
+                    }
+                    else if (tabBounds.Left < pageBounds.Left + radX)
+                    {
                         path.AddLine(tabBounds.Left, pageBounds.Bottom, pageBounds.Left, pageBounds.Bottom - radY);
-                    } else {
+                    }
+                    else
+                    {
                         path.AddLine(tabBounds.Left, pageBounds.Bottom, pageBounds.Left + radX, pageBounds.Bottom);
                         if (radius != 0) path.AddArc(pageBounds.Left, pageBounds.Bottom - diamY, diamX, diamY, 90, 90);
                     }
@@ -1132,10 +1378,15 @@ namespace TradeWright.UI.Forms {
                     if (radius != 0) path.AddArc(pageBounds.Right - diamX, pageBounds.Top, diamX, diamY, 270, 90);
                     path.AddLine(pageBounds.Right, pageBounds.Top + radY, pageBounds.Right, pageBounds.Bottom - radY);
 
-                    if (tabBounds.Right > pageBounds.Right && tabBounds.Left < pageBounds.Right) {
-                    } else if (tabBounds.Right > pageBounds.Right - radX) {
+                    if (tabBounds.Right > pageBounds.Right && tabBounds.Left < pageBounds.Right)
+                    {
+                    }
+                    else if (tabBounds.Right > pageBounds.Right - radX)
+                    {
                         path.AddLine(pageBounds.Right, pageBounds.Bottom - radY, tabBounds.Right, pageBounds.Bottom);
-                    } else {
+                    }
+                    else
+                    {
                         if (radius != 0) path.AddArc(pageBounds.Right - diamX, pageBounds.Bottom - diamY, diamX, diamY, 0, 90);
                         path.AddLine(pageBounds.Right - radX, pageBounds.Bottom, tabBounds.Right, pageBounds.Bottom);
                     }
@@ -1158,8 +1409,10 @@ namespace TradeWright.UI.Forms {
             }
         }
 
-        private void AddRoundedRectangle(GraphicsPath path, Rectangle pageBounds, int radius) {
-            if (radius == 0) {
+        private void AddRoundedRectangle(GraphicsPath path, Rectangle pageBounds, int radius)
+        {
+            if (radius == 0)
+            {
                 path.AddRectangle(pageBounds);
                 return;
             }
@@ -1172,44 +1425,60 @@ namespace TradeWright.UI.Forms {
             path.AddArc(pageBounds.Left, pageBounds.Bottom - d.Height, d.Width, d.Height, 90, 90);
         }
 
-        private Rectangle EnsureRectIsInPath(GraphicsPath tabBorder, Rectangle rect, bool increaseCoordinate) {
+        private Rectangle EnsureRectIsInPath(GraphicsPath tabBorder, Rectangle rect, bool increaseCoordinate)
+        {
             Rectangle newRect = rect;
 
-            switch (this.Alignment) {
-            case TabAlignment.Top:
-                if (increaseCoordinate) {
-                    newRect.X += 4 + GetOffsetToEnsurePointIsWithinPath(tabBorder, newRect.X, newRect.Y, true, +1, (p) => p.X < this.Width);
-                } else {
-                    newRect.X += -4 + GetOffsetToEnsurePointIsWithinPath(tabBorder, newRect.Right, newRect.Y, true, -1, (p) => p.X > 0);
-                }
-                break;
-            case TabAlignment.Bottom:
-                if (increaseCoordinate) {
-                    newRect.X += 4 + GetOffsetToEnsurePointIsWithinPath(tabBorder, newRect.X, newRect.Bottom, true, +1, (p) => p.X < this.Width);
-                } else {
-                    newRect.X += -4 + GetOffsetToEnsurePointIsWithinPath(tabBorder, newRect.Right, newRect.Bottom, true, -1, (p) => p.X > 0);
-                }
-                break;
-            case TabAlignment.Left:
-                if (increaseCoordinate) {
-                    newRect.Y += 4 + GetOffsetToEnsurePointIsWithinPath(tabBorder, newRect.Left, newRect.Y, false, +1, (p) => p.Y < this.Height);
-                } else {
-                    newRect.Y += -4 + GetOffsetToEnsurePointIsWithinPath(tabBorder, newRect.Left, newRect.Bottom, false, -1, (p) => p.Y > 0);
-                }
-                break;
-            case TabAlignment.Right:
-                if (increaseCoordinate) {
-                    newRect.Y += 4 + GetOffsetToEnsurePointIsWithinPath(tabBorder, newRect.Right, newRect.Y, false, +1, (p) => p.Y < this.Height);
-                } else {
-                    newRect.Y += -4 + GetOffsetToEnsurePointIsWithinPath(tabBorder, newRect.Right, newRect.Bottom, false, -1, (p) => p.Y > 0);
-                }
-                break;
+            switch (this.Alignment)
+            {
+                case TabAlignment.Top:
+                    if (increaseCoordinate)
+                    {
+                        newRect.X += 4 + GetOffsetToEnsurePointIsWithinPath(tabBorder, newRect.X, newRect.Y, true, +1, (p) => p.X < this.Width);
+                    }
+                    else
+                    {
+                        newRect.X += -4 + GetOffsetToEnsurePointIsWithinPath(tabBorder, newRect.Right, newRect.Y, true, -1, (p) => p.X > 0);
+                    }
+                    break;
+                case TabAlignment.Bottom:
+                    if (increaseCoordinate)
+                    {
+                        newRect.X += 4 + GetOffsetToEnsurePointIsWithinPath(tabBorder, newRect.X, newRect.Bottom, true, +1, (p) => p.X < this.Width);
+                    }
+                    else
+                    {
+                        newRect.X += -4 + GetOffsetToEnsurePointIsWithinPath(tabBorder, newRect.Right, newRect.Bottom, true, -1, (p) => p.X > 0);
+                    }
+                    break;
+                case TabAlignment.Left:
+                    if (increaseCoordinate)
+                    {
+                        newRect.Y += 4 + GetOffsetToEnsurePointIsWithinPath(tabBorder, newRect.Left, newRect.Y, false, +1, (p) => p.Y < this.Height);
+                    }
+                    else
+                    {
+                        newRect.Y += -4 + GetOffsetToEnsurePointIsWithinPath(tabBorder, newRect.Left, newRect.Bottom, false, -1, (p) => p.Y > 0);
+                    }
+                    break;
+                case TabAlignment.Right:
+                    if (increaseCoordinate)
+                    {
+                        newRect.Y += 4 + GetOffsetToEnsurePointIsWithinPath(tabBorder, newRect.Right, newRect.Y, false, +1, (p) => p.Y < this.Height);
+                    }
+                    else
+                    {
+                        newRect.Y += -4 + GetOffsetToEnsurePointIsWithinPath(tabBorder, newRect.Right, newRect.Bottom, false, -1, (p) => p.Y > 0);
+                    }
+                    break;
             }
             return newRect;
         }
 
-        private bool EffectiveRightToLeft {
-            get {
+        private bool EffectiveRightToLeft
+        {
+            get
+            {
                 return ((this.RightToLeft == RightToLeft.Yes) ||
                             (this.RightToLeft == RightToLeft.Inherit &&
                                 this.Parent.RightToLeft == RightToLeft.Yes))
@@ -1217,31 +1486,35 @@ namespace TradeWright.UI.Forms {
             }
         }
 
-        private Rectangle GetBaseTabRect(int index) {
+        private Rectangle GetBaseTabRect(int index)
+        {
             var rect = this.GetTabRect(index);
-            switch (this.Alignment) {
-            case TabAlignment.Top:
-            case TabAlignment.Bottom:
-                if (this.EffectiveRightToLeft)
-                    rect.X = this.Width - rect.Right;
-                break;
-            case TabAlignment.Left:
-            case TabAlignment.Right:
-                if (this.EffectiveRightToLeft)
-                    rect.Y = this.Height - rect.Bottom;
-                break;
+            switch (this.Alignment)
+            {
+                case TabAlignment.Top:
+                case TabAlignment.Bottom:
+                    if (this.EffectiveRightToLeft)
+                        rect.X = this.Width - rect.Right;
+                    break;
+                case TabAlignment.Left:
+                case TabAlignment.Right:
+                    if (this.EffectiveRightToLeft)
+                        rect.Y = this.Height - rect.Bottom;
+                    break;
             }
             return rect;
         }
 
-        private int GetOffsetToEnsurePointIsWithinPath(GraphicsPath path, int X, int Y, bool adjustHorizontally, int increment, Func<Point, bool> constraint) {
+        private int GetOffsetToEnsurePointIsWithinPath(GraphicsPath path, int X, int Y, bool adjustHorizontally, int increment, Func<Point, bool> constraint)
+        {
             Point point = new Point(X, Y);
             while (!path.IsVisible(point) && constraint(point))
                 AdjustPoint(ref point, adjustHorizontally, increment);
             return (int)(adjustHorizontally ? point.X - X : point.Y - Y);
         }
 
-        public Rectangle GetPageBounds(int index) {
+        public Rectangle GetPageBounds(int index)
+        {
             if (index < 0)
                 return new Rectangle();
 
@@ -1255,14 +1528,17 @@ namespace TradeWright.UI.Forms {
             return pageBounds;
         }
 
-        public Rectangle GetTabBounds(int index) {
+        public Rectangle GetTabBounds(int index)
+        {
             return this._StyleProvider.GetTabRect(base.GetTabRect(index), this.GetPageBounds(index), index == this.SelectedIndex);
         }
 
-        private GraphicsPath GetTabCloserButtonPathAtPosition(Point position) {
+        private GraphicsPath GetTabCloserButtonPathAtPosition(Point position)
+        {
             if (this.DesignMode || !this._StyleProvider.ShowTabCloser)
                 return null;
-            for (int i = 0; i < this.TabCount; i++) {
+            for (int i = 0; i < this.TabCount; i++)
+            {
                 var rect = this.GetTabCloserButtonRect(i);
                 var closerButtonPath = this._StyleProvider.GetTabCloserButtonPath(rect);
                 if (closerButtonPath.IsVisible(position))
@@ -1271,7 +1547,8 @@ namespace TradeWright.UI.Forms {
             return null;
         }
 
-        public Rectangle GetTabCloserButtonRect(int index) {
+        public Rectangle GetTabCloserButtonRect(int index)
+        {
             var baseTabRect = this.GetTabRect(index);
             var pageBounds = this.GetPageBounds(index);
 
@@ -1280,56 +1557,73 @@ namespace TradeWright.UI.Forms {
             return GetTabCloserButtonRect(tabContentRect, this._StyleProvider.GetTabBorder(tabBounds));
         }
 
-        private Rectangle GetTabCloserButtonRect(Rectangle tabContentRect, GraphicsPath tabBorder) {
+        private Rectangle GetTabCloserButtonRect(Rectangle tabContentRect, GraphicsPath tabBorder)
+        {
             Rectangle closerRect = new Rectangle();
             bool increaseCoordinate = false;
 
-            switch (this.Alignment) {
-            case TabAlignment.Top:
-            case TabAlignment.Bottom:
-                if (this.EffectiveRightToLeft) {
-                    closerRect = RectangleUtils.GetRectangleWithinRectangle(tabContentRect, TabCloserButtonSize, ContentAlignment.MiddleLeft);
-                    increaseCoordinate = true;
-                } else {
-                    closerRect = RectangleUtils.GetRectangleWithinRectangle(tabContentRect, TabCloserButtonSize, ContentAlignment.MiddleRight);
-                    increaseCoordinate = false;
-                }
-                break;
-            case TabAlignment.Left:
-            case TabAlignment.Right:
-                if (this.EffectiveRightToLeft) {
-                    closerRect = RectangleUtils.GetRectangleWithinRectangle(tabContentRect, TabCloserButtonSize, ContentAlignment.TopCenter);
-                    increaseCoordinate = true;
-                } else {
-                    closerRect = RectangleUtils.GetRectangleWithinRectangle(tabContentRect, TabCloserButtonSize, ContentAlignment.BottomCenter);
-                    increaseCoordinate = false;
-                }
-                break;
+            switch (this.Alignment)
+            {
+                case TabAlignment.Top:
+                case TabAlignment.Bottom:
+                    if (this.EffectiveRightToLeft)
+                    {
+                        closerRect = RectangleUtils.GetRectangleWithinRectangle(tabContentRect, TabCloserButtonSize, ContentAlignment.MiddleLeft);
+                        increaseCoordinate = true;
+                    }
+                    else
+                    {
+                        closerRect = RectangleUtils.GetRectangleWithinRectangle(tabContentRect, TabCloserButtonSize, ContentAlignment.MiddleRight);
+                        increaseCoordinate = false;
+                    }
+                    break;
+                case TabAlignment.Left:
+                case TabAlignment.Right:
+                    if (this.EffectiveRightToLeft)
+                    {
+                        closerRect = RectangleUtils.GetRectangleWithinRectangle(tabContentRect, TabCloserButtonSize, ContentAlignment.TopCenter);
+                        increaseCoordinate = true;
+                    }
+                    else
+                    {
+                        closerRect = RectangleUtils.GetRectangleWithinRectangle(tabContentRect, TabCloserButtonSize, ContentAlignment.BottomCenter);
+                        increaseCoordinate = false;
+                    }
+                    break;
             }
             return EnsureRectIsInPath(tabBorder, closerRect, increaseCoordinate);
         }
 
-        private Image GetTabImage(int index) {
+        private Image GetTabImage(int index)
+        {
             Image tabImage = null;
-            if (this.ImageList == null) {
-            } else if (this.TabPages[index].ImageIndex > -1 && this.ImageList.Images.Count > this.TabPages[index].ImageIndex) {
+            if (this.ImageList == null)
+            {
+            }
+            else if (this.TabPages[index].ImageIndex > -1 && this.ImageList.Images.Count > this.TabPages[index].ImageIndex)
+            {
                 tabImage = this.ImageList.Images[this.TabPages[index].ImageIndex];
-            } else if ((!string.IsNullOrEmpty(this.TabPages[index].ImageKey) && !this.TabPages[index].ImageKey.Equals("(none)", StringComparison.OrdinalIgnoreCase))
-                       && this.ImageList.Images.ContainsKey(this.TabPages[index].ImageKey)) {
+            }
+            else if ((!string.IsNullOrEmpty(this.TabPages[index].ImageKey) && !this.TabPages[index].ImageKey.Equals("(none)", StringComparison.OrdinalIgnoreCase))
+                       && this.ImageList.Images.ContainsKey(this.TabPages[index].ImageKey))
+            {
                 tabImage = this.ImageList.Images[this.TabPages[index].ImageKey];
             }
 
             return tabImage;
         }
 
-        private Rectangle GetTabImageRect(int index) {
+        private Rectangle GetTabImageRect(int index)
+        {
             var tabRect = this._StyleProvider.GetTabRect(base.GetTabRect(index), this.GetPageBounds(index), index == this.SelectedIndex);
-            using (GraphicsPath tabBorderPath = this._StyleProvider.GetTabBorder(tabRect)) {
+            using (GraphicsPath tabBorderPath = this._StyleProvider.GetTabBorder(tabRect))
+            {
                 return this.GetTabImageRect(tabRect, tabBorderPath);
             }
         }
 
-        private Rectangle GetTabImageRect(Rectangle tabRect, GraphicsPath tabBorderPath) {
+        private Rectangle GetTabImageRect(Rectangle tabRect, GraphicsPath tabBorderPath)
+        {
             Rectangle imageRect = new Rectangle();
             var imageSize = this.ImageList.ImageSize;
 
@@ -1340,14 +1634,18 @@ namespace TradeWright.UI.Forms {
             bool adjustPosition = (horizontalTabs && (IsLeftAligned(imageAlignment) || IsRightAligned(imageAlignment)))
                                 || (!horizontalTabs && (IsBottomAligned(imageAlignment) || IsTopAligned(imageAlignment)));
             bool increaseCoordinate = (horizontalTabs && IsLeftAligned(imageAlignment)) || (!horizontalTabs && IsTopAligned(imageAlignment));
-            
+
             if (adjustPosition) imageRect = EnsureRectIsInPath(tabBorderPath, imageRect, increaseCoordinate);
 
-            if (this._StyleProvider.ShowTabCloser) {
-                if (this.EffectiveRightToLeft) {
+            if (this._StyleProvider.ShowTabCloser)
+            {
+                if (this.EffectiveRightToLeft)
+                {
                     if (horizontalTabs && IsLeftAligned(imageAlignment)) imageRect.X += TabControlExtra.TabCloserButtonSize + 4;
                     if (!horizontalTabs && IsTopAligned(imageAlignment)) imageRect.Y += TabControlExtra.TabCloserButtonSize + 4;
-                } else {
+                }
+                else
+                {
                     if (horizontalTabs && IsRightAligned(imageAlignment)) imageRect.X -= TabControlExtra.TabCloserButtonSize + 4;
                     if (!horizontalTabs && IsBottomAligned(imageAlignment)) imageRect.Y -= TabControlExtra.TabCloserButtonSize + 4;
                 }
@@ -1356,7 +1654,8 @@ namespace TradeWright.UI.Forms {
             return imageRect;
         }
 
-        private GraphicsPath GetTabPageBorder(Rectangle pageBounds, Rectangle tabBounds) {
+        private GraphicsPath GetTabPageBorder(Rectangle pageBounds, Rectangle tabBounds)
+        {
 
             GraphicsPath path = new GraphicsPath();
             if (IsTabVisible(tabBounds, pageBounds))
@@ -1367,15 +1666,18 @@ namespace TradeWright.UI.Forms {
             return path;
         }
 
-        public Point GetTabPosition(int index) {
+        public Point GetTabPosition(int index)
+        {
 
             //	If we are not multiline then the column is the index and the row is 0.
-            if (!this.Multiline) {
+            if (!this.Multiline)
+            {
                 return new Point(0, index);
             }
 
             //	If there is only one row then the column is the index
-            if (this.RowCount == 1) {
+            if (this.RowCount == 1)
+            {
                 return new Point(0, index);
             }
 
@@ -1385,19 +1687,26 @@ namespace TradeWright.UI.Forms {
             int column = -1;
 
             //	Scan from left to right along rows, skipping to next row if it is not the one we want.
-            for (int testIndex = 0; testIndex < this.TabCount; testIndex++) {
+            for (int testIndex = 0; testIndex < this.TabCount; testIndex++)
+            {
                 Rectangle testRect = this.GetTabRect(testIndex);
-                if (this.Alignment <= TabAlignment.Bottom) {
-                    if (testRect.Y == rect.Y) {
+                if (this.Alignment <= TabAlignment.Bottom)
+                {
+                    if (testRect.Y == rect.Y)
+                    {
                         column += 1;
                     }
-                } else {
-                    if (testRect.X == rect.X) {
+                }
+                else
+                {
+                    if (testRect.X == rect.X)
+                    {
                         column += 1;
                     }
                 }
 
-                if (testRect.Location.Equals(rect.Location)) {
+                if (testRect.Location.Equals(rect.Location))
+                {
                     return new Point(row, column);
                 }
             }
@@ -1405,88 +1714,119 @@ namespace TradeWright.UI.Forms {
             return new Point(0, 0);
         }
 
-        public int GetTabRow(int index) {
+        public int GetTabRow(int index)
+        {
             //	All calculations will use this rect as the base point
             //	because the itemsize does not return the correct width.
             Rectangle rect = this.GetTabRect(index);
 
             int row = -1;
 
-            switch (this.Alignment) {
-            case TabAlignment.Top:
-                row = (rect.Y - 2) / rect.Height;
-                break;
-            case TabAlignment.Bottom:
-                row = ((this.Height - rect.Y - 2) / rect.Height) - 1;
-                break;
-            case TabAlignment.Left:
-                row = (rect.X - 2) / rect.Width;
-                break;
-            case TabAlignment.Right:
-                row = ((this.Width - rect.X - 2) / rect.Width) - 1;
-                break;
+            switch (this.Alignment)
+            {
+                case TabAlignment.Top:
+                    row = (rect.Y - 2) / rect.Height;
+                    break;
+                case TabAlignment.Bottom:
+                    row = ((this.Height - rect.Y - 2) / rect.Height) - 1;
+                    break;
+                case TabAlignment.Left:
+                    row = (rect.X - 2) / rect.Width;
+                    break;
+                case TabAlignment.Right:
+                    row = ((this.Width - rect.X - 2) / rect.Width) - 1;
+                    break;
             }
             return row;
         }
 
-        private TabState GetTabState(int index, Point mousePosition) {
-            if (this.SelectedIndex == index) {
-                if (this.ContainsFocus) {
+        private TabState GetTabState(int index, Point mousePosition)
+        {
+            if (this.SelectedIndex == index)
+            {
+                if (this.ContainsFocus)
+                {
                     return TabState.Focused;
-                } else {
+                }
+                else
+                {
                     return TabState.Selected;
                 }
-            } else if (!this.TabPages[index].Enabled) {
+            }
+            else if (!this.TabPages[index].Enabled)
+            {
                 return TabState.Disabled;
-            } else if (this.DisplayStyleProvider.HotTrack && index == this.GetActiveIndex(mousePosition)) {
+            }
+            else if (this.DisplayStyleProvider.HotTrack && index == this.GetActiveIndex(mousePosition))
+            {
                 return TabState.Highlighted;
-            } else {
+            }
+            else
+            {
                 return TabState.Unselected;
             }
         }
 
-        private Rectangle GetTabTextRect(GraphicsPath tabBorder, Rectangle tabBounds, Rectangle closerRect, Rectangle imageRect) {
+        private Rectangle GetTabTextRect(GraphicsPath tabBorder, Rectangle tabBounds, Rectangle closerRect, Rectangle imageRect)
+        {
             var left = tabBounds.X + 1;
             var right = tabBounds.Right - 1;
             var top = tabBounds.Y + 1;
             var bottom = tabBounds.Bottom - 1;
             var imageAlignment = this._StyleProvider.ImageAlign;
 
-            switch (this.Alignment) {
-            case TabAlignment.Bottom:
-            case TabAlignment.Top:
-                if (closerRect != Rectangle.Empty) {
-                    if (this.EffectiveRightToLeft) {
-                        left = closerRect.Right + 4;
-                    } else {
-                        right = closerRect.X - 4;
+            switch (this.Alignment)
+            {
+                case TabAlignment.Bottom:
+                case TabAlignment.Top:
+                    if (closerRect != Rectangle.Empty)
+                    {
+                        if (this.EffectiveRightToLeft)
+                        {
+                            left = closerRect.Right + 4;
+                        }
+                        else
+                        {
+                            right = closerRect.X - 4;
+                        }
                     }
-                }
-                if (imageRect != Rectangle.Empty) {
-                    if (IsLeftAligned(imageAlignment)) {
-                        left = imageRect.Right + 4;
-                    } else if (IsRightAligned(imageAlignment)) {
-                        right = imageRect.X - 4;
+                    if (imageRect != Rectangle.Empty)
+                    {
+                        if (IsLeftAligned(imageAlignment))
+                        {
+                            left = imageRect.Right + 4;
+                        }
+                        else if (IsRightAligned(imageAlignment))
+                        {
+                            right = imageRect.X - 4;
+                        }
                     }
-                }
-                break;
-            case TabAlignment.Left:
-            case TabAlignment.Right:
-                if (closerRect != Rectangle.Empty) {
-                    if (this.EffectiveRightToLeft) {
-                        top = closerRect.Bottom + 4;
-                    } else {
-                        bottom = closerRect.Y - 4;
+                    break;
+                case TabAlignment.Left:
+                case TabAlignment.Right:
+                    if (closerRect != Rectangle.Empty)
+                    {
+                        if (this.EffectiveRightToLeft)
+                        {
+                            top = closerRect.Bottom + 4;
+                        }
+                        else
+                        {
+                            bottom = closerRect.Y - 4;
+                        }
                     }
-                }
-                if (imageRect != Rectangle.Empty) {
-                    if (IsTopAligned(imageAlignment)) {
-                        top = imageRect.Bottom + 4;
-                    } else if (IsBottomAligned(imageAlignment)) {
-                        bottom = imageRect.Y - 4;
+                    if (imageRect != Rectangle.Empty)
+                    {
+                        if (IsTopAligned(imageAlignment))
+                        {
+                            top = imageRect.Bottom + 4;
+                        }
+                        else if (IsBottomAligned(imageAlignment))
+                        {
+                            bottom = imageRect.Y - 4;
+                        }
                     }
-                }
-                break;
+                    break;
             }
 
             Rectangle textRect = new Rectangle(left, top, right - left, bottom - top);
@@ -1495,24 +1835,28 @@ namespace TradeWright.UI.Forms {
             return AdjustRectangleDimensionsToFitInPath(textRect, tabBorder);
         }
 
-        protected internal bool IsTabVisible(Rectangle tabBounds, Rectangle pageBounds) {
-            switch (this.Alignment) {
-            case TabAlignment.Top:
-            case TabAlignment.Bottom:
-                return tabBounds.Right > pageBounds.Left + this._StyleProvider.TabPageMargin.Left && tabBounds.Left < pageBounds.Right - this._StyleProvider.TabPageMargin.Right;
-            case TabAlignment.Left:
-            case TabAlignment.Right:
-                return tabBounds.Bottom > pageBounds.Top + this._StyleProvider.TabPageMargin.Top && tabBounds.Top < pageBounds.Bottom - this._StyleProvider.TabPageMargin.Bottom;
+        protected internal bool IsTabVisible(Rectangle tabBounds, Rectangle pageBounds)
+        {
+            switch (this.Alignment)
+            {
+                case TabAlignment.Top:
+                case TabAlignment.Bottom:
+                    return tabBounds.Right > pageBounds.Left + this._StyleProvider.TabPageMargin.Left && tabBounds.Left < pageBounds.Right - this._StyleProvider.TabPageMargin.Right;
+                case TabAlignment.Left:
+                case TabAlignment.Right:
+                    return tabBounds.Bottom > pageBounds.Top + this._StyleProvider.TabPageMargin.Top && tabBounds.Top < pageBounds.Bottom - this._StyleProvider.TabPageMargin.Bottom;
             }
             return false;
         }
 
-        private bool IsValidTabIndex(int index) {
+        private bool IsValidTabIndex(int index)
+        {
             this.BackupTabPages();
             return ((index >= 0) && (index < this._TabPages.Count));
         }
 
-        private bool TabHasImage(int index) {
+        private bool TabHasImage(int index)
+        {
             return this.ImageList != null &&
                     (this.TabPages[index].ImageIndex > -1 ||
                     (!string.IsNullOrEmpty(this.TabPages[index].ImageKey) && !this.TabPages[index].ImageKey.Equals("(none)", StringComparison.OrdinalIgnoreCase)));
@@ -1522,27 +1866,33 @@ namespace TradeWright.UI.Forms {
 
         #region Alignment predicates
 
-        public static bool IsLeftAligned(ContentAlignment alignment) {
+        public static bool IsLeftAligned(ContentAlignment alignment)
+        {
             return ((int)alignment & AnyLeftAlign) != 0;
         }
 
-        public static bool IsRightAligned(ContentAlignment alignment) {
+        public static bool IsRightAligned(ContentAlignment alignment)
+        {
             return ((int)alignment & AnyRightAlign) != 0;
         }
 
-        public static bool IsTopAligned(ContentAlignment alignment) {
+        public static bool IsTopAligned(ContentAlignment alignment)
+        {
             return ((int)alignment & AnyTopAlign) != 0;
         }
 
-        public static bool IsBottomAligned(ContentAlignment alignment) {
+        public static bool IsBottomAligned(ContentAlignment alignment)
+        {
             return ((int)alignment & AnyBottomAlign) != 0;
         }
 
-        public static bool IsMiddleAligned(ContentAlignment alignment) {
+        public static bool IsMiddleAligned(ContentAlignment alignment)
+        {
             return ((int)alignment & AnyMiddleAlign) != 0;
         }
 
-        public static bool IsCenterAligned(ContentAlignment alignment) {
+        public static bool IsCenterAligned(ContentAlignment alignment)
+        {
             return ((int)alignment & AnyCenterAlign) != 0;
         }
 
@@ -1550,8 +1900,10 @@ namespace TradeWright.UI.Forms {
 
         #region Private methods
 
-        public IntPtr SendMessage(int msg, IntPtr wParam, IntPtr lParam) {
-            Message message = new Message {
+        public IntPtr SendMessage(int msg, IntPtr wParam, IntPtr lParam)
+        {
+            Message message = new Message
+            {
                 HWnd = this.Handle,
                 LParam = lParam,
                 WParam = wParam,
@@ -1561,6 +1913,24 @@ namespace TradeWright.UI.Forms {
             WndProc(ref message);
 
             return message.Result;
+        }
+
+        private int AdaptDpi(int x)
+        {
+            return (int)(x * (_Dpi / 100.00));
+        }
+        private Point AdaptDpi(Point p)
+        {
+            return new Point(AdaptDpi(p.X), AdaptDpi(p.Y));
+        }
+        private Padding AdaptDpi(Padding p)
+        {
+            return new Padding(
+                AdaptDpi(p.Left),
+                AdaptDpi(p.Top),
+                AdaptDpi(p.Right),
+                AdaptDpi(p.Bottom)
+            );
         }
 
         #endregion

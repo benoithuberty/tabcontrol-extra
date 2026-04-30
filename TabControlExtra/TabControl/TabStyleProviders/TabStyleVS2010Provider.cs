@@ -6,7 +6,7 @@
 using System.Drawing;
 using System.Windows.Forms;
 
-namespace TradeWright.UI.Forms 
+namespace Adiict.UI.Forms
 {
 
 	[System.ComponentModel.ToolboxItem(false)]

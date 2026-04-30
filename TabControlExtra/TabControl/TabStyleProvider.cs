@@ -9,7 +9,7 @@ using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Windows.Forms;
 
-namespace TradeWright.UI.Forms 
+namespace Adiict.UI.Forms
 {
     [System.ComponentModel.ToolboxItem(false)]
 	public abstract class TabStyleProvider : Component
@@ -305,6 +305,7 @@ namespace TradeWright.UI.Forms
             }
 		}
 
+        [Category("Appearance"), DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
         public BlendStyle BlendStyle {
             get { return this._BlendStyle; }
             set {
@@ -313,7 +314,7 @@ namespace TradeWright.UI.Forms
             }
         }
 
-        [Category("Appearance")]
+        [Category("Appearance"), DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
 		public ContentAlignment ImageAlign {
 			get { return this._ImageAlign; }
 			set {
@@ -321,7 +322,7 @@ namespace TradeWright.UI.Forms
 			}
 		}
 		
-		[Category("Appearance")]
+		[Category("Appearance"), DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
 		public Point Padding {
 			get { return this._Padding; }
 			set {
@@ -355,7 +356,7 @@ namespace TradeWright.UI.Forms
 			}
 		}
 
-		[Category("Appearance")]
+		[Category("Appearance"), DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
 		public int Overlap {
 			get { return this._Overlap; }
 			set {
@@ -367,7 +368,7 @@ namespace TradeWright.UI.Forms
 		}
 		
 		
-		[Category("Appearance")]
+		[Category("Appearance"), DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
 		public bool FocusTrack {
 			get { return this._FocusTrack; }
 			set {
@@ -375,7 +376,7 @@ namespace TradeWright.UI.Forms
 			}
 		}
 		
-		[Category("Appearance")]
+		[Category("Appearance"), DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
 		public bool HotTrack {
 			get { return this._HotTrack; }
 			set {
@@ -384,7 +385,7 @@ namespace TradeWright.UI.Forms
 			}
 		}
 
-        [Category("Appearance")]
+        [Category("Appearance"), DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
         public bool SelectedTabIsLarger {
             get { return this._SelectedTabIsLarger; }
 			set {
@@ -393,7 +394,7 @@ namespace TradeWright.UI.Forms
 			}
 		}
 		
-            [Category("Appearance")]
+        [Category("Appearance"), DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
 		public bool ShowTabCloser {
 			get { return this._ShowTabCloser; }
 			set {
@@ -403,7 +404,7 @@ namespace TradeWright.UI.Forms
 			}
 		}
 
-		[Category("Appearance")]
+		[Category("Appearance"), DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
 		public float Opacity {
 			get { return this._Opacity; }
 			set {

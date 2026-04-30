@@ -1,5 +1,5 @@
 ## TabControlExtra
-### An improved TabControl for Windows Forms (.Net)
+### An improved TabControl for Windows Forms (.net Framework 4.8, .net 8 and .net 10)
 
 The System.Windows.Forms TabControl provided by Microsoft in the .Net Library 
 has a number of limitations that make it unpleasant to use.
@@ -13,30 +13,13 @@ original can be found here:
 This link includes a good description of the failings of Microsoft's TabControl,
 and describes in detail the approach taken by Mark to improve it.
 
-In 2011 I found a need for a tab control that avoids the limitations of the 
-Microsoft TabControl, and I came across Mark's CustomTabControl at the link 
-above. 
+In 2011, Richard L King, took over Mark's code to continue the quest of having a customizable tab control for Windows forms and created a git repository for it.
+[Github tabcontrol-extra](https://github.com/tradewright/tabcontrol-extra)
 
-Mark's code dates back to 2010, and there have been no updates since then, and I
-discovered a number of bugs that needed to be fixed. I also wanted some 
-additional customizations (for example flat rectangular tabs). So I spent quite a bit
-of time over the years since then modifying it to meet my needs.
+As the CPOL license allows it, I've taken Richard's code over to migrate it to .net 10, keeping it backward compatible with .net framework 4.8. 
 
-I have a number of projects that I want to publish on GitHub that use my 
-modified version, and although the CodeProject Open Licence (under which Mark's 
-code was licensed) would permit me to do this, I feel strongly that such a 
-useful component should be more easily and widely accessible and should therefore 
-be a free-standing project on GitHub in its own right.
+I've also updated the code to fix DPI issues.
 
-Hence this project. I have renamed it to TabControl-Extra, rather than its 
-original name, CustomTabControl. 
-
-The initial source code in the repository is Mark's code that I downloaded in 
-2011, and my accumulated amendments are in subsequent commits. So the gross 
-history of the project is represented in the repository, though not the 
-detailed process of my amendments (ie there are not separate commits for all
-the various bug fixes and enhancements I made up to the creation of this 
-repository).
 
 ### Licence
 

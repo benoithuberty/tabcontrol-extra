@@ -1,36 +1,31 @@
-﻿#region Using directives
+#region Using directives
 
 using System;
 using System.Reflection;
 using System.Resources;
 using System.Runtime.InteropServices;
+#if NET5_0_OR_GREATER
+using System.Runtime.Versioning;
+#endif
 
 #endregion
 
-// General Information about an assembly is controlled through the following 
-// set of attributes. Change these attribute values to modify the information
-// associated with an assembly.
-[assembly: AssemblyTitle("TradeWright.TabControlExtra")]
+#if NET5_0_OR_GREATER
+[assembly: SupportedOSPlatform("windows")]
+#endif
+
+[assembly: AssemblyTitle("Adiict.TabControlExtra")]
 [assembly: AssemblyDescription("Replacement for the Microsoft .Net TabControl with advanced features")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Richard L King (TradeWright Software Systems)")]
-[assembly: AssemblyProduct("TabControlExtra")]
-[assembly: AssemblyCopyright("Copyright © Mark Jackson 2010; Richard L King 2012-2018")]
+[assembly: AssemblyCompany("Adiict")]
+[assembly: AssemblyProduct("Adiict.TabControlExtra")]
+[assembly: AssemblyCopyright("Copyright © Mark Jackson 2010; Richard L King 2012-2018; Adiict 2026")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 [assembly: NeutralResourcesLanguage("en-GB")]
 [assembly: CLSCompliant(true)]
 
-// This sets the default COM visibility of types in the assembly to invisible.
-// If you need to expose a type to COM, use [ComVisible(true)] on that type.
 [assembly: ComVisible(false)]
 
-// The assembly version has following format :
-//
-// Major.Minor.Build.Revision
-//
-// You can specify all the values or you can default the Revision and 
-// Build Numbers by using the '*' as shown below:
-[assembly: AssemblyVersion("2.0.1")]
+[assembly: AssemblyVersion("3.0.0")]
 [assembly: Guid("8C5AD640-CEDA-49F7-A709-610779ADB760")]
-
