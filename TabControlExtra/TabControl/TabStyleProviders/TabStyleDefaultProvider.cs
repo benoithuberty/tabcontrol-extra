@@ -15,14 +15,14 @@ namespace Adiict.UI.Forms
 	public class TabStyleDefaultProvider : TabStyleProvider
 	{
 		public TabStyleDefaultProvider(TabControlExtra tabControl) : base(tabControl){
-			this.Radius = 2;
+			Radius = 2;
 
-            this.SelectedTabIsLarger = true;
+            SelectedTabIsLarger = true;
 
-            this.TabColorHighLighted1 = Color.FromArgb(236, 244, 252);
-            this.TabColorHighLighted2 = Color.FromArgb(221, 237, 252);
+            TabColorHighLighted1 = Color.FromArgb(236, 244, 252);
+            TabColorHighLighted2 = Color.FromArgb(221, 237, 252);
 
-            this.PageBackgroundColorHighlighted = TabColorHighLighted1;
+            PageBackgroundColorHighlighted = TabColorHighLighted1;
         }
 		
 	}

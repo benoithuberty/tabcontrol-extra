@@ -15,15 +15,15 @@ namespace Adiict.UI.Forms
 	public class TabStyleVisualStudioProvider : TabStyleProvider
 	{
 		public TabStyleVisualStudioProvider(TabControlExtra tabControl) : base(tabControl){
-			this.ImageAlign = ContentAlignment.MiddleRight;
-			this.Overlap = 7;
+			ImageAlign = ContentAlignment.MiddleRight;
+			Overlap = 7;
 			
 			//	Must set after the _Radius as this is used in the calculations of the actual padding
-			this.Padding = new Point(16, 1);
+			Padding = new Point(16, 1);
 		}
 		
 		public override void AddTabBorder(System.Drawing.Drawing2D.GraphicsPath path, System.Drawing.Rectangle tabBounds){
-			switch (this.TabControl.Alignment) {
+			switch (TabControl.Alignment) {
 				case TabAlignment.Top:
 					path.AddLine(tabBounds.X, tabBounds.Bottom, tabBounds.X + tabBounds.Height - 4, tabBounds.Y + 2);
 					path.AddLine(tabBounds.X + tabBounds.Height, tabBounds.Y, tabBounds.Right - 3, tabBounds.Y);

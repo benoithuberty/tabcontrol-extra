@@ -49,9 +49,8 @@ namespace Adiict.UI.Forms
         }
  
  		public static IntPtr ToIntPtr(object structure){
-			IntPtr lparam = IntPtr.Zero;
-			lparam = Marshal.AllocCoTaskMem(Marshal.SizeOf(structure));
-			Marshal.StructureToPtr(structure, lparam, false);
+            IntPtr lparam = Marshal.AllocCoTaskMem(Marshal.SizeOf(structure));
+            Marshal.StructureToPtr(structure, lparam, false);
 			return lparam;
 		}
 		
@@ -108,10 +107,10 @@ namespace Adiict.UI.Forms
 		    }
 		
 		    public RECT(Rectangle r){
-		        this.left = r.Left;
-		        this.top = r.Top;
-		        this.right = r.Right;
-		        this.bottom = r.Bottom;
+		        left = r.Left;
+		        top = r.Top;
+		        right = r.Right;
+		        bottom = r.Bottom;
 		    }
 		
 		    public static RECT FromXYWH(int x, int y, int width, int height){
@@ -125,7 +124,7 @@ namespace Adiict.UI.Forms
 		    
 		    public Size Size{
 		        get{
-		            return new Size(this.right - this.left, this.bottom - this.top);
+		            return new Size(right - left, bottom - top);
 		        }
 		    }
 		}

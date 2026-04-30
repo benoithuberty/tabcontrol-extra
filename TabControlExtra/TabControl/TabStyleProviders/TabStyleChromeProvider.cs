@@ -14,37 +14,37 @@ namespace Adiict.UI.Forms
 	public class TabStyleChromeProvider : TabStyleProvider
 	{
 		public TabStyleChromeProvider(TabControlExtra tabControl) : base(tabControl){
-			this.Overlap = 16;
+			Overlap = 16;
 			//this.Radius = 16;
-			this.ShowTabCloser = true;
+			ShowTabCloser = true;
 
-            this.CloserColorFocused = Color.Black;
-            this.CloserColorFocusedActive = Color.White;
-            this.CloserColorSelected = Color.Black;
-            this.CloserColorSelectedActive = Color.White;
-            this.CloserColorHighlighted = Color.Black;
-            this.CloserColorHighlightedActive = Color.White;
-            this.CloserColorUnselected = Color.Empty;
+            CloserColorFocused = Color.Black;
+            CloserColorFocusedActive = Color.White;
+            CloserColorSelected = Color.Black;
+            CloserColorSelectedActive = Color.White;
+            CloserColorHighlighted = Color.Black;
+            CloserColorHighlightedActive = Color.White;
+            CloserColorUnselected = Color.Empty;
 
-            this.CloserButtonFillColorFocused = Color.Empty;
-            this.CloserButtonFillColorFocusedActive = Color.FromArgb(244, 159, 148);
-            this.CloserButtonFillColorSelected = Color.Empty;
-            this.CloserButtonFillColorSelectedActive = Color.FromArgb(244, 159, 148);
-            this.CloserButtonFillColorHighlighted = Color.Empty;
-            this.CloserButtonFillColorHighlightedActive = Color.FromArgb(244, 159, 148);
-            this.CloserButtonFillColorUnselected = Color.Empty;
+            CloserButtonFillColorFocused = Color.Empty;
+            CloserButtonFillColorFocusedActive = Color.FromArgb(244, 159, 148);
+            CloserButtonFillColorSelected = Color.Empty;
+            CloserButtonFillColorSelectedActive = Color.FromArgb(244, 159, 148);
+            CloserButtonFillColorHighlighted = Color.Empty;
+            CloserButtonFillColorHighlightedActive = Color.FromArgb(244, 159, 148);
+            CloserButtonFillColorUnselected = Color.Empty;
 
-            this.CloserButtonOutlineColorFocused = Color.Empty;
-            this.CloserButtonOutlineColorFocusedActive = Color.FromArgb(209, 106, 94);
-            this.CloserButtonOutlineColorSelected = Color.Empty;
-            this.CloserButtonOutlineColorSelectedActive = Color.FromArgb(209, 106, 94);
-            this.CloserButtonOutlineColorHighlighted = Color.Empty;
-            this.CloserButtonOutlineColorHighlightedActive = Color.FromArgb(209, 106, 94);
-            this.CloserButtonOutlineColorUnselected = Color.Empty;
+            CloserButtonOutlineColorFocused = Color.Empty;
+            CloserButtonOutlineColorFocusedActive = Color.FromArgb(209, 106, 94);
+            CloserButtonOutlineColorSelected = Color.Empty;
+            CloserButtonOutlineColorSelectedActive = Color.FromArgb(209, 106, 94);
+            CloserButtonOutlineColorHighlighted = Color.Empty;
+            CloserButtonOutlineColorHighlightedActive = Color.FromArgb(209, 106, 94);
+            CloserButtonOutlineColorUnselected = Color.Empty;
 
 			
 			//	Must set after the _Radius as this is used in the calculations of the actual padding
-			this.Padding = new Point(16, 5);
+			Padding = new Point(16, 5);
 		}
 		
 		public override void AddTabBorder(System.Drawing.Drawing2D.GraphicsPath path, System.Drawing.Rectangle tabBounds){
@@ -54,7 +54,7 @@ namespace Adiict.UI.Forms
 			int sixth;
 			int quarter;
 
-			if (this.TabControl.Alignment <= TabAlignment.Bottom){
+			if (TabControl.Alignment <= TabAlignment.Bottom){
 				spread = (int)Math.Floor((decimal)tabBounds.Height * 2/3);
 				eigth = (int)Math.Floor((decimal)tabBounds.Height * 1/8);
 				sixth = (int)Math.Floor((decimal)tabBounds.Height * 1/6);
@@ -66,7 +66,7 @@ namespace Adiict.UI.Forms
 				quarter = (int)Math.Floor((decimal)tabBounds.Width * 1/4);
 			}
 			
-			switch (this.TabControl.Alignment) {
+			switch (TabControl.Alignment) {
 				case TabAlignment.Top:
 					
 					path.AddCurve(new Point[] {  new Point(tabBounds.X, tabBounds.Bottom)

@@ -27,5 +27,5 @@ using System.Runtime.Versioning;
 
 [assembly: ComVisible(false)]
 
-[assembly: AssemblyVersion("3.0.0")]
+[assembly: AssemblyVersion("3.0.2")]
 [assembly: Guid("8C5AD640-CEDA-49F7-A709-610779ADB760")]

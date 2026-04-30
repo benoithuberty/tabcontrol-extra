@@ -14,5 +14,12 @@ namespace CSCustomTabControlDemo
 		public MainForm() {
 			InitializeComponent();
 		}
+        protected override void OnDpiChanged(DpiChangedEventArgs e)
+        {
+            base.OnDpiChanged(e);
+
+            //tabControlExtra1.ApplyDpi(e.DeviceDpiNew);
+
+        }
     }
 }

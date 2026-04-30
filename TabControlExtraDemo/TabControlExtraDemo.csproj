@@ -10,6 +10,6 @@
     <Nullable>disable</Nullable>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Adiict.TabControlExtra" Version="3.0.0" />
+    <ProjectReference Include="..\TabControlExtra\TabControlExtra.csproj" />
   </ItemGroup>
 </Project>

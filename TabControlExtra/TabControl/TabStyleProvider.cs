@@ -17,19 +17,19 @@ namespace Adiict.UI.Forms
 		#region Constructor
 		
 		protected TabStyleProvider(TabControlExtra tabControl){
-			this.TabControl = tabControl;
+			TabControl = tabControl;
 			
-			this._FocusColor = Color.Orange;
+			_FocusColor = Color.Orange;
 			
-			if (this.TabControl.RightToLeftLayout){
-				this._ImageAlign = ContentAlignment.MiddleRight;
+			if (TabControl.RightToLeftLayout){
+				_ImageAlign = ContentAlignment.MiddleRight;
 			} else {
-				this._ImageAlign = ContentAlignment.MiddleLeft;
+				_ImageAlign = ContentAlignment.MiddleLeft;
 			}
 			
-			this.HotTrack = true;
+			HotTrack = true;
 
-            this.Padding = new Point(6, 3);
+            Padding = new Point(6, 3);
 
 		}
 		
@@ -176,7 +176,7 @@ namespace Adiict.UI.Forms
 		#region overridable Methods
 		
 		public virtual void AddTabBorder(GraphicsPath path, Rectangle tabBounds) {
-            switch (this.TabControl.Alignment) {
+            switch (TabControl.Alignment) {
                 case TabAlignment.Top:
                     path.AddLine(tabBounds.X, tabBounds.Bottom, tabBounds.X, tabBounds.Y);
                     path.AddLine(tabBounds.X, tabBounds.Y, tabBounds.Right, tabBounds.Y);
@@ -204,7 +204,7 @@ namespace Adiict.UI.Forms
             var tabRect = baseTabRect;
 
             //	Adjust to meet the tabpage
-            switch (this.TabControl.Alignment) {
+            switch (TabControl.Alignment) {
                 case TabAlignment.Top:
                     tabRect.Height += pageBounds.Top - tabRect.Bottom;
                     break;
@@ -221,18 +221,18 @@ namespace Adiict.UI.Forms
                     break;
             }
 
-            if (this.SelectedTabIsLarger) tabRect = EnlargeTab(tabRect, tabIsSelected);
+            if (SelectedTabIsLarger) tabRect = EnlargeTab(tabRect, tabIsSelected);
 
             //	Create Overlap
-            if (this.TabControl.Alignment <= TabAlignment.Bottom) {
-                tabRect.X -= this._Overlap;
-                tabRect.Width += this._Overlap;
+            if (TabControl.Alignment <= TabAlignment.Bottom) {
+                tabRect.X -= _Overlap;
+                tabRect.Width += _Overlap;
             } else {
-                tabRect.Y -= this._Overlap;
-                tabRect.Height += this._Overlap;
+                tabRect.Y -= _Overlap;
+                tabRect.Height += _Overlap;
             }
 
-            tabRect = this.EnsureTabIsInView(tabRect, pageBounds);
+            tabRect = EnsureTabIsInView(tabRect, pageBounds);
 
             return tabRect;
         }
@@ -242,7 +242,7 @@ namespace Adiict.UI.Forms
             int widthIncrement = (int)(tabIsSelected ? 1 : 0);
             int heightIncrement = (int)(tabIsSelected ? 1 : -1);
 
-            switch (this.TabControl.Alignment) {
+            switch (TabControl.Alignment) {
                 case TabAlignment.Top:
                     newTabBounds.Y -= heightIncrement;
                     newTabBounds.Height += heightIncrement;
@@ -273,11 +273,11 @@ namespace Adiict.UI.Forms
 			//	Adjust tab to fit within the page bounds.
 			//	Make sure we only reposition visible tabs, as we may have scrolled out of view.
 
-            if (!this.TabControl.IsTabVisible(tabBounds, pageBounds)) return tabBounds;
+            if (!TabControl.IsTabVisible(tabBounds, pageBounds)) return tabBounds;
 
             var newTabBounds = tabBounds;
 
-            switch (this.TabControl.Alignment) {
+            switch (TabControl.Alignment) {
                 case TabAlignment.Top:
                 case TabAlignment.Bottom:
                     if (newTabBounds.X <= pageBounds.X + 4) newTabBounds.X = pageBounds.X;
@@ -299,45 +299,45 @@ namespace Adiict.UI.Forms
 
 		[Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
 		public TabStyle DisplayStyle {
-			get { return this._Style; }
+			get { return _Style; }
 			set { 
-                this._Style = value;
+                _Style = value;
             }
 		}
 
         [Category("Appearance"), DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
         public BlendStyle BlendStyle {
-            get { return this._BlendStyle; }
+            get { return _BlendStyle; }
             set {
-                this._BlendStyle = value;
-                this.TabControl.Invalidate();
+                _BlendStyle = value;
+                TabControl.Invalidate();
             }
         }
 
         [Category("Appearance"), DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
 		public ContentAlignment ImageAlign {
-			get { return this._ImageAlign; }
+			get { return _ImageAlign; }
 			set {
-				this._ImageAlign = value;
+				_ImageAlign = value;
 			}
 		}
 		
 		[Category("Appearance"), DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
 		public Point Padding {
-			get { return this._Padding; }
+			get { return _Padding; }
 			set {
-				this._Padding = value;
-				if (this._ShowTabCloser){
-					if (value.X + (int)(this._Radius/2) < -TabControlExtra.TabCloserButtonSize){
-						((TabControl)this.TabControl).Padding = new Point(0, value.Y);
+				_Padding = value;
+				if (_ShowTabCloser){
+					if (value.X + (int)(_Radius/2) < -TabControlExtra.TabCloserButtonSize){
+						((TabControl)TabControl).Padding = new Point(0, value.Y);
 					} else {
-                        ((TabControl)this.TabControl).Padding = new Point(value.X + this._Radius + (int)(TabControlExtra.TabCloserButtonSize + 10) / 2, value.Y);
+                        ((TabControl)TabControl).Padding = new Point(value.X + _Radius + (int)(TabControlExtra.TabCloserButtonSize + 10) / 2, value.Y);
 					}
 				} else {
-					if (value.X + (int)(this._Radius/2) < 1){
-						((TabControl)this.TabControl).Padding = new Point(0, value.Y);
+					if (value.X + (int)(_Radius/2) < 1){
+						((TabControl)TabControl).Padding = new Point(0, value.Y);
 					} else {
-                        ((TabControl)this.TabControl).Padding = new Point(value.X + this._Radius, value.Y);
+                        ((TabControl)TabControl).Padding = new Point(value.X + _Radius, value.Y);
 					}
 				}
 			}
@@ -346,67 +346,67 @@ namespace Adiict.UI.Forms
 
 		[Category("Appearance"), DefaultValue(1), Browsable(true)]
 		public int Radius {
-			get { return this._Radius; }
+			get { return _Radius; }
 			set {
 				if (value < 1) throw new ArgumentException("The radius cannot be less than 1", nameof(value));
 				
-				this._Radius = value;
+				_Radius = value;
 				//	Adjust padding
-				this.Padding = this._Padding;
+				Padding = _Padding;
 			}
 		}
 
 		[Category("Appearance"), DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
 		public int Overlap {
-			get { return this._Overlap; }
+			get { return _Overlap; }
 			set {
 				if (value < 0){
 					throw new ArgumentException("The tabs cannot have a negative overlap", nameof(value));
 				}
-				this._Overlap = value;
+				_Overlap = value;
 			}
 		}
 		
 		
 		[Category("Appearance"), DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
 		public bool FocusTrack {
-			get { return this._FocusTrack; }
+			get { return _FocusTrack; }
 			set {
-				this._FocusTrack = value;
+				_FocusTrack = value;
 			}
 		}
 		
 		[Category("Appearance"), DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
 		public bool HotTrack {
-			get { return this._HotTrack; }
+			get { return _HotTrack; }
 			set {
-				this._HotTrack = value;
-				((TabControl)this.TabControl).HotTrack = value;
+				_HotTrack = value;
+				((TabControl)TabControl).HotTrack = value;
 			}
 		}
 
         [Category("Appearance"), DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
         public bool SelectedTabIsLarger {
-            get { return this._SelectedTabIsLarger; }
+            get { return _SelectedTabIsLarger; }
 			set {
-                this._SelectedTabIsLarger = value;
-                this.TabControl.Invalidate();
+                _SelectedTabIsLarger = value;
+                TabControl.Invalidate();
 			}
 		}
 		
         [Category("Appearance"), DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
 		public bool ShowTabCloser {
-			get { return this._ShowTabCloser; }
+			get { return _ShowTabCloser; }
 			set {
-				this._ShowTabCloser = value;
+				_ShowTabCloser = value;
 				//	Adjust padding
-				this.Padding = this._Padding;
+				Padding = _Padding;
 			}
 		}
 
 		[Category("Appearance"), DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
 		public float Opacity {
-			get { return this._Opacity; }
+			get { return _Opacity; }
 			set {
 				if (value < 0){
 					throw new ArgumentException("The opacity must be between 0 and 1", nameof(value));
@@ -414,24 +414,24 @@ namespace Adiict.UI.Forms
 				if (value > 1){
 					throw new ArgumentException("The opacity must be between 0 and 1", nameof(value));
 				}
-				this._Opacity = value;
+				_Opacity = value;
 			}
 		}
 
         [Category("Appearance"), DefaultValue(typeof(Color), "")]
         public Color BorderColorDisabled {
             get {
-                if (this._BorderColorDisabled.IsEmpty) {
+                if (_BorderColorDisabled.IsEmpty) {
                     return SystemColors.ControlLight;
                 } else {
-                    return this._BorderColorDisabled;
+                    return _BorderColorDisabled;
                 }
             }
             set {
                 if (value.Equals(SystemColors.ControlLight)) {
-                    this._BorderColorDisabled = Color.Empty;
+                    _BorderColorDisabled = Color.Empty;
                 } else {
-                    this._BorderColorDisabled = value;
+                    _BorderColorDisabled = value;
                 }
             }
         }
@@ -439,18 +439,18 @@ namespace Adiict.UI.Forms
         [Category("Appearance"), DefaultValue(typeof(Color), "")]
         public Color BorderColorFocused {
             get {
-                if (this._BorderColorFocused.IsEmpty) {
+                if (_BorderColorFocused.IsEmpty) {
                     return ThemedColors.ToolBorder;
                 } else {
-                    return this._BorderColorFocused;
+                    return _BorderColorFocused;
                 }
             }
             set {
-                if (!value.Equals(this.BorderColorFocused)) {
+                if (!value.Equals(BorderColorFocused)) {
                     if (value.Equals(ThemedColors.ToolBorder)) {
-                        this._BorderColorFocused = Color.Empty;
+                        _BorderColorFocused = Color.Empty;
                     } else {
-                        this._BorderColorFocused = value;
+                        _BorderColorFocused = value;
                     }
                 }
             }
@@ -460,17 +460,17 @@ namespace Adiict.UI.Forms
 		public Color BorderColorHighlighted
 		{
 			get {
-				if (this._BorderColorHighlighted.IsEmpty){
+				if (_BorderColorHighlighted.IsEmpty){
 					return SystemColors.ControlDark;
 				} else {
-					return this._BorderColorHighlighted;
+					return _BorderColorHighlighted;
 				}
 			}
 			set {
 				if (value.Equals(SystemColors.ControlDark)){
-					this._BorderColorHighlighted = Color.Empty;
+					_BorderColorHighlighted = Color.Empty;
 				} else {
-					this._BorderColorHighlighted = value;
+					_BorderColorHighlighted = value;
 				}
 			}
 		}
@@ -478,17 +478,17 @@ namespace Adiict.UI.Forms
         [Category("Appearance"), DefaultValue(typeof(Color), "")]
         public Color BorderColorSelected {
             get {
-                if (this._BorderColorSelected.IsEmpty) {
+                if (_BorderColorSelected.IsEmpty) {
                     return SystemColors.ControlDark;
                 } else {
-                    return this._BorderColorSelected;
+                    return _BorderColorSelected;
                 }
             }
             set {
                 if (value.Equals(SystemColors.ControlDark)) {
-                    this._BorderColorSelected = Color.Empty;
+                    _BorderColorSelected = Color.Empty;
                 } else {
-                    this._BorderColorSelected = value;
+                    _BorderColorSelected = value;
                 }
             }
         }
@@ -497,17 +497,17 @@ namespace Adiict.UI.Forms
 		public Color BorderColorUnselected
 		{
 			get {
-				if (this._BorderColorUnselected.IsEmpty){
+				if (_BorderColorUnselected.IsEmpty){
 					return SystemColors.ControlDark;
 				} else {
-					return this._BorderColorUnselected;
+					return _BorderColorUnselected;
 				}
 			}
 			set {
 				if (value.Equals(SystemColors.ControlDark)){
-					this._BorderColorUnselected = Color.Empty;
+					_BorderColorUnselected = Color.Empty;
 				} else {
-					this._BorderColorUnselected = value;
+					_BorderColorUnselected = value;
 				}
 			}
 		}
@@ -515,227 +515,227 @@ namespace Adiict.UI.Forms
         [Category("Appearance"), DefaultValue(typeof(Color), "")]
         public Color PageBackgroundColorDisabled {
             get {
-                if (this._PageBackgroundColorDisabled.IsEmpty) {
+                if (_PageBackgroundColorDisabled.IsEmpty) {
                     return SystemColors.Control;
                 } else {
-                    return this._PageBackgroundColorDisabled;
+                    return _PageBackgroundColorDisabled;
                 }
             }
             set {
-                this._PageBackgroundColorDisabled = value;
+                _PageBackgroundColorDisabled = value;
             }
         }
 
         [Category("Appearance"), DefaultValue(typeof(Color), "")]
         public Color PageBackgroundColorFocused {
             get {
-                if (this._PageBackgroundColorFocused.IsEmpty) {
+                if (_PageBackgroundColorFocused.IsEmpty) {
                     return SystemColors.ControlLight;
                 } else {
-                    return this._PageBackgroundColorFocused;
+                    return _PageBackgroundColorFocused;
                 }
             }
             set {
-                this._PageBackgroundColorFocused = value;
+                _PageBackgroundColorFocused = value;
             }
         }
 
         [Category("Appearance"), DefaultValue(typeof(Color), "")]
         public Color PageBackgroundColorHighlighted {
             get {
-                if (this._PageBackgroundColorHighlighted.IsEmpty) {
+                if (_PageBackgroundColorHighlighted.IsEmpty) {
                     return PageBackgroundColorUnselected;
                 } else {
-                    return this._PageBackgroundColorHighlighted;
+                    return _PageBackgroundColorHighlighted;
                 }
             }
             set {
-                this._PageBackgroundColorHighlighted = value;
+                _PageBackgroundColorHighlighted = value;
             }
         }
 
         [Category("Appearance"), DefaultValue(typeof(Color), "")]
         public Color PageBackgroundColorSelected {
             get {
-                if (this._PageBackgroundColorSelected.IsEmpty) {
+                if (_PageBackgroundColorSelected.IsEmpty) {
                     return SystemColors.ControlLightLight;
                 } else {
-                    return this._PageBackgroundColorSelected;
+                    return _PageBackgroundColorSelected;
                 }
             }
             set {
-                this._PageBackgroundColorSelected = value;
+                _PageBackgroundColorSelected = value;
             }
         }
 
         [Category("Appearance"), DefaultValue(typeof(Color), "")]
         public Color PageBackgroundColorUnselected {
             get {
-                if (this._PageBackgroundColorUnselected.IsEmpty) {
+                if (_PageBackgroundColorUnselected.IsEmpty) {
                     return SystemColors.Control;
                 } else {
-                    return this._PageBackgroundColorUnselected;
+                    return _PageBackgroundColorUnselected;
                 }
             }
             set {
-                this._PageBackgroundColorUnselected = value;
+                _PageBackgroundColorUnselected = value;
             }
         }
 
         [Category("Appearance"), DefaultValue(typeof(Color), "")]
         public Color TabColorDisabled1 {
             get {
-                if (this._TabColorDisabled1.IsEmpty) {
+                if (_TabColorDisabled1.IsEmpty) {
                     return PageBackgroundColorDisabled;
                 } else {
-                    return this._TabColorDisabled1;
+                    return _TabColorDisabled1;
                 }
             }
             set {
-                this._TabColorDisabled1 = value;
+                _TabColorDisabled1 = value;
             }
         }
 
         [Category("Appearance"), DefaultValue(typeof(Color), "")]
         public Color TabColorDisabled2 {
             get {
-                if (this._TabColorDisabled2.IsEmpty) {
+                if (_TabColorDisabled2.IsEmpty) {
                     return TabColorDisabled1;
                 } else {
-                    return this._TabColorDisabled2;
+                    return _TabColorDisabled2;
                 }
             }
             set {
-                this._TabColorDisabled2 = value;
+                _TabColorDisabled2 = value;
             }
         }
 
         [Category("Appearance"), DefaultValue(typeof(Color), "")]
         public Color TabColorFocused1 {
             get {
-                if (this._TabColorFocused1.IsEmpty) {
+                if (_TabColorFocused1.IsEmpty) {
                     return PageBackgroundColorFocused;
                 } else {
-                    return this._TabColorFocused1;
+                    return _TabColorFocused1;
                 }
             }
             set {
-                this._TabColorFocused1 = value;
+                _TabColorFocused1 = value;
             }
         }
 
         [Category("Appearance"), DefaultValue(typeof(Color), "")]
         public Color TabColorFocused2 {
             get {
-                if (this._TabColorFocused2.IsEmpty) {
+                if (_TabColorFocused2.IsEmpty) {
                     return TabColorFocused1;
                 } else {
-                    return this._TabColorFocused2;
+                    return _TabColorFocused2;
                 }
             }
             set {
-                this._TabColorFocused2 = value;
+                _TabColorFocused2 = value;
             }
         }
 
         [Category("Appearance"), DefaultValue(typeof(Color), "")]
         public Color TabColorSelected1 {
             get {
-                if (this._TabColorSelected1.IsEmpty) {
+                if (_TabColorSelected1.IsEmpty) {
                     return PageBackgroundColorSelected;
                 } else {
-                    return this._TabColorSelected1;
+                    return _TabColorSelected1;
                 }
             }
             set {
-                this._TabColorSelected1 = value;
+                _TabColorSelected1 = value;
             }
         }
 
         [Category("Appearance"), DefaultValue(typeof(Color), "")]
         public Color TabColorSelected2 {
             get {
-                if (this._TabColorSelected2.IsEmpty) {
+                if (_TabColorSelected2.IsEmpty) {
                     return TabColorSelected1;
                 } else {
-                    return this._TabColorSelected2;
+                    return _TabColorSelected2;
                 }
             }
             set {
-                this._TabColorSelected2 = value;
+                _TabColorSelected2 = value;
             }
         }
 
         [Category("Appearance"), DefaultValue(typeof(Color), "")]
         public Color TabColorUnSelected1 {
             get {
-                if (this._TabColorUnSelected1.IsEmpty) {
+                if (_TabColorUnSelected1.IsEmpty) {
                     return PageBackgroundColorUnselected;
                 } else {
-                    return this._TabColorUnSelected1;
+                    return _TabColorUnSelected1;
                 }
             }
             set {
-                this._TabColorUnSelected1 = value;
+                _TabColorUnSelected1 = value;
             }
         }
 
         [Category("Appearance"), DefaultValue(typeof(Color), "")]
         public Color TabColorUnSelected2 {
             get {
-                if (this._TabColorUnSelected2.IsEmpty) {
+                if (_TabColorUnSelected2.IsEmpty) {
                     return TabColorUnSelected1;
                 } else {
-                    return this._TabColorUnSelected2;
+                    return _TabColorUnSelected2;
                 }
             }
             set {
-                this._TabColorUnSelected2 = value;
+                _TabColorUnSelected2 = value;
             }
         }
 
         [Category("Appearance"), DefaultValue(typeof(Color), "")]
         public Color TabColorHighLighted1 {
             get {
-                if (this._TabColorHighLighted1.IsEmpty) {
+                if (_TabColorHighLighted1.IsEmpty) {
                     return PageBackgroundColorHighlighted;
                 } else {
-                    return this._TabColorHighLighted1;
+                    return _TabColorHighLighted1;
                 }
             }
             set {
-                this._TabColorHighLighted1 = value;
+                _TabColorHighLighted1 = value;
             }
         }
 
         [Category("Appearance"), DefaultValue(typeof(Color), "")]
         public Color TabColorHighLighted2 {
             get {
-                if (this._TabColorHighLighted2.IsEmpty) {
+                if (_TabColorHighLighted2.IsEmpty) {
                     return TabColorHighLighted1;
                 } else {
-                    return this._TabColorHighLighted2;
+                    return _TabColorHighLighted2;
                 }
             }
             set {
-                this._TabColorHighLighted2 = value;
+                _TabColorHighLighted2 = value;
             }
         }
 
         [Category("Appearance"), DefaultValue(typeof(Color), "")]
         public Color TextColorDisabled {
             get {
-                if (this._TextColorUnselected.IsEmpty) {
+                if (_TextColorUnselected.IsEmpty) {
                     return SystemColors.ControlDark;
                 } else {
-                    return this._TextColorDisabled;
+                    return _TextColorDisabled;
                 }
             }
             set {
                 if (value.Equals(SystemColors.ControlDark)) {
-                    this._TextColorDisabled = Color.Empty;
+                    _TextColorDisabled = Color.Empty;
                 } else {
-                    this._TextColorDisabled = value;
+                    _TextColorDisabled = value;
                 }
             }
         }
@@ -743,28 +743,28 @@ namespace Adiict.UI.Forms
         [Category("Appearance"), DefaultValue(typeof(Color), "")]
         public Color TextColorFocused {
             get {
-                if (this._TextColorFocused.IsEmpty) {
+                if (_TextColorFocused.IsEmpty) {
                     return TextColorSelected;
                 } else {
-                    return this._TextColorFocused;
+                    return _TextColorFocused;
                 }
             }
             set {
-                this._TextColorFocused = value;
+                _TextColorFocused = value;
             }
         }
 
         [Category("Appearance"), DefaultValue(typeof(Color), "")]
         public Color TextColorHighlighted {
             get {
-                if (this._TextColorHighlighted.IsEmpty) {
+                if (_TextColorHighlighted.IsEmpty) {
                     return TextColorUnselected;
                 } else {
-                    return this._TextColorHighlighted;
+                    return _TextColorHighlighted;
                 }
             }
             set {
-                this._TextColorHighlighted = value;
+                _TextColorHighlighted = value;
             }
         }
 
@@ -772,17 +772,17 @@ namespace Adiict.UI.Forms
 		public Color TextColorSelected
 		{
 			get {
-				if (this._TextColorSelected.IsEmpty){
+				if (_TextColorSelected.IsEmpty){
 					return SystemColors.ControlText;
 				} else {
-					return this._TextColorSelected;
+					return _TextColorSelected;
 				}
 			}
 			set {
 				if (value.Equals(SystemColors.ControlText)){
-					this._TextColorSelected = Color.Empty;
+					_TextColorSelected = Color.Empty;
 				} else {
-					this._TextColorSelected = value;
+					_TextColorSelected = value;
 				}
 			}
 		}
@@ -790,17 +790,17 @@ namespace Adiict.UI.Forms
         [Category("Appearance"), DefaultValue(typeof(Color), "")]
         public Color TextColorUnselected {
             get {
-                if (this._TextColorUnselected.IsEmpty) {
+                if (_TextColorUnselected.IsEmpty) {
                     return SystemColors.ControlText;
                 } else {
-                    return this._TextColorUnselected;
+                    return _TextColorUnselected;
                 }
             }
             set {
                 if (value.Equals(SystemColors.ControlText)) {
-                    this._TextColorUnselected = Color.Empty;
+                    _TextColorUnselected = Color.Empty;
                 } else {
-                    this._TextColorUnselected = value;
+                    _TextColorUnselected = value;
                 }
             }
         }
@@ -808,183 +808,183 @@ namespace Adiict.UI.Forms
         [Category("Appearance"), DefaultValue(typeof(Color), "Orange")]
 		public Color FocusColor
 		{
-			get { return this._FocusColor; }
-			set { this._FocusColor = value;
+			get { return _FocusColor; }
+			set { _FocusColor = value;
 			}
 		}
 
         [Category("Appearance"), DefaultValue(typeof(SystemColors), "ControlDark")]
         public Color CloserColorFocused {
-            get { return this._CloserColorFocused; }
+            get { return _CloserColorFocused; }
             set {
-                this._CloserColorFocused = value;
+                _CloserColorFocused = value;
             }
         }
 
         [Category("Appearance"), DefaultValue(typeof(SystemColors), "ControlDark")]
         public Color CloserColorFocusedActive {
-            get { return this._CloserColorFocusedActive; }
+            get { return _CloserColorFocusedActive; }
             set {
-                this._CloserColorFocusedActive = value;
+                _CloserColorFocusedActive = value;
             }
         }
 
         [Category("Appearance"), DefaultValue(typeof(SystemColors), "ControlDark")]
         public Color CloserColorSelected {
-            get { return this._CloserColorSelected; }
+            get { return _CloserColorSelected; }
             set {
-                this._CloserColorSelected = value;
+                _CloserColorSelected = value;
             }
         }
 
         [Category("Appearance"), DefaultValue(typeof(SystemColors), "ControlDark")]
         public Color CloserColorSelectedActive {
-            get { return this._CloserColorSelectedActive; }
+            get { return _CloserColorSelectedActive; }
             set {
-                this._CloserColorSelectedActive = value;
+                _CloserColorSelectedActive = value;
             }
         }
 
         [Category("Appearance"), DefaultValue(typeof(SystemColors), "ControlDark")]
         public Color CloserColorHighlighted {
-            get { return this._CloserColorHighlighted; }
+            get { return _CloserColorHighlighted; }
             set {
-                this._CloserColorHighlighted = value;
+                _CloserColorHighlighted = value;
             }
         }
 
         [Category("Appearance"), DefaultValue(typeof(SystemColors), "ControlDark")]
         public Color CloserColorHighlightedActive {
-            get { return this._CloserColorHighlightedActive; }
+            get { return _CloserColorHighlightedActive; }
             set {
-                this._CloserColorHighlightedActive = value;
+                _CloserColorHighlightedActive = value;
             }
         }
 
         [Category("Appearance"), DefaultValue(typeof(SystemColors), "Empty")]
         public Color CloserColorUnselected {
-            get { return this._CloserColorUnselected; }
+            get { return _CloserColorUnselected; }
             set {
-                this._CloserColorUnselected = value;
+                _CloserColorUnselected = value;
             }
         }
 
         [Category("Appearance"), DefaultValue(typeof(SystemColors), "Empty")]
         public Color CloserButtonFillColorFocused {
-            get { return this._CloserButtonFillColorFocused; }
+            get { return _CloserButtonFillColorFocused; }
             set {
-                this._CloserButtonFillColorFocused = value;
+                _CloserButtonFillColorFocused = value;
             }
         }
 
         [Category("Appearance"), DefaultValue(typeof(SystemColors), "Empty")]
         public Color CloserButtonFillColorFocusedActive {
-            get { return this._CloserButtonFillColorFocusedActive; }
+            get { return _CloserButtonFillColorFocusedActive; }
             set {
-                this._CloserButtonFillColorFocusedActive = value;
+                _CloserButtonFillColorFocusedActive = value;
             }
         }
 
         [Category("Appearance"), DefaultValue(typeof(SystemColors), "Empty")]
         public Color CloserButtonFillColorSelected {
-            get { return this._CloserButtonFillColorSelected ; }
+            get { return _CloserButtonFillColorSelected ; }
             set {
-                this._CloserButtonFillColorSelected = value;
+                _CloserButtonFillColorSelected = value;
             }
         }
 
         [Category("Appearance"), DefaultValue(typeof(SystemColors), "Empty")]
         public Color CloserButtonFillColorSelectedActive {
-            get { return this._CloserButtonFillColorSelectedActive; }
+            get { return _CloserButtonFillColorSelectedActive; }
             set {
-                this._CloserButtonFillColorSelectedActive = value;
+                _CloserButtonFillColorSelectedActive = value;
             }
         }
 
         [Category("Appearance"), DefaultValue(typeof(SystemColors), "Empty")]
         public Color CloserButtonFillColorHighlighted {
-            get { return this._CloserButtonFillColorHighlighted; }
+            get { return _CloserButtonFillColorHighlighted; }
             set {
-                this._CloserButtonFillColorHighlighted = value;
+                _CloserButtonFillColorHighlighted = value;
             }
         }
 
         [Category("Appearance"), DefaultValue(typeof(SystemColors), "Empty")]
         public Color CloserButtonFillColorHighlightedActive {
-            get { return this._CloserButtonFillColorHighlightedActive; }
+            get { return _CloserButtonFillColorHighlightedActive; }
             set {
-                this._CloserButtonFillColorHighlightedActive = value;
+                _CloserButtonFillColorHighlightedActive = value;
             }
         }
 
         [Category("Appearance"), DefaultValue(typeof(SystemColors), "Empty")]
         public Color CloserButtonFillColorUnselected {
-            get { return this._CloserButtonFillColorUnselected; }
+            get { return _CloserButtonFillColorUnselected; }
             set {
-                this._CloserButtonFillColorUnselected = value;
+                _CloserButtonFillColorUnselected = value;
             }
         }
 
         [Category("Appearance"), DefaultValue(typeof(SystemColors), "Empty")]
         public Color CloserButtonOutlineColorFocused {
-            get { return this._CloserButtonOutlineColorFocused; }
+            get { return _CloserButtonOutlineColorFocused; }
             set {
-                this._CloserButtonOutlineColorFocused = value;
+                _CloserButtonOutlineColorFocused = value;
             }
         }
 
         [Category("Appearance"), DefaultValue(typeof(SystemColors), "Empty")]
         public Color CloserButtonOutlineColorFocusedActive {
-            get { return this._CloserButtonOutlineColorFocusedActive; }
+            get { return _CloserButtonOutlineColorFocusedActive; }
             set {
-                this._CloserButtonOutlineColorFocusedActive = value;
+                _CloserButtonOutlineColorFocusedActive = value;
             }
         }
 
         [Category("Appearance"), DefaultValue(typeof(SystemColors), "Empty")]
         public Color CloserButtonOutlineColorSelected {
-            get { return this._CloserButtonOutlineColorSelected; }
+            get { return _CloserButtonOutlineColorSelected; }
             set {
-                this._CloserButtonOutlineColorSelected = value;
+                _CloserButtonOutlineColorSelected = value;
             }
         }
 
         [Category("Appearance"), DefaultValue(typeof(SystemColors), "Empty")]
         public Color CloserButtonOutlineColorSelectedActive {
-            get { return this._CloserButtonOutlineColorSelectedActive; }
+            get { return _CloserButtonOutlineColorSelectedActive; }
             set {
-                this._CloserButtonOutlineColorSelectedActive = value;
+                _CloserButtonOutlineColorSelectedActive = value;
             }
         }
 
         [Category("Appearance"), DefaultValue(typeof(SystemColors), "Empty")]
         public Color CloserButtonOutlineColorHighlighted {
-            get { return this._CloserButtonOutlineColorHighlighted; }
+            get { return _CloserButtonOutlineColorHighlighted; }
             set {
-                this._CloserButtonOutlineColorHighlighted = value;
+                _CloserButtonOutlineColorHighlighted = value;
             }
         }
 
         [Category("Appearance"), DefaultValue(typeof(SystemColors), "Empty")]
         public Color CloserButtonOutlineColorHighlightedActive {
-            get { return this._CloserButtonOutlineColorHighlightedActive; }
+            get { return _CloserButtonOutlineColorHighlightedActive; }
             set {
-                this._CloserButtonOutlineColorHighlightedActive = value;
+                _CloserButtonOutlineColorHighlightedActive = value;
             }
         }
 
         [Category("Appearance"), DefaultValue(typeof(SystemColors), "Empty")]
         public Color CloserButtonOutlineColorUnselected {
-            get { return this._CloserButtonOutlineColorUnselected; }
+            get { return _CloserButtonOutlineColorUnselected; }
             set {
-                this._CloserButtonOutlineColorUnselected = value;
+                _CloserButtonOutlineColorUnselected = value;
             }
         }
 
         [Category("Appearance"), DefaultValue(typeof(Padding), "{1,1,1,1}")]
         public Padding TabPageMargin 
         {
-            get {return this._TabPageMargin;}
+            get {return _TabPageMargin;}
             set {
                 if (value.Left < 0) value.Left = 0;
                 if (value.Right< 0) value.Right = 0;
@@ -996,17 +996,17 @@ namespace Adiict.UI.Forms
                 if (value.Top > 4) value.Top = 4;
                 if (value.Bottom > 4) value.Bottom = 4;
 
-                this._TabPageMargin = value;
+                _TabPageMargin = value;
             }
         }
 
         [Category("Appearance"), DefaultValue(typeof(int), "0")]
         public int TabPageRadius {
-            get { return this._TabPageRadius; }
+            get { return _TabPageRadius; }
             set { 
                 if (value < 0) value = 0;
                 if (value > 4) value = 4;
-                this._TabPageRadius = value;
+                _TabPageRadius = value;
             }
         }
 
@@ -1018,36 +1018,36 @@ namespace Adiict.UI.Forms
             bool active = closerButtonPath.GetBounds().Contains(mousePosition);
             switch (state) {
                 case TabState.Disabled:
-                    DrawTabCloser(closerPath, closerButtonPath, graphics, this.CloserColorUnselected, this.CloserButtonFillColorUnselected, this.CloserButtonOutlineColorUnselected);
+                    DrawTabCloser(closerPath, closerButtonPath, graphics, CloserColorUnselected, CloserButtonFillColorUnselected, CloserButtonOutlineColorUnselected);
                     break;
                 case TabState.Focused:
                     if (active) {
-                        DrawTabCloser(closerPath, closerButtonPath, graphics, this.CloserColorFocusedActive, this.CloserButtonFillColorFocusedActive, this.CloserButtonOutlineColorFocusedActive);
+                        DrawTabCloser(closerPath, closerButtonPath, graphics, CloserColorFocusedActive, CloserButtonFillColorFocusedActive, CloserButtonOutlineColorFocusedActive);
                     } else {
-                        DrawTabCloser(closerPath, closerButtonPath, graphics, this.CloserColorFocused, this.CloserButtonFillColorFocused, this.CloserButtonOutlineColorFocused);
+                        DrawTabCloser(closerPath, closerButtonPath, graphics, CloserColorFocused, CloserButtonFillColorFocused, CloserButtonOutlineColorFocused);
                     }
                     break;
                 case TabState.Highlighted:
                     if (active) {
-                        DrawTabCloser(closerPath, closerButtonPath, graphics, this.CloserColorHighlightedActive, this.CloserButtonFillColorHighlightedActive, this.CloserButtonOutlineColorHighlightedActive);
+                        DrawTabCloser(closerPath, closerButtonPath, graphics, CloserColorHighlightedActive, CloserButtonFillColorHighlightedActive, CloserButtonOutlineColorHighlightedActive);
                     } else {
-                        DrawTabCloser(closerPath, closerButtonPath, graphics, this.CloserColorHighlighted, this.CloserButtonFillColorHighlighted, this.CloserButtonOutlineColorHighlighted);
+                        DrawTabCloser(closerPath, closerButtonPath, graphics, CloserColorHighlighted, CloserButtonFillColorHighlighted, CloserButtonOutlineColorHighlighted);
                     }
                     break;
                 case TabState.Selected:
                     if (active) {
-                        DrawTabCloser(closerPath, closerButtonPath, graphics, this.CloserColorSelectedActive, this.CloserButtonFillColorSelectedActive, this.CloserButtonOutlineColorSelectedActive);
+                        DrawTabCloser(closerPath, closerButtonPath, graphics, CloserColorSelectedActive, CloserButtonFillColorSelectedActive, CloserButtonOutlineColorSelectedActive);
                     } else {
-                        DrawTabCloser(closerPath, closerButtonPath, graphics, this.CloserColorSelected, this.CloserButtonFillColorSelected, this.CloserButtonOutlineColorSelected);
+                        DrawTabCloser(closerPath, closerButtonPath, graphics, CloserColorSelected, CloserButtonFillColorSelected, CloserButtonOutlineColorSelected);
                     }
                     break;
                 case TabState.Unselected:
-                    DrawTabCloser(closerPath, closerButtonPath, graphics, this.CloserColorUnselected, this.CloserButtonFillColorUnselected, this.CloserButtonOutlineColorUnselected);
+                    DrawTabCloser(closerPath, closerButtonPath, graphics, CloserColorUnselected, CloserButtonFillColorUnselected, CloserButtonOutlineColorUnselected);
                     break;
             }
         }
 
-        private void DrawTabCloser(GraphicsPath closerPath, GraphicsPath closerButtonPath, Graphics graphics, Color closerColor, Color closerFillColor, Color closerOutlineColor) {
+        private static void DrawTabCloser(GraphicsPath closerPath, GraphicsPath closerButtonPath, Graphics graphics, Color closerColor, Color closerFillColor, Color closerOutlineColor) {
             if (closerButtonPath != null) {
                 if (closerFillColor != Color.Empty) {
                     graphics.SmoothingMode = SmoothingMode.None;
@@ -1082,7 +1082,7 @@ namespace Adiict.UI.Forms
         }
 
         public void DrawTabCloser(Rectangle closerButtonRect, Graphics graphics, TabState state, Point mousePosition) {
-            if (!this._ShowTabCloser) return;
+            if (!_ShowTabCloser) return;
             using (var closerPath = GetTabCloserPath(closerButtonRect)) {
                 using (var closerButtonPath = GetTabCloserButtonPath(closerButtonRect)) {
                     DrawTabCloser(closerPath, closerButtonPath, graphics, state, mousePosition);
@@ -1101,26 +1101,26 @@ namespace Adiict.UI.Forms
        }
 
         public virtual void DrawTabFocusIndicator(GraphicsPath tabpath, TabState state, Graphics graphics) {
-            if (this._FocusTrack && state == TabState.Focused) {
+            if (_FocusTrack && state == TabState.Focused) {
                 Brush focusBrush = null;
                 RectangleF pathRect = tabpath.GetBounds();
                 Rectangle focusRect = Rectangle.Empty;
-                switch (this.TabControl.Alignment) {
+                switch (TabControl.Alignment) {
                     case TabAlignment.Top:
                         focusRect = new Rectangle((int)pathRect.X, (int)pathRect.Y, (int)pathRect.Width, 4);
-                        focusBrush = new LinearGradientBrush(focusRect, this.FocusColor, SystemColors.Window, LinearGradientMode.Vertical);
+                        focusBrush = new LinearGradientBrush(focusRect, FocusColor, SystemColors.Window, LinearGradientMode.Vertical);
                         break;
                     case TabAlignment.Bottom:
                         focusRect = new Rectangle((int)pathRect.X, (int)pathRect.Bottom - 4, (int)pathRect.Width, 4);
-                        focusBrush = new LinearGradientBrush(focusRect, SystemColors.ControlLight, this.FocusColor, LinearGradientMode.Vertical);
+                        focusBrush = new LinearGradientBrush(focusRect, SystemColors.ControlLight, FocusColor, LinearGradientMode.Vertical);
                         break;
                     case TabAlignment.Left:
                         focusRect = new Rectangle((int)pathRect.X, (int)pathRect.Y, 4, (int)pathRect.Height);
-                        focusBrush = new LinearGradientBrush(focusRect, this.FocusColor, SystemColors.ControlLight, LinearGradientMode.Horizontal);
+                        focusBrush = new LinearGradientBrush(focusRect, FocusColor, SystemColors.ControlLight, LinearGradientMode.Horizontal);
                         break;
                     case TabAlignment.Right:
                         focusRect = new Rectangle((int)pathRect.Right - 4, (int)pathRect.Y, 4, (int)pathRect.Height);
-                        focusBrush = new LinearGradientBrush(focusRect, SystemColors.ControlLight, this.FocusColor, LinearGradientMode.Horizontal);
+                        focusBrush = new LinearGradientBrush(focusRect, SystemColors.ControlLight, FocusColor, LinearGradientMode.Horizontal);
                         break;
                 }
 
@@ -1149,19 +1149,19 @@ namespace Adiict.UI.Forms
 
             switch (state) {
                 case TabState.Disabled:
-                    color = this.PageBackgroundColorDisabled;
+                    color = PageBackgroundColorDisabled;
                     break;
                 case TabState.Focused:
-                    color = this.PageBackgroundColorFocused;
+                    color = PageBackgroundColorFocused;
                     break;
                 case TabState.Highlighted:
-                    color = this.PageBackgroundColorHighlighted;
+                    color = PageBackgroundColorHighlighted;
                     break;
                 case TabState.Selected:
-                    color = this.PageBackgroundColorSelected;
+                    color = PageBackgroundColorSelected;
                     break;
                 case TabState.Unselected:
-                    color = this.PageBackgroundColorUnselected;
+                    color = PageBackgroundColorUnselected;
                     break;
             }
             return new SolidBrush(color);
@@ -1182,7 +1182,7 @@ namespace Adiict.UI.Forms
             //tabBounds.Inflate(3, 3);
             //tabBounds.X -= 1;
             //tabBounds.Y -= 1;
-            switch (this.TabControl.Alignment) {
+            switch (TabControl.Alignment) {
                 case TabAlignment.Top:
                     tabBounds.Height += 1;
                     fillBrush = new LinearGradientBrush(tabBounds, color2, color1, LinearGradientMode.Vertical);
@@ -1208,19 +1208,19 @@ namespace Adiict.UI.Forms
 
             switch (state) {
                 case TabState.Disabled:
-                    color = this.TabColorDisabled1;
+                    color = TabColorDisabled1;
                     break;
                 case TabState.Focused:
-                    color = this.TabColorFocused1;
+                    color = TabColorFocused1;
                     break;
                 case TabState.Highlighted:
-                    color = this.TabColorHighLighted1;
+                    color = TabColorHighLighted1;
                     break;
                 case TabState.Selected:
-                    color = this.TabColorSelected1;
+                    color = TabColorSelected1;
                     break;
                 case TabState.Unselected:
-                    color = this.TabColorUnSelected1;
+                    color = TabColorUnSelected1;
                     break;
             }
             return color;
@@ -1231,19 +1231,19 @@ namespace Adiict.UI.Forms
 
             switch (state) {
                 case TabState.Disabled:
-                    color = this.TabColorDisabled2;
+                    color = TabColorDisabled2;
                     break;
                 case TabState.Focused:
-                    color = this.TabColorFocused2;
+                    color = TabColorFocused2;
                     break;
                 case TabState.Highlighted:
-                    color = this.TabColorHighLighted2;
+                    color = TabColorHighLighted2;
                     break;
                 case TabState.Selected:
-                    color = this.TabColorSelected2;
+                    color = TabColorSelected2;
                     break;
                 case TabState.Unselected:
-                    color = this.TabColorUnSelected2;
+                    color = TabColorUnSelected2;
                     break;
             }
             return color;
@@ -1254,14 +1254,16 @@ namespace Adiict.UI.Forms
             float[] relativePositions = { 0f, 0.6f, 1f };
 
             //	Glass look to top aligned tabs
-            if (this.BlendStyle == BlendStyle.Glass) {
+            if (BlendStyle == BlendStyle.Glass) {
                 relativeIntensities = new float[] { 0f, 0.5f, 1f, 1f };
                 relativePositions = new float[] { 0f, 0.5f, 0.51f, 1f };
             }
 
-            Blend blend = new Blend();
-            blend.Factors = relativeIntensities;
-            blend.Positions = relativePositions;
+            Blend blend = new Blend
+            {
+                Factors = relativeIntensities,
+                Positions = relativePositions
+            };
 
             return blend;
         }
@@ -1274,7 +1276,7 @@ namespace Adiict.UI.Forms
 			
 			GraphicsPath path = new GraphicsPath();
 			
-			this.AddTabBorder(path, tabBounds);
+			AddTabBorder(path, tabBounds);
 			
 			path.CloseFigure();
 			return path;
