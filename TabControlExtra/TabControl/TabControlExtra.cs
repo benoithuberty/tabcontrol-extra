@@ -24,6 +24,7 @@ namespace Adiict.UI.Forms
         #region constants
 
         public const int TabCloserButtonSize = 15;
+        private const int TabInnerPadding = 4;
 
         private const int AnyRightAlign = (int)ContentAlignment.BottomRight | (int)ContentAlignment.MiddleRight | (int)ContentAlignment.TopRight;
         private const int AnyLeftAlign = (int)ContentAlignment.BottomLeft | (int)ContentAlignment.MiddleLeft | (int)ContentAlignment.TopLeft;
@@ -554,12 +555,6 @@ namespace Adiict.UI.Forms
 
         protected override void OnFontChanged(EventArgs e)
         {
-            //IntPtr hFont = this.Font.ToHfont();
-            //NativeMethods.SendMessage(this.Handle, NativeMethods.WM_SETFONT, hFont, (IntPtr)(-1));
-            //NativeMethods.SendMessage(this.Handle, NativeMethods.WM_FONTCHANGE, IntPtr.Zero, IntPtr.Zero);
-
-            
-
             UpdateStyles();
         }
 
@@ -581,17 +576,13 @@ namespace Adiict.UI.Forms
 
                 _TabBuffer = new Bitmap(Width, Height);
                 _TabBufferGraphics = Graphics.FromImage(_TabBuffer);
-                _BackImage?.Dispose();
-                _BackImage = null;
             }
         }
 
         protected override void OnResize(EventArgs e)
         {
-            //var start = DateTime.Now;
             CreateGraphicsBuffers();
             base.OnResize(e);
-            //System.Diagnostics.Debug.WriteLine(DateTime.Now.ToString() + " TabControl " + this.GetHashCode() + " resized: " + DateTime.Now.Subtract(start).TotalMilliseconds + "ms; size: " + this.Size.ToString() + " location: " + this.Location.ToString());
         }
 
         protected override void OnParentBackColorChanged(EventArgs e)
@@ -634,7 +625,9 @@ namespace Adiict.UI.Forms
             base.OnEnter(e);
             if (Visible)
             {
-                OnPaint(new PaintEventArgs(CreateGraphics(), ClientRectangle));
+                using (var g = CreateGraphics())
+                using (var args = new PaintEventArgs(g, ClientRectangle))
+                    OnPaint(args);
             }
         }
 
@@ -643,7 +636,9 @@ namespace Adiict.UI.Forms
             base.OnLeave(e);
             if (Visible)
             {
-                OnPaint(new PaintEventArgs(CreateGraphics(), ClientRectangle));
+                using (var g = CreateGraphics())
+                using (var args = new PaintEventArgs(g, ClientRectangle))
+                    OnPaint(args);
             }
         }
 
@@ -661,11 +656,6 @@ namespace Adiict.UI.Forms
                 }
             }
             return base.ProcessMnemonic(charCode);
-        }
-
-        protected override void OnSelectedIndexChanged(EventArgs e)
-        {
-            base.OnSelectedIndexChanged(e);
         }
 
 #if NETFRAMEWORK
@@ -791,16 +781,13 @@ namespace Adiict.UI.Forms
         {
             if (_SuspendDrawing) return;
 
-            //	We must always paint the entire area of the tab control, since our actual tab sizes 
-            //  may differ from those of the underlying TabControl, which frequently requests painting 
+            //	We must always paint the entire area of the tab control, since our actual tab sizes
+            //  may differ from those of the underlying TabControl, which frequently requests painting
             //  of just a single tab or the whole row of tabs (ie the clip rectangle supplied in the
             //  event args only covers those areas).
 
             //  So we create a new Graphics object rather than use the one in the event args, to avoid the clipping.
-            DateTime start = DateTime.Now;
-            Point posn = MousePosition;
-            CustomPaint(posn);
-            System.Diagnostics.Debug.WriteLine(DateTime.Now.ToString() + " TabControl " + GetHashCode() + " painted: " + DateTime.Now.Subtract(start).TotalMilliseconds + "ms; size: " + Size.ToString() + " location: " + Location.ToString() + " clip: " + e.ClipRectangle.ToString());
+            CustomPaint(MousePosition);
         }
 
         private void CustomPaint(Point mousePosition)
@@ -1375,54 +1362,54 @@ namespace Adiict.UI.Forms
                 case TabAlignment.Top:
                     if (increaseCoordinate)
                     {
-                        newRect.X += 4 + GetOffsetToEnsurePointIsWithinPath(tabBorder, newRect.X, newRect.Y, true, +1, (p) => p.X < Width);
+                        newRect.X += TabInnerPadding + GetOffsetToEnsurePointIsWithinPath(tabBorder, newRect.X, newRect.Y, true, +1, (p) => p.X < Width);
                     }
                     else
                     {
-                        newRect.X += -4 + GetOffsetToEnsurePointIsWithinPath(tabBorder, newRect.Right, newRect.Y, true, -1, (p) => p.X > 0);
+                        newRect.X += -TabInnerPadding + GetOffsetToEnsurePointIsWithinPath(tabBorder, newRect.Right, newRect.Y, true, -1, (p) => p.X > 0);
                     }
                     break;
                 case TabAlignment.Bottom:
                     if (increaseCoordinate)
                     {
-                        newRect.X += 4 + GetOffsetToEnsurePointIsWithinPath(tabBorder, newRect.X, newRect.Bottom, true, +1, (p) => p.X < Width);
+                        newRect.X += TabInnerPadding + GetOffsetToEnsurePointIsWithinPath(tabBorder, newRect.X, newRect.Bottom, true, +1, (p) => p.X < Width);
                     }
                     else
                     {
-                        newRect.X += -4 + GetOffsetToEnsurePointIsWithinPath(tabBorder, newRect.Right, newRect.Bottom, true, -1, (p) => p.X > 0);
+                        newRect.X += -TabInnerPadding + GetOffsetToEnsurePointIsWithinPath(tabBorder, newRect.Right, newRect.Bottom, true, -1, (p) => p.X > 0);
                     }
                     break;
                 case TabAlignment.Left:
                     if (increaseCoordinate)
                     {
-                        newRect.Y += 4 + GetOffsetToEnsurePointIsWithinPath(tabBorder, newRect.Left, newRect.Y, false, +1, (p) => p.Y < Height);
+                        newRect.Y += TabInnerPadding + GetOffsetToEnsurePointIsWithinPath(tabBorder, newRect.Left, newRect.Y, false, +1, (p) => p.Y < Height);
                     }
                     else
                     {
-                        newRect.Y += -4 + GetOffsetToEnsurePointIsWithinPath(tabBorder, newRect.Left, newRect.Bottom, false, -1, (p) => p.Y > 0);
+                        newRect.Y += -TabInnerPadding + GetOffsetToEnsurePointIsWithinPath(tabBorder, newRect.Left, newRect.Bottom, false, -1, (p) => p.Y > 0);
                     }
                     break;
                 case TabAlignment.Right:
                     if (increaseCoordinate)
                     {
-                        newRect.Y += 4 + GetOffsetToEnsurePointIsWithinPath(tabBorder, newRect.Right, newRect.Y, false, +1, (p) => p.Y < Height);
+                        newRect.Y += TabInnerPadding + GetOffsetToEnsurePointIsWithinPath(tabBorder, newRect.Right, newRect.Y, false, +1, (p) => p.Y < Height);
                     }
                     else
                     {
-                        newRect.Y += -4 + GetOffsetToEnsurePointIsWithinPath(tabBorder, newRect.Right, newRect.Bottom, false, -1, (p) => p.Y > 0);
+                        newRect.Y += -TabInnerPadding + GetOffsetToEnsurePointIsWithinPath(tabBorder, newRect.Right, newRect.Bottom, false, -1, (p) => p.Y > 0);
                     }
                     break;
             }
             return newRect;
         }
 
-        private bool EffectiveRightToLeft
+        internal bool EffectiveRightToLeft
         {
             get
             {
                 return ((RightToLeft == RightToLeft.Yes) ||
                             (RightToLeft == RightToLeft.Inherit &&
-                                Parent.RightToLeft == RightToLeft.Yes))
+                                Parent?.RightToLeft == RightToLeft.Yes))
                         && RightToLeftLayout;
             }
         }
@@ -1537,21 +1524,17 @@ namespace Adiict.UI.Forms
 
         private Image GetTabImage(int index)
         {
-            Image tabImage = null;
-            if (ImageList == null)
-            {
-            }
-            else if (TabPages[index].ImageIndex > -1 && ImageList.Images.Count > TabPages[index].ImageIndex)
-            {
-                tabImage = ImageList.Images[TabPages[index].ImageIndex];
-            }
-            else if ((!string.IsNullOrEmpty(TabPages[index].ImageKey) && !TabPages[index].ImageKey.Equals("(none)", StringComparison.OrdinalIgnoreCase))
-                       && ImageList.Images.ContainsKey(TabPages[index].ImageKey))
-            {
-                tabImage = ImageList.Images[TabPages[index].ImageKey];
-            }
+            if (ImageList == null) return null;
 
-            return tabImage;
+            if (TabPages[index].ImageIndex > -1 && ImageList.Images.Count > TabPages[index].ImageIndex)
+                return ImageList.Images[TabPages[index].ImageIndex];
+
+            if (!string.IsNullOrEmpty(TabPages[index].ImageKey)
+                && !TabPages[index].ImageKey.Equals("(none)", StringComparison.OrdinalIgnoreCase)
+                && ImageList.Images.ContainsKey(TabPages[index].ImageKey))
+                return ImageList.Images[TabPages[index].ImageKey];
+
+            return null;
         }
 
         private Rectangle GetTabImageRect(int index)
@@ -1580,13 +1563,13 @@ namespace Adiict.UI.Forms
             {
                 if (EffectiveRightToLeft)
                 {
-                    if (horizontalTabs && IsLeftAligned(imageAlignment)) imageRect.X += TabControlExtra.TabCloserButtonSize + 4;
-                    if (!horizontalTabs && IsTopAligned(imageAlignment)) imageRect.Y += TabControlExtra.TabCloserButtonSize + 4;
+                    if (horizontalTabs && IsLeftAligned(imageAlignment)) imageRect.X += TabCloserButtonSize + TabInnerPadding;
+                    if (!horizontalTabs && IsTopAligned(imageAlignment)) imageRect.Y += TabCloserButtonSize + TabInnerPadding;
                 }
                 else
                 {
-                    if (horizontalTabs && IsRightAligned(imageAlignment)) imageRect.X -= TabControlExtra.TabCloserButtonSize + 4;
-                    if (!horizontalTabs && IsBottomAligned(imageAlignment)) imageRect.Y -= TabControlExtra.TabCloserButtonSize + 4;
+                    if (horizontalTabs && IsRightAligned(imageAlignment)) imageRect.X -= TabCloserButtonSize + TabInnerPadding;
+                    if (!horizontalTabs && IsBottomAligned(imageAlignment)) imageRect.Y -= TabCloserButtonSize + TabInnerPadding;
                 }
             }
 
@@ -1681,29 +1664,26 @@ namespace Adiict.UI.Forms
 
         private TabState GetTabState(int index, Point mousePosition)
         {
-            if (SelectedIndex == index)
-            {
-                if (ContainsFocus)
-                {
-                    return TabState.Focused;
-                }
-                else
-                {
-                    return TabState.Selected;
-                }
-            }
-            else if (!TabPages[index].Enabled)
-            {
+            return DetermineTabState(
+                index,
+                SelectedIndex,
+                ContainsFocus,
+                TabPages[index].Enabled,
+                DisplayStyleProvider.HotTrack,
+                GetActiveIndex(mousePosition));
+        }
+
+        internal static TabState DetermineTabState(
+            int index, int selectedIndex, bool containsFocus,
+            bool tabEnabled, bool hotTrack, int activeIndex)
+        {
+            if (selectedIndex == index)
+                return containsFocus ? TabState.Focused : TabState.Selected;
+            if (!tabEnabled)
                 return TabState.Disabled;
-            }
-            else if (DisplayStyleProvider.HotTrack && index == GetActiveIndex(mousePosition))
-            {
+            if (hotTrack && index == activeIndex)
                 return TabState.Highlighted;
-            }
-            else
-            {
-                return TabState.Unselected;
-            }
+            return TabState.Unselected;
         }
 
         private Rectangle GetTabTextRect(GraphicsPath tabBorder, Rectangle tabBounds, Rectangle closerRect, Rectangle imageRect)
@@ -1722,22 +1702,22 @@ namespace Adiict.UI.Forms
                     {
                         if (EffectiveRightToLeft)
                         {
-                            left = closerRect.Right + 4;
+                            left = closerRect.Right + TabInnerPadding;
                         }
                         else
                         {
-                            right = closerRect.X - 4;
+                            right = closerRect.X - TabInnerPadding;
                         }
                     }
                     if (imageRect != Rectangle.Empty)
                     {
                         if (IsLeftAligned(imageAlignment))
                         {
-                            left = imageRect.Right + 4;
+                            left = imageRect.Right + TabInnerPadding;
                         }
                         else if (IsRightAligned(imageAlignment))
                         {
-                            right = imageRect.X - 4;
+                            right = imageRect.X - TabInnerPadding;
                         }
                     }
                     break;
@@ -1747,22 +1727,22 @@ namespace Adiict.UI.Forms
                     {
                         if (EffectiveRightToLeft)
                         {
-                            top = closerRect.Bottom + 4;
+                            top = closerRect.Bottom + TabInnerPadding;
                         }
                         else
                         {
-                            bottom = closerRect.Y - 4;
+                            bottom = closerRect.Y - TabInnerPadding;
                         }
                     }
                     if (imageRect != Rectangle.Empty)
                     {
                         if (IsTopAligned(imageAlignment))
                         {
-                            top = imageRect.Bottom + 4;
+                            top = imageRect.Bottom + TabInnerPadding;
                         }
                         else if (IsBottomAligned(imageAlignment))
                         {
-                            bottom = imageRect.Y - 4;
+                            bottom = imageRect.Y - TabInnerPadding;
                         }
                     }
                     break;
@@ -1863,10 +1843,6 @@ namespace Adiict.UI.Forms
             if (dpi == 0 || _Dpi == dpi) return;
 
             _Dpi = dpi;
-            SizeF sizeF = new SizeF(dpi / 96f, dpi / 96f);
-
-
-            SuspendLayout();
 
             int radius = AdaptDpi(_StyleProvider.Radius);
             int tabPageRadius = AdaptDpi(_StyleProvider.TabPageRadius);
@@ -1874,17 +1850,19 @@ namespace Adiict.UI.Forms
             Point padding = AdaptDpi(_StyleProvider.Padding);
             Padding tabPageMargin = AdaptDpi(_StyleProvider.TabPageMargin);
 
-            //this.Scale(sizeF);
-
-            _StyleProvider.Radius = radius;
-            _StyleProvider.TabPageRadius = tabPageRadius;
-            _StyleProvider.Overlap = overlap;
-            _StyleProvider.Padding = padding;
-            _StyleProvider.TabPageMargin = tabPageMargin;
-
-
-
-            PerformLayout();
+            SuspendLayout();
+            try
+            {
+                _StyleProvider.Radius = radius;
+                _StyleProvider.TabPageRadius = tabPageRadius;
+                _StyleProvider.Overlap = overlap;
+                _StyleProvider.Padding = padding;
+                _StyleProvider.TabPageMargin = tabPageMargin;
+            }
+            finally
+            {
+                ResumeLayout();
+            }
         }
 
         private int AdaptDpi(int x)

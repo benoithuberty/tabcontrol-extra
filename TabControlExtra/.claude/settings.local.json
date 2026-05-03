@@ -1,0 +1,18 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(Get-ChildItem -Path \"D:\\\\Programming\\\\git\\\\tabcontrol-extra\\\\TabControlExtra\" -Recurse -Depth 2)",
+      "Bash(Select-Object FullName, PSIsContainer)",
+      "Bash(Get-ChildItem -Path \"D:\\\\Programming\\\\git\\\\tabcontrol-extra\\\\TabControlExtra\\\\TabControl\" -File -Name)",
+      "Bash(Measure-Object -Line)",
+      "PowerShell(Get-ChildItem *)",
+      "PowerShell(Get-ChildItem -Path \"D:\\\\Programming\\\\git\\\\tabcontrol-extra\\\\TabControlExtra\" -File | Where-Object { $_.Extension -eq \".snk\" } | Select-Object -ExpandProperty Name)",
+      "Bash(dotnet build *)",
+      "Bash(dotnet new *)",
+      "Bash(Remove-Item *)",
+      "Bash(del *)",
+      "Bash(dotnet sln *)",
+      "Bash(dotnet test *)"
+    ]
+  }
+}

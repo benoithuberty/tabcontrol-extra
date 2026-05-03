@@ -26,6 +26,7 @@ using System.Runtime.Versioning;
 [assembly: CLSCompliant(true)]
 
 [assembly: ComVisible(false)]
+[assembly: System.Runtime.CompilerServices.InternalsVisibleTo("TabControlExtra.Tests")]
 
-[assembly: AssemblyVersion("3.0.2")]
+[assembly: AssemblyVersion("3.0.3")]
 [assembly: Guid("8C5AD640-CEDA-49F7-A709-610779ADB760")]
