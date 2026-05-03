@@ -23,8 +23,8 @@ namespace Adiict.UI.Forms
 
         #region constants
 
-        public const int TabCloserButtonSize = 15;
-        private const int TabInnerPadding = 4;
+        public const int TabCloserButtonSizeBase = 15;
+        private const int TabInnerPaddingBase = 4;
 
         private const int AnyRightAlign = (int)ContentAlignment.BottomRight | (int)ContentAlignment.MiddleRight | (int)ContentAlignment.TopRight;
         private const int AnyLeftAlign = (int)ContentAlignment.BottomLeft | (int)ContentAlignment.MiddleLeft | (int)ContentAlignment.TopLeft;
@@ -55,7 +55,12 @@ namespace Adiict.UI.Forms
         protected override void OnCreateControl()
         {
             base.OnCreateControl();
-            ApplyDpi((int)_TabBufferGraphics.DpiX);
+#if NETFRAMEWORK
+            if (!DesignMode)
+#else
+            if (!DesignMode || Application.HighDpiMode != HighDpiMode.DpiUnaware)
+#endif
+                ApplyDpi((int)_TabBufferGraphics.DpiX);
             OnFontChanged(EventArgs.Empty);
         }
 
@@ -111,10 +116,14 @@ namespace Adiict.UI.Forms
         private bool _SuspendDrawing;
 
         private int _Dpi;
+        private int _tabCloserButtonSize = TabCloserButtonSizeBase;
+        private int _tabInnerPadding = TabInnerPaddingBase;
 
         #endregion
 
         #region Public properties
+
+        public int TabCloserButtonSize => _tabCloserButtonSize;
 
         [Category("Appearance"), DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
         public TabStyleProvider DisplayStyleProvider
@@ -1362,41 +1371,41 @@ namespace Adiict.UI.Forms
                 case TabAlignment.Top:
                     if (increaseCoordinate)
                     {
-                        newRect.X += TabInnerPadding + GetOffsetToEnsurePointIsWithinPath(tabBorder, newRect.X, newRect.Y, true, +1, (p) => p.X < Width);
+                        newRect.X += _tabInnerPadding + GetOffsetToEnsurePointIsWithinPath(tabBorder, newRect.X, newRect.Y, true, +1, (p) => p.X < Width);
                     }
                     else
                     {
-                        newRect.X += -TabInnerPadding + GetOffsetToEnsurePointIsWithinPath(tabBorder, newRect.Right, newRect.Y, true, -1, (p) => p.X > 0);
+                        newRect.X += -_tabInnerPadding + GetOffsetToEnsurePointIsWithinPath(tabBorder, newRect.Right, newRect.Y, true, -1, (p) => p.X > 0);
                     }
                     break;
                 case TabAlignment.Bottom:
                     if (increaseCoordinate)
                     {
-                        newRect.X += TabInnerPadding + GetOffsetToEnsurePointIsWithinPath(tabBorder, newRect.X, newRect.Bottom, true, +1, (p) => p.X < Width);
+                        newRect.X += _tabInnerPadding + GetOffsetToEnsurePointIsWithinPath(tabBorder, newRect.X, newRect.Bottom, true, +1, (p) => p.X < Width);
                     }
                     else
                     {
-                        newRect.X += -TabInnerPadding + GetOffsetToEnsurePointIsWithinPath(tabBorder, newRect.Right, newRect.Bottom, true, -1, (p) => p.X > 0);
+                        newRect.X += -_tabInnerPadding + GetOffsetToEnsurePointIsWithinPath(tabBorder, newRect.Right, newRect.Bottom, true, -1, (p) => p.X > 0);
                     }
                     break;
                 case TabAlignment.Left:
                     if (increaseCoordinate)
                     {
-                        newRect.Y += TabInnerPadding + GetOffsetToEnsurePointIsWithinPath(tabBorder, newRect.Left, newRect.Y, false, +1, (p) => p.Y < Height);
+                        newRect.Y += _tabInnerPadding + GetOffsetToEnsurePointIsWithinPath(tabBorder, newRect.Left, newRect.Y, false, +1, (p) => p.Y < Height);
                     }
                     else
                     {
-                        newRect.Y += -TabInnerPadding + GetOffsetToEnsurePointIsWithinPath(tabBorder, newRect.Left, newRect.Bottom, false, -1, (p) => p.Y > 0);
+                        newRect.Y += -_tabInnerPadding + GetOffsetToEnsurePointIsWithinPath(tabBorder, newRect.Left, newRect.Bottom, false, -1, (p) => p.Y > 0);
                     }
                     break;
                 case TabAlignment.Right:
                     if (increaseCoordinate)
                     {
-                        newRect.Y += TabInnerPadding + GetOffsetToEnsurePointIsWithinPath(tabBorder, newRect.Right, newRect.Y, false, +1, (p) => p.Y < Height);
+                        newRect.Y += _tabInnerPadding + GetOffsetToEnsurePointIsWithinPath(tabBorder, newRect.Right, newRect.Y, false, +1, (p) => p.Y < Height);
                     }
                     else
                     {
-                        newRect.Y += -TabInnerPadding + GetOffsetToEnsurePointIsWithinPath(tabBorder, newRect.Right, newRect.Bottom, false, -1, (p) => p.Y > 0);
+                        newRect.Y += -_tabInnerPadding + GetOffsetToEnsurePointIsWithinPath(tabBorder, newRect.Right, newRect.Bottom, false, -1, (p) => p.Y > 0);
                     }
                     break;
             }
@@ -1563,13 +1572,13 @@ namespace Adiict.UI.Forms
             {
                 if (EffectiveRightToLeft)
                 {
-                    if (horizontalTabs && IsLeftAligned(imageAlignment)) imageRect.X += TabCloserButtonSize + TabInnerPadding;
-                    if (!horizontalTabs && IsTopAligned(imageAlignment)) imageRect.Y += TabCloserButtonSize + TabInnerPadding;
+                    if (horizontalTabs && IsLeftAligned(imageAlignment)) imageRect.X += TabCloserButtonSize + _tabInnerPadding;
+                    if (!horizontalTabs && IsTopAligned(imageAlignment)) imageRect.Y += TabCloserButtonSize + _tabInnerPadding;
                 }
                 else
                 {
-                    if (horizontalTabs && IsRightAligned(imageAlignment)) imageRect.X -= TabCloserButtonSize + TabInnerPadding;
-                    if (!horizontalTabs && IsBottomAligned(imageAlignment)) imageRect.Y -= TabCloserButtonSize + TabInnerPadding;
+                    if (horizontalTabs && IsRightAligned(imageAlignment)) imageRect.X -= TabCloserButtonSize + _tabInnerPadding;
+                    if (!horizontalTabs && IsBottomAligned(imageAlignment)) imageRect.Y -= TabCloserButtonSize + _tabInnerPadding;
                 }
             }
 
@@ -1673,7 +1682,7 @@ namespace Adiict.UI.Forms
                 GetActiveIndex(mousePosition));
         }
 
-        internal static TabState DetermineTabState(
+        public static TabState DetermineTabState(
             int index, int selectedIndex, bool containsFocus,
             bool tabEnabled, bool hotTrack, int activeIndex)
         {
@@ -1702,22 +1711,22 @@ namespace Adiict.UI.Forms
                     {
                         if (EffectiveRightToLeft)
                         {
-                            left = closerRect.Right + TabInnerPadding;
+                            left = closerRect.Right + _tabInnerPadding;
                         }
                         else
                         {
-                            right = closerRect.X - TabInnerPadding;
+                            right = closerRect.X - _tabInnerPadding;
                         }
                     }
                     if (imageRect != Rectangle.Empty)
                     {
                         if (IsLeftAligned(imageAlignment))
                         {
-                            left = imageRect.Right + TabInnerPadding;
+                            left = imageRect.Right + _tabInnerPadding;
                         }
                         else if (IsRightAligned(imageAlignment))
                         {
-                            right = imageRect.X - TabInnerPadding;
+                            right = imageRect.X - _tabInnerPadding;
                         }
                     }
                     break;
@@ -1727,22 +1736,22 @@ namespace Adiict.UI.Forms
                     {
                         if (EffectiveRightToLeft)
                         {
-                            top = closerRect.Bottom + TabInnerPadding;
+                            top = closerRect.Bottom + _tabInnerPadding;
                         }
                         else
                         {
-                            bottom = closerRect.Y - TabInnerPadding;
+                            bottom = closerRect.Y - _tabInnerPadding;
                         }
                     }
                     if (imageRect != Rectangle.Empty)
                     {
                         if (IsTopAligned(imageAlignment))
                         {
-                            top = imageRect.Bottom + TabInnerPadding;
+                            top = imageRect.Bottom + _tabInnerPadding;
                         }
                         else if (IsBottomAligned(imageAlignment))
                         {
-                            bottom = imageRect.Y - TabInnerPadding;
+                            bottom = imageRect.Y - _tabInnerPadding;
                         }
                     }
                     break;
@@ -1843,6 +1852,10 @@ namespace Adiict.UI.Forms
             if (dpi == 0 || _Dpi == dpi) return;
 
             _Dpi = dpi;
+
+            _tabCloserButtonSize = AdaptDpi(TabCloserButtonSizeBase);
+            _tabInnerPadding = AdaptDpi(TabInnerPaddingBase);
+            _StyleProvider.ApplyDpiScale(_Dpi / 96f);
 
             int radius = AdaptDpi(_StyleProvider.Radius);
             int tabPageRadius = AdaptDpi(_StyleProvider.TabPageRadius);

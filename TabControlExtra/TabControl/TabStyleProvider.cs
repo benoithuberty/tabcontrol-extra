@@ -14,7 +14,8 @@ namespace Adiict.UI.Forms
     [System.ComponentModel.ToolboxItem(false)]
 	public abstract class TabStyleProvider : Component
 	{
-		private const int TabCloserPathInset = 4;
+		private const int TabCloserPathInsetBase = 4;
+		private int _tabCloserPathInset = TabCloserPathInsetBase;
 
 		#region Constructor
 		
@@ -330,10 +331,10 @@ namespace Adiict.UI.Forms
 			set {
 				_Padding = value;
 				if (_ShowTabCloser){
-					if (value.X + (int)(_Radius/2) < -TabControlExtra.TabCloserButtonSize){
+					if (value.X + (int)(_Radius/2) < -TabControl.TabCloserButtonSize){
 						((TabControl)TabControl).Padding = new Point(0, value.Y);
 					} else {
-                        ((TabControl)TabControl).Padding = new Point(value.X + _Radius + (int)(TabControlExtra.TabCloserButtonSize + 10) / 2, value.Y);
+                        ((TabControl)TabControl).Padding = new Point(value.X + _Radius + (int)(TabControl.TabCloserButtonSize + 10) / 2, value.Y);
 					}
 				} else {
 					if (value.X + (int)(_Radius/2) < 1){
@@ -1091,9 +1092,9 @@ namespace Adiict.UI.Forms
 
        protected internal virtual GraphicsPath GetTabCloserPath(Rectangle closerButtonRect) {
            GraphicsPath closerPath = new GraphicsPath();
-           closerPath.AddLine(closerButtonRect.X + TabCloserPathInset, closerButtonRect.Y + TabCloserPathInset, closerButtonRect.Right - TabCloserPathInset, closerButtonRect.Bottom - TabCloserPathInset);
+           closerPath.AddLine(closerButtonRect.X + _tabCloserPathInset, closerButtonRect.Y + _tabCloserPathInset, closerButtonRect.Right - _tabCloserPathInset, closerButtonRect.Bottom - _tabCloserPathInset);
            closerPath.CloseFigure();
-           closerPath.AddLine(closerButtonRect.Right - TabCloserPathInset, closerButtonRect.Y + TabCloserPathInset, closerButtonRect.X + TabCloserPathInset, closerButtonRect.Bottom - TabCloserPathInset);
+           closerPath.AddLine(closerButtonRect.Right - _tabCloserPathInset, closerButtonRect.Y + _tabCloserPathInset, closerButtonRect.X + _tabCloserPathInset, closerButtonRect.Bottom - _tabCloserPathInset);
            closerPath.CloseFigure();
 
            return closerPath;
@@ -1171,7 +1172,7 @@ namespace Adiict.UI.Forms
             return CreateTabBackgroundBrush(color1, color2, state, tabBorder);
         }
 
-        internal virtual (Color color1, Color color2) GetTabBackgroundColors(TabState state) {
+        public virtual (Color color1, Color color2) GetTabBackgroundColors(TabState state) {
             switch (state) {
                 case TabState.Disabled:   return (TabColorDisabled1, TabColorDisabled2);
                 case TabState.Focused:    return (TabColorFocused1, TabColorFocused2);
@@ -1231,16 +1232,24 @@ namespace Adiict.UI.Forms
 		#region Tab border and rect
 
         public GraphicsPath GetTabBorder(Rectangle tabBounds) {
-			
+
 			GraphicsPath path = new GraphicsPath();
-			
+
 			AddTabBorder(path, tabBounds);
-			
+
 			path.CloseFigure();
 			return path;
 		}
 
 		#endregion
-		
+
+        #region DPI scaling
+
+        internal void ApplyDpiScale(float dpiScale) {
+            _tabCloserPathInset = (int)Math.Round(TabCloserPathInsetBase * dpiScale, MidpointRounding.AwayFromZero);
+        }
+
+        #endregion
+
 	}
 }
