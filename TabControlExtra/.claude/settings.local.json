@@ -12,7 +12,9 @@
       "Bash(Remove-Item *)",
       "Bash(del *)",
       "Bash(dotnet sln *)",
-      "Bash(dotnet test *)"
+      "Bash(dotnet test *)",
+      "PowerShell(dotnet build *)",
+      "PowerShell(dotnet test *)"
     ]
   }
 }

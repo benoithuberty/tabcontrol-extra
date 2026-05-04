@@ -854,6 +854,14 @@ namespace Adiict.UI.Forms
                     {
                         for (int row = 0; row < RowCount; row++)
                         {
+                            //	Clip each row to its own Y band so that the extended tabBounds
+                            //	used by GetTabRect/TabStyleProvider do not bleed highlight paint
+                            //	into adjacent rows (inter-tab gaps would otherwise remain highlighted).
+                            Rectangle rowClip = ComputeRowClipBounds(row, SelectedIndex, TabCount,
+                                ClientRectangle.Width, GetTabRow, GetTabRect);
+                            if (!rowClip.IsEmpty)
+                                _TabBufferGraphics.Clip = new Region(rowClip);
+
                             for (int index = TabCount - 1; index >= 0; index--)
                             {
                                 if (index != SelectedIndex && (RowCount == 1 || GetTabRow(index) == row))
@@ -862,6 +870,7 @@ namespace Adiict.UI.Forms
                                 }
                             }
                         }
+                        _TabBufferGraphics.ResetClip();
                     }
                     else
                     {
@@ -1693,6 +1702,25 @@ namespace Adiict.UI.Forms
             if (hotTrack && index == activeIndex)
                 return TabState.Highlighted;
             return TabState.Unselected;
+        }
+
+        internal static Rectangle ComputeRowClipBounds(
+            int row, int selectedIndex, int tabCount, int clientWidth,
+            Func<int, int> getTabRow, Func<int, Rectangle> getTabRect)
+        {
+            int top = int.MaxValue, bottom = int.MinValue;
+            for (int i = 0; i < tabCount; i++)
+            {
+                if (i != selectedIndex && getTabRow(i) == row)
+                {
+                    Rectangle r = getTabRect(i);
+                    if (r.Y < top) top = r.Y;
+                    if (r.Bottom > bottom) bottom = r.Bottom;
+                }
+            }
+            return top == int.MaxValue
+                ? Rectangle.Empty
+                : new Rectangle(0, top, clientWidth, bottom - top);
         }
 
         private Rectangle GetTabTextRect(GraphicsPath tabBorder, Rectangle tabBounds, Rectangle closerRect, Rectangle imageRect)
