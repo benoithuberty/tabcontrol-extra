@@ -1,14 +1,11 @@
-﻿/*
- * This code is provided under the Code Project Open Licence (CPOL)
- * See http://www.codeproject.com/info/cpol10.aspx for details
- */
-
+﻿
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
+
 #if NETFRAMEWORK
 using System.Security.Permissions;
 #endif
@@ -16,8 +13,8 @@ using System.Windows.Forms;
 
 namespace Adiict.UI.Forms
 {
-
-    [ToolboxBitmapAttribute(typeof(TabControl))]
+    
+    [ToolboxBitmap(typeof(TabControl))]
     public class TabControlExtra : TabControl
     {
 
@@ -1709,7 +1706,7 @@ namespace Adiict.UI.Forms
             return TabState.Unselected;
         }
 
-        internal static Rectangle ComputeRowClipBounds(
+        public static Rectangle ComputeRowClipBounds(
             int row, int selectedIndex, int tabCount,
             int clientWidth, int clientHeight, TabAlignment alignment,
             Func<int, int> getTabRow, Func<int, Rectangle> getTabRect)
@@ -1815,7 +1812,7 @@ namespace Adiict.UI.Forms
             return false;
         }
 
-        protected internal bool IsPageVisible(Rectangle pageBounds)
+        protected internal static bool IsPageVisible(Rectangle pageBounds)
         {
             return pageBounds.X > 0 && pageBounds.Y > 0 && pageBounds.Height > 0 && pageBounds.Width > 0;
         }
