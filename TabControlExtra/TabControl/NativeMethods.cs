@@ -118,7 +118,7 @@ namespace Adiict.UI.Forms
 		    }
 		
 		    public static RECT FromIntPtr(IntPtr ptr){
-		    	RECT rect = (RECT)Marshal.PtrToStructure(ptr, typeof(RECT));
+		    	RECT rect = Marshal.PtrToStructure<RECT>(ptr);
 		    	return rect;
 		    }
 		    

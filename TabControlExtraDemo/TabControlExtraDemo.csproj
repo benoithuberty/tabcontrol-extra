@@ -8,6 +8,10 @@
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <StartupObject>CSCustomTabControlDemo.Program</StartupObject>
     <Nullable>disable</Nullable>
+    <!-- ImageList resources use a legacy serialisation path; suppress the informational warning. -->
+    <GenerateResourceWarnOnBinaryFormatterUse>false</GenerateResourceWarnOnBinaryFormatterUse>
+    <!-- Platform-specific APIs are intentional: this project only targets windows TFMs. -->
+    <NoWarn>$(NoWarn);CA1416</NoWarn>
   </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="..\TabControlExtra\TabControlExtra.csproj" />

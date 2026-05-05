@@ -14,6 +14,9 @@ namespace Adiict.UI.Forms
     [System.ComponentModel.ToolboxItem(false)]
 	public abstract class TabStyleProvider : Component
 	{
+		private const int TabCloserPathInsetBase = 4;
+		private int _tabCloserPathInset = TabCloserPathInsetBase;
+
 		#region Constructor
 		
 		protected TabStyleProvider(TabControlExtra tabControl){
@@ -156,10 +159,10 @@ namespace Adiict.UI.Forms
         private Color _TabColorFocused2 = Color.Empty;
         private Color _TabColorSelected1 = Color.Empty;
         private Color _TabColorSelected2 = Color.Empty;
-        private Color _TabColorUnSelected1 = Color.Empty;
-        private Color _TabColorUnSelected2 = Color.Empty;
-        private Color _TabColorHighLighted1 = Color.Empty;
-        private Color _TabColorHighLighted2 = Color.Empty;
+        private Color _TabColorUnselected1 = Color.Empty;
+        private Color _TabColorUnselected2 = Color.Empty;
+        private Color _TabColorHighlighted1 = Color.Empty;
+        private Color _TabColorHighlighted2 = Color.Empty;
 
         private Color _TextColorDisabled = Color.Empty;
         private Color _TextColorFocused = Color.Empty;
@@ -328,10 +331,10 @@ namespace Adiict.UI.Forms
 			set {
 				_Padding = value;
 				if (_ShowTabCloser){
-					if (value.X + (int)(_Radius/2) < -TabControlExtra.TabCloserButtonSize){
+					if (value.X + (int)(_Radius/2) < -TabControl.TabCloserButtonSize){
 						((TabControl)TabControl).Padding = new Point(0, value.Y);
 					} else {
-                        ((TabControl)TabControl).Padding = new Point(value.X + _Radius + (int)(TabControlExtra.TabCloserButtonSize + 10) / 2, value.Y);
+                        ((TabControl)TabControl).Padding = new Point(value.X + _Radius + (int)(TabControl.TabCloserButtonSize + 10) / 2, value.Y);
 					}
 				} else {
 					if (value.X + (int)(_Radius/2) < 1){
@@ -408,10 +411,7 @@ namespace Adiict.UI.Forms
 		public float Opacity {
 			get { return _Opacity; }
 			set {
-				if (value < 0){
-					throw new ArgumentException("The opacity must be between 0 and 1", nameof(value));
-				}
-				if (value > 1){
+				if (value < 0 || value > 1) {
 					throw new ArgumentException("The opacity must be between 0 and 1", nameof(value));
 				}
 				_Opacity = value;
@@ -667,65 +667,65 @@ namespace Adiict.UI.Forms
         }
 
         [Category("Appearance"), DefaultValue(typeof(Color), "")]
-        public Color TabColorUnSelected1 {
+        public Color TabColorUnselected1 {
             get {
-                if (_TabColorUnSelected1.IsEmpty) {
+                if (_TabColorUnselected1.IsEmpty) {
                     return PageBackgroundColorUnselected;
                 } else {
-                    return _TabColorUnSelected1;
+                    return _TabColorUnselected1;
                 }
             }
             set {
-                _TabColorUnSelected1 = value;
+                _TabColorUnselected1 = value;
             }
         }
 
         [Category("Appearance"), DefaultValue(typeof(Color), "")]
-        public Color TabColorUnSelected2 {
+        public Color TabColorUnselected2 {
             get {
-                if (_TabColorUnSelected2.IsEmpty) {
-                    return TabColorUnSelected1;
+                if (_TabColorUnselected2.IsEmpty) {
+                    return TabColorUnselected1;
                 } else {
-                    return _TabColorUnSelected2;
+                    return _TabColorUnselected2;
                 }
             }
             set {
-                _TabColorUnSelected2 = value;
+                _TabColorUnselected2 = value;
             }
         }
 
         [Category("Appearance"), DefaultValue(typeof(Color), "")]
-        public Color TabColorHighLighted1 {
+        public Color TabColorHighlighted1 {
             get {
-                if (_TabColorHighLighted1.IsEmpty) {
+                if (_TabColorHighlighted1.IsEmpty) {
                     return PageBackgroundColorHighlighted;
                 } else {
-                    return _TabColorHighLighted1;
+                    return _TabColorHighlighted1;
                 }
             }
             set {
-                _TabColorHighLighted1 = value;
+                _TabColorHighlighted1 = value;
             }
         }
 
         [Category("Appearance"), DefaultValue(typeof(Color), "")]
-        public Color TabColorHighLighted2 {
+        public Color TabColorHighlighted2 {
             get {
-                if (_TabColorHighLighted2.IsEmpty) {
-                    return TabColorHighLighted1;
+                if (_TabColorHighlighted2.IsEmpty) {
+                    return TabColorHighlighted1;
                 } else {
-                    return _TabColorHighLighted2;
+                    return _TabColorHighlighted2;
                 }
             }
             set {
-                _TabColorHighLighted2 = value;
+                _TabColorHighlighted2 = value;
             }
         }
 
         [Category("Appearance"), DefaultValue(typeof(Color), "")]
         public Color TextColorDisabled {
             get {
-                if (_TextColorUnselected.IsEmpty) {
+                if (_TextColorDisabled.IsEmpty) {
                     return SystemColors.ControlDark;
                 } else {
                     return _TextColorDisabled;
@@ -1092,9 +1092,9 @@ namespace Adiict.UI.Forms
 
        protected internal virtual GraphicsPath GetTabCloserPath(Rectangle closerButtonRect) {
            GraphicsPath closerPath = new GraphicsPath();
-           closerPath.AddLine(closerButtonRect.X + 4, closerButtonRect.Y + 4, closerButtonRect.Right - 4, closerButtonRect.Bottom - 4);
+           closerPath.AddLine(closerButtonRect.X + _tabCloserPathInset, closerButtonRect.Y + _tabCloserPathInset, closerButtonRect.Right - _tabCloserPathInset, closerButtonRect.Bottom - _tabCloserPathInset);
            closerPath.CloseFigure();
-           closerPath.AddLine(closerButtonRect.Right - 4, closerButtonRect.Y + 4, closerButtonRect.X + 4, closerButtonRect.Bottom - 4);
+           closerPath.AddLine(closerButtonRect.Right - _tabCloserPathInset, closerButtonRect.Y + _tabCloserPathInset, closerButtonRect.X + _tabCloserPathInset, closerButtonRect.Bottom - _tabCloserPathInset);
            closerPath.CloseFigure();
 
            return closerPath;
@@ -1168,10 +1168,18 @@ namespace Adiict.UI.Forms
 		}
 
         protected internal Brush GetTabBackgroundBrush(TabState state, GraphicsPath tabBorder) {
-            Color color1 = GetTabBackgroundColor1(state,tabBorder);
-            Color color2 = GetTabBackgroundColor2(state, tabBorder);
-
+            (Color color1, Color color2) = GetTabBackgroundColors(state);
             return CreateTabBackgroundBrush(color1, color2, state, tabBorder);
+        }
+
+        public virtual (Color color1, Color color2) GetTabBackgroundColors(TabState state) {
+            switch (state) {
+                case TabState.Disabled:   return (TabColorDisabled1, TabColorDisabled2);
+                case TabState.Focused:    return (TabColorFocused1, TabColorFocused2);
+                case TabState.Highlighted: return (TabColorHighlighted1, TabColorHighlighted2);
+                case TabState.Selected:   return (TabColorSelected1, TabColorSelected2);
+                default:                  return (TabColorUnselected1, TabColorUnselected2);
+            }
         }
 
         protected internal virtual Brush CreateTabBackgroundBrush(Color color1, Color color2, TabState state, GraphicsPath tabBorder) {
@@ -1179,9 +1187,6 @@ namespace Adiict.UI.Forms
 
             //	Get the correctly aligned gradient
             var tabBounds = tabBorder.GetBounds();
-            //tabBounds.Inflate(3, 3);
-            //tabBounds.X -= 1;
-            //tabBounds.Y -= 1;
             switch (TabControl.Alignment) {
                 case TabAlignment.Top:
                     tabBounds.Height += 1;
@@ -1201,52 +1206,6 @@ namespace Adiict.UI.Forms
             //	Add the blend
             fillBrush.Blend = GetBackgroundBlend();
             return fillBrush;
-        }
-
-        protected virtual Color GetTabBackgroundColor1(TabState state, GraphicsPath tabBorder) {
-            Color color = Color.Empty;
-
-            switch (state) {
-                case TabState.Disabled:
-                    color = TabColorDisabled1;
-                    break;
-                case TabState.Focused:
-                    color = TabColorFocused1;
-                    break;
-                case TabState.Highlighted:
-                    color = TabColorHighLighted1;
-                    break;
-                case TabState.Selected:
-                    color = TabColorSelected1;
-                    break;
-                case TabState.Unselected:
-                    color = TabColorUnSelected1;
-                    break;
-            }
-            return color;
-        }
-
-        protected virtual Color GetTabBackgroundColor2(TabState state, GraphicsPath tabBorder) {
-            Color color = Color.Empty;
-
-            switch (state) {
-                case TabState.Disabled:
-                    color = TabColorDisabled2;
-                    break;
-                case TabState.Focused:
-                    color = TabColorFocused2;
-                    break;
-                case TabState.Highlighted:
-                    color = TabColorHighLighted2;
-                    break;
-                case TabState.Selected:
-                    color = TabColorSelected2;
-                    break;
-                case TabState.Unselected:
-                    color = TabColorUnSelected2;
-                    break;
-            }
-            return color;
         }
 
         protected virtual Blend GetBackgroundBlend() {
@@ -1273,16 +1232,24 @@ namespace Adiict.UI.Forms
 		#region Tab border and rect
 
         public GraphicsPath GetTabBorder(Rectangle tabBounds) {
-			
+
 			GraphicsPath path = new GraphicsPath();
-			
+
 			AddTabBorder(path, tabBounds);
-			
+
 			path.CloseFigure();
 			return path;
 		}
 
 		#endregion
-		
+
+        #region DPI scaling
+
+        internal void ApplyDpiScale(float dpiScale) {
+            _tabCloserPathInset = (int)Math.Round(TabCloserPathInsetBase * dpiScale, MidpointRounding.AwayFromZero);
+        }
+
+        #endregion
+
 	}
 }

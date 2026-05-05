@@ -19,10 +19,10 @@ namespace Adiict.UI.Forms
 
             SelectedTabIsLarger = true;
 
-            TabColorHighLighted1 = Color.FromArgb(236, 244, 252);
-            TabColorHighLighted2 = Color.FromArgb(221, 237, 252);
+            TabColorHighlighted1 = Color.FromArgb(236, 244, 252);
+            TabColorHighlighted2 = Color.FromArgb(221, 237, 252);
 
-            PageBackgroundColorHighlighted = TabColorHighLighted1;
+            PageBackgroundColorHighlighted = TabColorHighlighted1;
         }
 		
 	}

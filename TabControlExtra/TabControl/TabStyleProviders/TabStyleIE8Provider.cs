@@ -44,7 +44,7 @@ namespace Adiict.UI.Forms
             PageBackgroundColorUnselected = Color.FromArgb(198, 223, 255);
 
             TabColorFocused2 = Color.FromArgb(198, 223, 255);
-            TabColorHighLighted2 = Color.FromArgb(198, 223, 255);
+            TabColorHighlighted2 = Color.FromArgb(198, 223, 255);
             TabColorSelected2 = Color.FromArgb(198, 223, 255);
 
             Padding = new Point(6, 5);

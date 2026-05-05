@@ -1,24 +1,22 @@
-﻿
-using System;
-using System.ComponentModel;
-using System.Drawing;
-using System.Drawing.Imaging;
-using System.Drawing.Drawing2D;
-using System.Security.Permissions;
-using System.Windows.Forms;
+﻿using System.Windows.Forms;
 
 namespace CSCustomTabControlDemo
 {
-	public partial class MainForm : System.Windows.Forms.Form
-	{
-		public MainForm() {
-			InitializeComponent();
-		}
+    public partial class MainForm : System.Windows.Forms.Form
+    {
+        public MainForm()
+        {
+            InitializeComponent();
+        }
         protected override void OnDpiChanged(DpiChangedEventArgs e)
         {
             base.OnDpiChanged(e);
-
-            //tabControlExtra1.ApplyDpi(e.DeviceDpiNew);
+            tabControlExtra1.OnDpiChanged(e);
+            tabControlExtra2.OnDpiChanged(e);
+            tabControlExtra3.OnDpiChanged(e);
+            tabControlExtra4.OnDpiChanged(e);
+            tabControlExtra5.OnDpiChanged(e);
+            tabControlExtra6.OnDpiChanged(e);
 
         }
     }

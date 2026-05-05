@@ -52,19 +52,18 @@ namespace Adiict.UI.Forms
             PageBackgroundColorFocused = Color.FromArgb(255, 243, 205);
             PageBackgroundColorHighlighted = Color.FromArgb(75, 92, 116);
             PageBackgroundColorSelected = Color.FromArgb(206, 212, 223);
-            //this.PageBackgroundColorUnselected = Color.FromArgb(41, 57, 85);
             PageBackgroundColorUnselected = Color.Transparent;
 
             TabColorDisabled1 = PageBackgroundColorDisabled;
             TabColorDisabled2 = TabColorDisabled1;
             TabColorFocused1 = PageBackgroundColorFocused;
             TabColorFocused2 = TabColorFocused1;
-            TabColorHighLighted1 = PageBackgroundColorHighlighted;
-            TabColorHighLighted2 = TabColorHighLighted1;
+            TabColorHighlighted1 = PageBackgroundColorHighlighted;
+            TabColorHighlighted2 = TabColorHighlighted1;
             TabColorSelected1 = PageBackgroundColorSelected;
             TabColorSelected2 = TabColorSelected1;
-            TabColorUnSelected1 = Color.Transparent;
-            TabColorUnSelected1 = Color.Transparent;
+            TabColorUnselected1 = Color.Transparent;
+            TabColorUnselected2 = Color.Transparent;
 
             //	Must set after the _Radius as this is used in the calculations of the actual padding
             Padding = new Point(6, 5);
