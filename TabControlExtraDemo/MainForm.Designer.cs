@@ -6,6 +6,8 @@
  * 
  * To change this template use Tools | Options | Coding | Edit Standard Headers.
  */
+using Adiict.UI.Forms;
+
 namespace CSCustomTabControlDemo
 {
 	partial class MainForm
@@ -39,7 +41,7 @@ namespace CSCustomTabControlDemo
             components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             imageList1 = new System.Windows.Forms.ImageList(components);
-            tabControlExtra8 = new Adiict.UI.Forms.TabControlExtra();
+            tabControlExtra5 = new TabControlExtra();
             tabPage36 = new System.Windows.Forms.TabPage();
             tabPage37 = new System.Windows.Forms.TabPage();
             tabPage38 = new System.Windows.Forms.TabPage();
@@ -49,13 +51,13 @@ namespace CSCustomTabControlDemo
             tabPage42 = new System.Windows.Forms.TabPage();
             tabPage43 = new System.Windows.Forms.TabPage();
             tabPage44 = new System.Windows.Forms.TabPage();
-            tabControlExtra2 = new Adiict.UI.Forms.TabControlExtra();
+            tabControlExtra2 = new TabControlExtra();
             tabPage6 = new System.Windows.Forms.TabPage();
             tabPage7 = new System.Windows.Forms.TabPage();
             tabPage8 = new System.Windows.Forms.TabPage();
             tabPage9 = new System.Windows.Forms.TabPage();
             tabPage10 = new System.Windows.Forms.TabPage();
-            tabControlExtra1 = new Adiict.UI.Forms.TabControlExtra();
+            tabControlExtra1 = new TabControlExtra();
             tabPage1 = new System.Windows.Forms.TabPage();
             textBox1 = new System.Windows.Forms.TextBox();
             button1 = new System.Windows.Forms.Button();
@@ -72,19 +74,19 @@ namespace CSCustomTabControlDemo
             tabPage66 = new System.Windows.Forms.TabPage();
             tabPage67 = new System.Windows.Forms.TabPage();
             tabPage68 = new System.Windows.Forms.TabPage();
-            tabControlExtra6 = new Adiict.UI.Forms.TabControlExtra();
+            tabControlExtra4 = new TabControlExtra();
             tabPage26 = new System.Windows.Forms.TabPage();
             tabPage27 = new System.Windows.Forms.TabPage();
             tabPage28 = new System.Windows.Forms.TabPage();
             tabPage29 = new System.Windows.Forms.TabPage();
             tabPage30 = new System.Windows.Forms.TabPage();
-            tabControlExtra5 = new Adiict.UI.Forms.TabControlExtra();
+            tabControlExtra3 = new TabControlExtra();
             tabPage21 = new System.Windows.Forms.TabPage();
             tabPage22 = new System.Windows.Forms.TabPage();
             tabPage23 = new System.Windows.Forms.TabPage();
             tabPage24 = new System.Windows.Forms.TabPage();
             tabPage25 = new System.Windows.Forms.TabPage();
-            tabControlExtra9 = new Adiict.UI.Forms.TabControlExtra();
+            tabControlExtra6 = new TabControlExtra();
             tabPage69 = new System.Windows.Forms.TabPage();
             pictureBox2 = new System.Windows.Forms.PictureBox();
             tabPage70 = new System.Windows.Forms.TabPage();
@@ -97,13 +99,13 @@ namespace CSCustomTabControlDemo
             panel2 = new System.Windows.Forms.Panel();
             panel1 = new System.Windows.Forms.Panel();
             textBox2 = new System.Windows.Forms.TextBox();
-            tabControlExtra8.SuspendLayout();
+            tabControlExtra5.SuspendLayout();
             tabControlExtra2.SuspendLayout();
             tabControlExtra1.SuspendLayout();
             tabPage1.SuspendLayout();
+            tabControlExtra4.SuspendLayout();
+            tabControlExtra3.SuspendLayout();
             tabControlExtra6.SuspendLayout();
-            tabControlExtra5.SuspendLayout();
-            tabControlExtra9.SuspendLayout();
             tabPage69.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             panel2.SuspendLayout();
@@ -123,86 +125,86 @@ namespace CSCustomTabControlDemo
             imageList1.Images.SetKeyName(5, "Close");
             imageList1.Images.SetKeyName(6, "google_favicon.png");
             // 
-            // tabControlExtra8
+            // tabControlExtra5
             // 
-            tabControlExtra8.Alignment = System.Windows.Forms.TabAlignment.Bottom;
-            tabControlExtra8.Controls.Add(tabPage36);
-            tabControlExtra8.Controls.Add(tabPage37);
-            tabControlExtra8.Controls.Add(tabPage38);
-            tabControlExtra8.Controls.Add(tabPage39);
-            tabControlExtra8.Controls.Add(tabPage40);
-            tabControlExtra8.Controls.Add(tabPage41);
-            tabControlExtra8.Controls.Add(tabPage42);
-            tabControlExtra8.Controls.Add(tabPage43);
-            tabControlExtra8.Controls.Add(tabPage44);
-            tabControlExtra8.DisplayStyle = Adiict.UI.Forms.TabStyle.VS2012;
+            tabControlExtra5.Alignment = System.Windows.Forms.TabAlignment.Bottom;
+            tabControlExtra5.Controls.Add(tabPage36);
+            tabControlExtra5.Controls.Add(tabPage37);
+            tabControlExtra5.Controls.Add(tabPage38);
+            tabControlExtra5.Controls.Add(tabPage39);
+            tabControlExtra5.Controls.Add(tabPage40);
+            tabControlExtra5.Controls.Add(tabPage41);
+            tabControlExtra5.Controls.Add(tabPage42);
+            tabControlExtra5.Controls.Add(tabPage43);
+            tabControlExtra5.Controls.Add(tabPage44);
+            tabControlExtra5.DisplayStyle = TabStyle.VS2012;
             // 
             // 
             // 
-            tabControlExtra8.DisplayStyleProvider.BlendStyle = Adiict.UI.Forms.BlendStyle.Normal;
-            tabControlExtra8.DisplayStyleProvider.BorderColorDisabled = System.Drawing.Color.FromArgb(41, 57, 85);
-            tabControlExtra8.DisplayStyleProvider.BorderColorFocused = System.Drawing.Color.FromArgb(255, 243, 205);
-            tabControlExtra8.DisplayStyleProvider.BorderColorHighlighted = System.Drawing.Color.FromArgb(155, 167, 183);
-            tabControlExtra8.DisplayStyleProvider.BorderColorSelected = System.Drawing.Color.FromArgb(206, 212, 223);
-            tabControlExtra8.DisplayStyleProvider.BorderColorUnselected = System.Drawing.Color.Transparent;
-            tabControlExtra8.DisplayStyleProvider.CloserButtonFillColorFocused = System.Drawing.Color.Empty;
-            tabControlExtra8.DisplayStyleProvider.CloserButtonFillColorFocusedActive = System.Drawing.Color.White;
-            tabControlExtra8.DisplayStyleProvider.CloserButtonFillColorHighlighted = System.Drawing.Color.Empty;
-            tabControlExtra8.DisplayStyleProvider.CloserButtonFillColorHighlightedActive = System.Drawing.Color.White;
-            tabControlExtra8.DisplayStyleProvider.CloserButtonFillColorSelected = System.Drawing.Color.Empty;
-            tabControlExtra8.DisplayStyleProvider.CloserButtonFillColorSelectedActive = System.Drawing.Color.White;
-            tabControlExtra8.DisplayStyleProvider.CloserButtonFillColorUnselected = System.Drawing.Color.Empty;
-            tabControlExtra8.DisplayStyleProvider.CloserButtonOutlineColorFocused = System.Drawing.Color.Empty;
-            tabControlExtra8.DisplayStyleProvider.CloserButtonOutlineColorFocusedActive = System.Drawing.Color.FromArgb(229, 195, 101);
-            tabControlExtra8.DisplayStyleProvider.CloserButtonOutlineColorHighlighted = System.Drawing.Color.Empty;
-            tabControlExtra8.DisplayStyleProvider.CloserButtonOutlineColorHighlightedActive = System.Drawing.Color.FromArgb(229, 195, 101);
-            tabControlExtra8.DisplayStyleProvider.CloserButtonOutlineColorSelected = System.Drawing.Color.Empty;
-            tabControlExtra8.DisplayStyleProvider.CloserButtonOutlineColorSelectedActive = System.Drawing.Color.FromArgb(229, 195, 101);
-            tabControlExtra8.DisplayStyleProvider.CloserButtonOutlineColorUnselected = System.Drawing.Color.Empty;
-            tabControlExtra8.DisplayStyleProvider.CloserColorFocused = System.Drawing.Color.FromArgb(117, 99, 61);
-            tabControlExtra8.DisplayStyleProvider.CloserColorFocusedActive = System.Drawing.Color.Black;
-            tabControlExtra8.DisplayStyleProvider.CloserColorHighlighted = System.Drawing.Color.FromArgb(206, 212, 221);
-            tabControlExtra8.DisplayStyleProvider.CloserColorHighlightedActive = System.Drawing.Color.Black;
-            tabControlExtra8.DisplayStyleProvider.CloserColorSelected = System.Drawing.Color.FromArgb(95, 102, 115);
-            tabControlExtra8.DisplayStyleProvider.CloserColorSelectedActive = System.Drawing.Color.Black;
-            tabControlExtra8.DisplayStyleProvider.CloserColorUnselected = System.Drawing.Color.Empty;
-            tabControlExtra8.DisplayStyleProvider.FocusTrack = false;
-            tabControlExtra8.DisplayStyleProvider.HotTrack = true;
-            tabControlExtra8.DisplayStyleProvider.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            tabControlExtra8.DisplayStyleProvider.Opacity = 1F;
-            tabControlExtra8.DisplayStyleProvider.Overlap = 0;
-            tabControlExtra8.DisplayStyleProvider.Padding = new System.Drawing.Point(12, 10);
-            tabControlExtra8.DisplayStyleProvider.PageBackgroundColorDisabled = System.Drawing.Color.FromArgb(41, 57, 85);
-            tabControlExtra8.DisplayStyleProvider.PageBackgroundColorFocused = System.Drawing.Color.FromArgb(255, 243, 205);
-            tabControlExtra8.DisplayStyleProvider.PageBackgroundColorHighlighted = System.Drawing.Color.FromArgb(75, 92, 116);
-            tabControlExtra8.DisplayStyleProvider.PageBackgroundColorSelected = System.Drawing.Color.FromArgb(206, 212, 223);
-            tabControlExtra8.DisplayStyleProvider.PageBackgroundColorUnselected = System.Drawing.Color.Transparent;
-            tabControlExtra8.DisplayStyleProvider.Radius = 6;
-            tabControlExtra8.DisplayStyleProvider.SelectedTabIsLarger = false;
-            tabControlExtra8.DisplayStyleProvider.ShowTabCloser = true;
-            tabControlExtra8.DisplayStyleProvider.TabColorDisabled1 = System.Drawing.Color.FromArgb(41, 57, 85);
-            tabControlExtra8.DisplayStyleProvider.TabColorDisabled2 = System.Drawing.Color.FromArgb(41, 57, 85);
-            tabControlExtra8.DisplayStyleProvider.TabColorFocused1 = System.Drawing.Color.FromArgb(255, 243, 205);
-            tabControlExtra8.DisplayStyleProvider.TabColorFocused2 = System.Drawing.Color.FromArgb(255, 243, 205);
-            tabControlExtra8.DisplayStyleProvider.TabColorHighlighted1 = System.Drawing.Color.FromArgb(75, 92, 116);
-            tabControlExtra8.DisplayStyleProvider.TabColorHighlighted2 = System.Drawing.Color.FromArgb(75, 92, 116);
-            tabControlExtra8.DisplayStyleProvider.TabColorSelected1 = System.Drawing.Color.FromArgb(206, 212, 223);
-            tabControlExtra8.DisplayStyleProvider.TabColorSelected2 = System.Drawing.Color.FromArgb(206, 212, 223);
-            tabControlExtra8.DisplayStyleProvider.TabColorUnselected1 = System.Drawing.Color.Transparent;
-            tabControlExtra8.DisplayStyleProvider.TabColorUnselected2 = System.Drawing.Color.Transparent;
-            tabControlExtra8.DisplayStyleProvider.TabPageMargin = new System.Windows.Forms.Padding(0, 4, 0, 4);
-            tabControlExtra8.DisplayStyleProvider.TabPageRadius = 4;
-            tabControlExtra8.DisplayStyleProvider.TextColorDisabled = System.Drawing.Color.WhiteSmoke;
-            tabControlExtra8.DisplayStyleProvider.TextColorFocused = System.Drawing.SystemColors.ControlText;
-            tabControlExtra8.DisplayStyleProvider.TextColorHighlighted = System.Drawing.Color.White;
-            tabControlExtra8.DisplayStyleProvider.TextColorSelected = System.Drawing.SystemColors.ControlText;
-            tabControlExtra8.DisplayStyleProvider.TextColorUnselected = System.Drawing.Color.White;
-            tabControlExtra8.Location = new System.Drawing.Point(42, 962);
-            tabControlExtra8.Margin = new System.Windows.Forms.Padding(6);
-            tabControlExtra8.Name = "tabControlExtra8";
-            tabControlExtra8.SelectedIndex = 0;
-            tabControlExtra8.Size = new System.Drawing.Size(1600, 172);
-            tabControlExtra8.TabIndex = 9;
+            tabControlExtra5.DisplayStyleProvider.BlendStyle = BlendStyle.Normal;
+            tabControlExtra5.DisplayStyleProvider.BorderColorDisabled = System.Drawing.Color.FromArgb(41, 57, 85);
+            tabControlExtra5.DisplayStyleProvider.BorderColorFocused = System.Drawing.Color.FromArgb(255, 243, 205);
+            tabControlExtra5.DisplayStyleProvider.BorderColorHighlighted = System.Drawing.Color.FromArgb(155, 167, 183);
+            tabControlExtra5.DisplayStyleProvider.BorderColorSelected = System.Drawing.Color.FromArgb(206, 212, 223);
+            tabControlExtra5.DisplayStyleProvider.BorderColorUnselected = System.Drawing.Color.Transparent;
+            tabControlExtra5.DisplayStyleProvider.CloserButtonFillColorFocused = System.Drawing.Color.Empty;
+            tabControlExtra5.DisplayStyleProvider.CloserButtonFillColorFocusedActive = System.Drawing.Color.White;
+            tabControlExtra5.DisplayStyleProvider.CloserButtonFillColorHighlighted = System.Drawing.Color.Empty;
+            tabControlExtra5.DisplayStyleProvider.CloserButtonFillColorHighlightedActive = System.Drawing.Color.White;
+            tabControlExtra5.DisplayStyleProvider.CloserButtonFillColorSelected = System.Drawing.Color.Empty;
+            tabControlExtra5.DisplayStyleProvider.CloserButtonFillColorSelectedActive = System.Drawing.Color.White;
+            tabControlExtra5.DisplayStyleProvider.CloserButtonFillColorUnselected = System.Drawing.Color.Empty;
+            tabControlExtra5.DisplayStyleProvider.CloserButtonOutlineColorFocused = System.Drawing.Color.Empty;
+            tabControlExtra5.DisplayStyleProvider.CloserButtonOutlineColorFocusedActive = System.Drawing.Color.FromArgb(229, 195, 101);
+            tabControlExtra5.DisplayStyleProvider.CloserButtonOutlineColorHighlighted = System.Drawing.Color.Empty;
+            tabControlExtra5.DisplayStyleProvider.CloserButtonOutlineColorHighlightedActive = System.Drawing.Color.FromArgb(229, 195, 101);
+            tabControlExtra5.DisplayStyleProvider.CloserButtonOutlineColorSelected = System.Drawing.Color.Empty;
+            tabControlExtra5.DisplayStyleProvider.CloserButtonOutlineColorSelectedActive = System.Drawing.Color.FromArgb(229, 195, 101);
+            tabControlExtra5.DisplayStyleProvider.CloserButtonOutlineColorUnselected = System.Drawing.Color.Empty;
+            tabControlExtra5.DisplayStyleProvider.CloserColorFocused = System.Drawing.Color.FromArgb(117, 99, 61);
+            tabControlExtra5.DisplayStyleProvider.CloserColorFocusedActive = System.Drawing.Color.Black;
+            tabControlExtra5.DisplayStyleProvider.CloserColorHighlighted = System.Drawing.Color.FromArgb(206, 212, 221);
+            tabControlExtra5.DisplayStyleProvider.CloserColorHighlightedActive = System.Drawing.Color.Black;
+            tabControlExtra5.DisplayStyleProvider.CloserColorSelected = System.Drawing.Color.FromArgb(95, 102, 115);
+            tabControlExtra5.DisplayStyleProvider.CloserColorSelectedActive = System.Drawing.Color.Black;
+            tabControlExtra5.DisplayStyleProvider.CloserColorUnselected = System.Drawing.Color.Empty;
+            tabControlExtra5.DisplayStyleProvider.FocusTrack = false;
+            tabControlExtra5.DisplayStyleProvider.HotTrack = true;
+            tabControlExtra5.DisplayStyleProvider.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            tabControlExtra5.DisplayStyleProvider.Opacity = 1F;
+            tabControlExtra5.DisplayStyleProvider.Overlap = 0;
+            tabControlExtra5.DisplayStyleProvider.Padding = new System.Drawing.Point(12, 10);
+            tabControlExtra5.DisplayStyleProvider.PageBackgroundColorDisabled = System.Drawing.Color.FromArgb(41, 57, 85);
+            tabControlExtra5.DisplayStyleProvider.PageBackgroundColorFocused = System.Drawing.Color.FromArgb(255, 243, 205);
+            tabControlExtra5.DisplayStyleProvider.PageBackgroundColorHighlighted = System.Drawing.Color.FromArgb(75, 92, 116);
+            tabControlExtra5.DisplayStyleProvider.PageBackgroundColorSelected = System.Drawing.Color.FromArgb(206, 212, 223);
+            tabControlExtra5.DisplayStyleProvider.PageBackgroundColorUnselected = System.Drawing.Color.Transparent;
+            tabControlExtra5.DisplayStyleProvider.Radius = 6;
+            tabControlExtra5.DisplayStyleProvider.SelectedTabIsLarger = false;
+            tabControlExtra5.DisplayStyleProvider.ShowTabCloser = true;
+            tabControlExtra5.DisplayStyleProvider.TabColorDisabled1 = System.Drawing.Color.FromArgb(41, 57, 85);
+            tabControlExtra5.DisplayStyleProvider.TabColorDisabled2 = System.Drawing.Color.FromArgb(41, 57, 85);
+            tabControlExtra5.DisplayStyleProvider.TabColorFocused1 = System.Drawing.Color.FromArgb(255, 243, 205);
+            tabControlExtra5.DisplayStyleProvider.TabColorFocused2 = System.Drawing.Color.FromArgb(255, 243, 205);
+            tabControlExtra5.DisplayStyleProvider.TabColorHighlighted1 = System.Drawing.Color.FromArgb(75, 92, 116);
+            tabControlExtra5.DisplayStyleProvider.TabColorHighlighted2 = System.Drawing.Color.FromArgb(75, 92, 116);
+            tabControlExtra5.DisplayStyleProvider.TabColorSelected1 = System.Drawing.Color.FromArgb(206, 212, 223);
+            tabControlExtra5.DisplayStyleProvider.TabColorSelected2 = System.Drawing.Color.FromArgb(206, 212, 223);
+            tabControlExtra5.DisplayStyleProvider.TabColorUnselected1 = System.Drawing.Color.Transparent;
+            tabControlExtra5.DisplayStyleProvider.TabColorUnselected2 = System.Drawing.Color.Transparent;
+            tabControlExtra5.DisplayStyleProvider.TabPageMargin = new System.Windows.Forms.Padding(0, 4, 0, 4);
+            tabControlExtra5.DisplayStyleProvider.TabPageRadius = 4;
+            tabControlExtra5.DisplayStyleProvider.TextColorDisabled = System.Drawing.Color.WhiteSmoke;
+            tabControlExtra5.DisplayStyleProvider.TextColorFocused = System.Drawing.SystemColors.ControlText;
+            tabControlExtra5.DisplayStyleProvider.TextColorHighlighted = System.Drawing.Color.White;
+            tabControlExtra5.DisplayStyleProvider.TextColorSelected = System.Drawing.SystemColors.ControlText;
+            tabControlExtra5.DisplayStyleProvider.TextColorUnselected = System.Drawing.Color.White;
+            tabControlExtra5.Location = new System.Drawing.Point(42, 962);
+            tabControlExtra5.Margin = new System.Windows.Forms.Padding(6);
+            tabControlExtra5.Name = "tabControlExtra5";
+            tabControlExtra5.SelectedIndex = 0;
+            tabControlExtra5.Size = new System.Drawing.Size(1600, 172);
+            tabControlExtra5.TabIndex = 9;
             // 
             // tabPage36
             // 
@@ -310,11 +312,11 @@ namespace CSCustomTabControlDemo
             tabControlExtra2.Controls.Add(tabPage8);
             tabControlExtra2.Controls.Add(tabPage9);
             tabControlExtra2.Controls.Add(tabPage10);
-            tabControlExtra2.DisplayStyle = Adiict.UI.Forms.TabStyle.VisualStudio;
+            tabControlExtra2.DisplayStyle = TabStyle.VisualStudio;
             // 
             // 
             // 
-            tabControlExtra2.DisplayStyleProvider.BlendStyle = Adiict.UI.Forms.BlendStyle.Normal;
+            tabControlExtra2.DisplayStyleProvider.BlendStyle = BlendStyle.Normal;
             tabControlExtra2.DisplayStyleProvider.BorderColorDisabled = System.Drawing.SystemColors.ControlLight;
             tabControlExtra2.DisplayStyleProvider.BorderColorFocused = System.Drawing.Color.FromArgb(127, 157, 185);
             tabControlExtra2.DisplayStyleProvider.BorderColorHighlighted = System.Drawing.SystemColors.ControlDark;
@@ -457,7 +459,7 @@ namespace CSCustomTabControlDemo
             // 
             // 
             // 
-            tabControlExtra1.DisplayStyleProvider.BlendStyle = Adiict.UI.Forms.BlendStyle.Normal;
+            tabControlExtra1.DisplayStyleProvider.BlendStyle = BlendStyle.Normal;
             tabControlExtra1.DisplayStyleProvider.BorderColorDisabled = System.Drawing.SystemColors.ControlLight;
             tabControlExtra1.DisplayStyleProvider.BorderColorFocused = System.Drawing.Color.FromArgb(127, 157, 185);
             tabControlExtra1.DisplayStyleProvider.BorderColorHighlighted = System.Drawing.SystemColors.ControlDark;
@@ -701,84 +703,84 @@ namespace CSCustomTabControlDemo
             tabPage68.Text = "tabPage68";
             tabPage68.UseVisualStyleBackColor = true;
             // 
-            // tabControlExtra6
+            // tabControlExtra4
             // 
-            tabControlExtra6.AllowDrop = true;
-            tabControlExtra6.Controls.Add(tabPage26);
-            tabControlExtra6.Controls.Add(tabPage27);
-            tabControlExtra6.Controls.Add(tabPage28);
-            tabControlExtra6.Controls.Add(tabPage29);
-            tabControlExtra6.Controls.Add(tabPage30);
-            tabControlExtra6.DisplayStyle = Adiict.UI.Forms.TabStyle.VS2010;
+            tabControlExtra4.AllowDrop = true;
+            tabControlExtra4.Controls.Add(tabPage26);
+            tabControlExtra4.Controls.Add(tabPage27);
+            tabControlExtra4.Controls.Add(tabPage28);
+            tabControlExtra4.Controls.Add(tabPage29);
+            tabControlExtra4.Controls.Add(tabPage30);
+            tabControlExtra4.DisplayStyle = TabStyle.VS2010;
             // 
             // 
             // 
-            tabControlExtra6.DisplayStyleProvider.BlendStyle = Adiict.UI.Forms.BlendStyle.Normal;
-            tabControlExtra6.DisplayStyleProvider.BorderColorDisabled = System.Drawing.Color.FromArgb(41, 57, 85);
-            tabControlExtra6.DisplayStyleProvider.BorderColorFocused = System.Drawing.Color.FromArgb(255, 243, 205);
-            tabControlExtra6.DisplayStyleProvider.BorderColorHighlighted = System.Drawing.Color.FromArgb(155, 167, 183);
-            tabControlExtra6.DisplayStyleProvider.BorderColorSelected = System.Drawing.Color.FromArgb(206, 212, 223);
-            tabControlExtra6.DisplayStyleProvider.BorderColorUnselected = System.Drawing.Color.Transparent;
-            tabControlExtra6.DisplayStyleProvider.CloserButtonFillColorFocused = System.Drawing.Color.Empty;
-            tabControlExtra6.DisplayStyleProvider.CloserButtonFillColorFocusedActive = System.Drawing.Color.White;
-            tabControlExtra6.DisplayStyleProvider.CloserButtonFillColorHighlighted = System.Drawing.Color.Empty;
-            tabControlExtra6.DisplayStyleProvider.CloserButtonFillColorHighlightedActive = System.Drawing.Color.White;
-            tabControlExtra6.DisplayStyleProvider.CloserButtonFillColorSelected = System.Drawing.Color.Empty;
-            tabControlExtra6.DisplayStyleProvider.CloserButtonFillColorSelectedActive = System.Drawing.Color.White;
-            tabControlExtra6.DisplayStyleProvider.CloserButtonFillColorUnselected = System.Drawing.Color.Empty;
-            tabControlExtra6.DisplayStyleProvider.CloserButtonOutlineColorFocused = System.Drawing.Color.Empty;
-            tabControlExtra6.DisplayStyleProvider.CloserButtonOutlineColorFocusedActive = System.Drawing.Color.FromArgb(229, 195, 101);
-            tabControlExtra6.DisplayStyleProvider.CloserButtonOutlineColorHighlighted = System.Drawing.Color.Empty;
-            tabControlExtra6.DisplayStyleProvider.CloserButtonOutlineColorHighlightedActive = System.Drawing.Color.FromArgb(229, 195, 101);
-            tabControlExtra6.DisplayStyleProvider.CloserButtonOutlineColorSelected = System.Drawing.Color.Empty;
-            tabControlExtra6.DisplayStyleProvider.CloserButtonOutlineColorSelectedActive = System.Drawing.Color.FromArgb(229, 195, 101);
-            tabControlExtra6.DisplayStyleProvider.CloserButtonOutlineColorUnselected = System.Drawing.Color.Empty;
-            tabControlExtra6.DisplayStyleProvider.CloserColorFocused = System.Drawing.Color.FromArgb(117, 99, 61);
-            tabControlExtra6.DisplayStyleProvider.CloserColorFocusedActive = System.Drawing.Color.Black;
-            tabControlExtra6.DisplayStyleProvider.CloserColorHighlighted = System.Drawing.Color.FromArgb(206, 212, 221);
-            tabControlExtra6.DisplayStyleProvider.CloserColorHighlightedActive = System.Drawing.Color.Black;
-            tabControlExtra6.DisplayStyleProvider.CloserColorSelected = System.Drawing.Color.FromArgb(95, 102, 115);
-            tabControlExtra6.DisplayStyleProvider.CloserColorSelectedActive = System.Drawing.Color.Black;
-            tabControlExtra6.DisplayStyleProvider.CloserColorUnselected = System.Drawing.Color.Empty;
-            tabControlExtra6.DisplayStyleProvider.FocusTrack = false;
-            tabControlExtra6.DisplayStyleProvider.HotTrack = true;
-            tabControlExtra6.DisplayStyleProvider.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            tabControlExtra6.DisplayStyleProvider.Opacity = 1F;
-            tabControlExtra6.DisplayStyleProvider.Overlap = 0;
-            tabControlExtra6.DisplayStyleProvider.Padding = new System.Drawing.Point(12, 10);
-            tabControlExtra6.DisplayStyleProvider.PageBackgroundColorDisabled = System.Drawing.Color.FromArgb(41, 57, 85);
-            tabControlExtra6.DisplayStyleProvider.PageBackgroundColorFocused = System.Drawing.Color.FromArgb(229, 195, 101);
-            tabControlExtra6.DisplayStyleProvider.PageBackgroundColorHighlighted = System.Drawing.Color.FromArgb(75, 92, 116);
-            tabControlExtra6.DisplayStyleProvider.PageBackgroundColorSelected = System.Drawing.Color.FromArgb(206, 212, 223);
-            tabControlExtra6.DisplayStyleProvider.PageBackgroundColorUnselected = System.Drawing.Color.Transparent;
-            tabControlExtra6.DisplayStyleProvider.Radius = 6;
-            tabControlExtra6.DisplayStyleProvider.SelectedTabIsLarger = false;
-            tabControlExtra6.DisplayStyleProvider.ShowTabCloser = true;
-            tabControlExtra6.DisplayStyleProvider.TabColorDisabled1 = System.Drawing.Color.FromArgb(41, 57, 85);
-            tabControlExtra6.DisplayStyleProvider.TabColorDisabled2 = System.Drawing.Color.FromArgb(41, 57, 85);
-            tabControlExtra6.DisplayStyleProvider.TabColorFocused1 = System.Drawing.Color.FromArgb(229, 195, 101);
-            tabControlExtra6.DisplayStyleProvider.TabColorFocused2 = System.Drawing.SystemColors.Window;
-            tabControlExtra6.DisplayStyleProvider.TabColorHighlighted1 = System.Drawing.Color.FromArgb(75, 92, 116);
-            tabControlExtra6.DisplayStyleProvider.TabColorHighlighted2 = System.Drawing.Color.FromArgb(75, 92, 116);
-            tabControlExtra6.DisplayStyleProvider.TabColorSelected1 = System.Drawing.Color.FromArgb(206, 212, 223);
-            tabControlExtra6.DisplayStyleProvider.TabColorSelected2 = System.Drawing.Color.FromArgb(206, 212, 223);
-            tabControlExtra6.DisplayStyleProvider.TabColorUnselected1 = System.Drawing.Color.Transparent;
-            tabControlExtra6.DisplayStyleProvider.TabColorUnselected2 = System.Drawing.Color.Transparent;
-            tabControlExtra6.DisplayStyleProvider.TabPageMargin = new System.Windows.Forms.Padding(0, 4, 0, 4);
-            tabControlExtra6.DisplayStyleProvider.TabPageRadius = 4;
-            tabControlExtra6.DisplayStyleProvider.TextColorDisabled = System.Drawing.Color.WhiteSmoke;
-            tabControlExtra6.DisplayStyleProvider.TextColorFocused = System.Drawing.SystemColors.ControlText;
-            tabControlExtra6.DisplayStyleProvider.TextColorHighlighted = System.Drawing.Color.White;
-            tabControlExtra6.DisplayStyleProvider.TextColorSelected = System.Drawing.SystemColors.ControlText;
-            tabControlExtra6.DisplayStyleProvider.TextColorUnselected = System.Drawing.Color.White;
-            tabControlExtra6.ImageList = imageList1;
-            tabControlExtra6.Location = new System.Drawing.Point(38, 703);
-            tabControlExtra6.Margin = new System.Windows.Forms.Padding(6);
-            tabControlExtra6.Name = "tabControlExtra6";
-            tabControlExtra6.RightToLeftLayout = true;
-            tabControlExtra6.SelectedIndex = 0;
-            tabControlExtra6.Size = new System.Drawing.Size(994, 140);
-            tabControlExtra6.TabIndex = 4;
+            tabControlExtra4.DisplayStyleProvider.BlendStyle = BlendStyle.Normal;
+            tabControlExtra4.DisplayStyleProvider.BorderColorDisabled = System.Drawing.Color.FromArgb(41, 57, 85);
+            tabControlExtra4.DisplayStyleProvider.BorderColorFocused = System.Drawing.Color.FromArgb(255, 243, 205);
+            tabControlExtra4.DisplayStyleProvider.BorderColorHighlighted = System.Drawing.Color.FromArgb(155, 167, 183);
+            tabControlExtra4.DisplayStyleProvider.BorderColorSelected = System.Drawing.Color.FromArgb(206, 212, 223);
+            tabControlExtra4.DisplayStyleProvider.BorderColorUnselected = System.Drawing.Color.Transparent;
+            tabControlExtra4.DisplayStyleProvider.CloserButtonFillColorFocused = System.Drawing.Color.Empty;
+            tabControlExtra4.DisplayStyleProvider.CloserButtonFillColorFocusedActive = System.Drawing.Color.White;
+            tabControlExtra4.DisplayStyleProvider.CloserButtonFillColorHighlighted = System.Drawing.Color.Empty;
+            tabControlExtra4.DisplayStyleProvider.CloserButtonFillColorHighlightedActive = System.Drawing.Color.White;
+            tabControlExtra4.DisplayStyleProvider.CloserButtonFillColorSelected = System.Drawing.Color.Empty;
+            tabControlExtra4.DisplayStyleProvider.CloserButtonFillColorSelectedActive = System.Drawing.Color.White;
+            tabControlExtra4.DisplayStyleProvider.CloserButtonFillColorUnselected = System.Drawing.Color.Empty;
+            tabControlExtra4.DisplayStyleProvider.CloserButtonOutlineColorFocused = System.Drawing.Color.Empty;
+            tabControlExtra4.DisplayStyleProvider.CloserButtonOutlineColorFocusedActive = System.Drawing.Color.FromArgb(229, 195, 101);
+            tabControlExtra4.DisplayStyleProvider.CloserButtonOutlineColorHighlighted = System.Drawing.Color.Empty;
+            tabControlExtra4.DisplayStyleProvider.CloserButtonOutlineColorHighlightedActive = System.Drawing.Color.FromArgb(229, 195, 101);
+            tabControlExtra4.DisplayStyleProvider.CloserButtonOutlineColorSelected = System.Drawing.Color.Empty;
+            tabControlExtra4.DisplayStyleProvider.CloserButtonOutlineColorSelectedActive = System.Drawing.Color.FromArgb(229, 195, 101);
+            tabControlExtra4.DisplayStyleProvider.CloserButtonOutlineColorUnselected = System.Drawing.Color.Empty;
+            tabControlExtra4.DisplayStyleProvider.CloserColorFocused = System.Drawing.Color.FromArgb(117, 99, 61);
+            tabControlExtra4.DisplayStyleProvider.CloserColorFocusedActive = System.Drawing.Color.Black;
+            tabControlExtra4.DisplayStyleProvider.CloserColorHighlighted = System.Drawing.Color.FromArgb(206, 212, 221);
+            tabControlExtra4.DisplayStyleProvider.CloserColorHighlightedActive = System.Drawing.Color.Black;
+            tabControlExtra4.DisplayStyleProvider.CloserColorSelected = System.Drawing.Color.FromArgb(95, 102, 115);
+            tabControlExtra4.DisplayStyleProvider.CloserColorSelectedActive = System.Drawing.Color.Black;
+            tabControlExtra4.DisplayStyleProvider.CloserColorUnselected = System.Drawing.Color.Empty;
+            tabControlExtra4.DisplayStyleProvider.FocusTrack = false;
+            tabControlExtra4.DisplayStyleProvider.HotTrack = true;
+            tabControlExtra4.DisplayStyleProvider.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            tabControlExtra4.DisplayStyleProvider.Opacity = 1F;
+            tabControlExtra4.DisplayStyleProvider.Overlap = 0;
+            tabControlExtra4.DisplayStyleProvider.Padding = new System.Drawing.Point(12, 10);
+            tabControlExtra4.DisplayStyleProvider.PageBackgroundColorDisabled = System.Drawing.Color.FromArgb(41, 57, 85);
+            tabControlExtra4.DisplayStyleProvider.PageBackgroundColorFocused = System.Drawing.Color.FromArgb(229, 195, 101);
+            tabControlExtra4.DisplayStyleProvider.PageBackgroundColorHighlighted = System.Drawing.Color.FromArgb(75, 92, 116);
+            tabControlExtra4.DisplayStyleProvider.PageBackgroundColorSelected = System.Drawing.Color.FromArgb(206, 212, 223);
+            tabControlExtra4.DisplayStyleProvider.PageBackgroundColorUnselected = System.Drawing.Color.Transparent;
+            tabControlExtra4.DisplayStyleProvider.Radius = 6;
+            tabControlExtra4.DisplayStyleProvider.SelectedTabIsLarger = false;
+            tabControlExtra4.DisplayStyleProvider.ShowTabCloser = true;
+            tabControlExtra4.DisplayStyleProvider.TabColorDisabled1 = System.Drawing.Color.FromArgb(41, 57, 85);
+            tabControlExtra4.DisplayStyleProvider.TabColorDisabled2 = System.Drawing.Color.FromArgb(41, 57, 85);
+            tabControlExtra4.DisplayStyleProvider.TabColorFocused1 = System.Drawing.Color.FromArgb(229, 195, 101);
+            tabControlExtra4.DisplayStyleProvider.TabColorFocused2 = System.Drawing.SystemColors.Window;
+            tabControlExtra4.DisplayStyleProvider.TabColorHighlighted1 = System.Drawing.Color.FromArgb(75, 92, 116);
+            tabControlExtra4.DisplayStyleProvider.TabColorHighlighted2 = System.Drawing.Color.FromArgb(75, 92, 116);
+            tabControlExtra4.DisplayStyleProvider.TabColorSelected1 = System.Drawing.Color.FromArgb(206, 212, 223);
+            tabControlExtra4.DisplayStyleProvider.TabColorSelected2 = System.Drawing.Color.FromArgb(206, 212, 223);
+            tabControlExtra4.DisplayStyleProvider.TabColorUnselected1 = System.Drawing.Color.Transparent;
+            tabControlExtra4.DisplayStyleProvider.TabColorUnselected2 = System.Drawing.Color.Transparent;
+            tabControlExtra4.DisplayStyleProvider.TabPageMargin = new System.Windows.Forms.Padding(0, 4, 0, 4);
+            tabControlExtra4.DisplayStyleProvider.TabPageRadius = 4;
+            tabControlExtra4.DisplayStyleProvider.TextColorDisabled = System.Drawing.Color.WhiteSmoke;
+            tabControlExtra4.DisplayStyleProvider.TextColorFocused = System.Drawing.SystemColors.ControlText;
+            tabControlExtra4.DisplayStyleProvider.TextColorHighlighted = System.Drawing.Color.White;
+            tabControlExtra4.DisplayStyleProvider.TextColorSelected = System.Drawing.SystemColors.ControlText;
+            tabControlExtra4.DisplayStyleProvider.TextColorUnselected = System.Drawing.Color.White;
+            tabControlExtra4.ImageList = imageList1;
+            tabControlExtra4.Location = new System.Drawing.Point(38, 703);
+            tabControlExtra4.Margin = new System.Windows.Forms.Padding(6);
+            tabControlExtra4.Name = "tabControlExtra4";
+            tabControlExtra4.RightToLeftLayout = true;
+            tabControlExtra4.SelectedIndex = 0;
+            tabControlExtra4.Size = new System.Drawing.Size(994, 140);
+            tabControlExtra4.TabIndex = 4;
             // 
             // tabPage26
             // 
@@ -839,82 +841,82 @@ namespace CSCustomTabControlDemo
             tabPage30.Text = "tabPage30";
             tabPage30.UseVisualStyleBackColor = true;
             // 
-            // tabControlExtra5
+            // tabControlExtra3
             // 
-            tabControlExtra5.Controls.Add(tabPage21);
-            tabControlExtra5.Controls.Add(tabPage22);
-            tabControlExtra5.Controls.Add(tabPage23);
-            tabControlExtra5.Controls.Add(tabPage24);
-            tabControlExtra5.Controls.Add(tabPage25);
-            tabControlExtra5.DisplayStyle = Adiict.UI.Forms.TabStyle.Chrome;
+            tabControlExtra3.Controls.Add(tabPage21);
+            tabControlExtra3.Controls.Add(tabPage22);
+            tabControlExtra3.Controls.Add(tabPage23);
+            tabControlExtra3.Controls.Add(tabPage24);
+            tabControlExtra3.Controls.Add(tabPage25);
+            tabControlExtra3.DisplayStyle = TabStyle.Chrome;
             // 
             // 
             // 
-            tabControlExtra5.DisplayStyleProvider.BlendStyle = Adiict.UI.Forms.BlendStyle.Normal;
-            tabControlExtra5.DisplayStyleProvider.BorderColorDisabled = System.Drawing.SystemColors.ControlLight;
-            tabControlExtra5.DisplayStyleProvider.BorderColorFocused = System.Drawing.Color.FromArgb(127, 157, 185);
-            tabControlExtra5.DisplayStyleProvider.BorderColorHighlighted = System.Drawing.SystemColors.ControlDark;
-            tabControlExtra5.DisplayStyleProvider.BorderColorSelected = System.Drawing.SystemColors.ControlDark;
-            tabControlExtra5.DisplayStyleProvider.BorderColorUnselected = System.Drawing.SystemColors.ControlDark;
-            tabControlExtra5.DisplayStyleProvider.CloserButtonFillColorFocused = System.Drawing.Color.Empty;
-            tabControlExtra5.DisplayStyleProvider.CloserButtonFillColorFocusedActive = System.Drawing.Color.FromArgb(244, 159, 148);
-            tabControlExtra5.DisplayStyleProvider.CloserButtonFillColorHighlighted = System.Drawing.Color.Empty;
-            tabControlExtra5.DisplayStyleProvider.CloserButtonFillColorHighlightedActive = System.Drawing.Color.FromArgb(244, 159, 148);
-            tabControlExtra5.DisplayStyleProvider.CloserButtonFillColorSelected = System.Drawing.Color.Empty;
-            tabControlExtra5.DisplayStyleProvider.CloserButtonFillColorSelectedActive = System.Drawing.Color.FromArgb(244, 159, 148);
-            tabControlExtra5.DisplayStyleProvider.CloserButtonFillColorUnselected = System.Drawing.Color.Empty;
-            tabControlExtra5.DisplayStyleProvider.CloserButtonOutlineColorFocused = System.Drawing.Color.Empty;
-            tabControlExtra5.DisplayStyleProvider.CloserButtonOutlineColorFocusedActive = System.Drawing.Color.FromArgb(209, 106, 94);
-            tabControlExtra5.DisplayStyleProvider.CloserButtonOutlineColorHighlighted = System.Drawing.Color.Empty;
-            tabControlExtra5.DisplayStyleProvider.CloserButtonOutlineColorHighlightedActive = System.Drawing.Color.FromArgb(209, 106, 94);
-            tabControlExtra5.DisplayStyleProvider.CloserButtonOutlineColorSelected = System.Drawing.Color.Empty;
-            tabControlExtra5.DisplayStyleProvider.CloserButtonOutlineColorSelectedActive = System.Drawing.Color.FromArgb(209, 106, 94);
-            tabControlExtra5.DisplayStyleProvider.CloserButtonOutlineColorUnselected = System.Drawing.Color.Empty;
-            tabControlExtra5.DisplayStyleProvider.CloserColorFocused = System.Drawing.Color.Black;
-            tabControlExtra5.DisplayStyleProvider.CloserColorFocusedActive = System.Drawing.Color.White;
-            tabControlExtra5.DisplayStyleProvider.CloserColorHighlighted = System.Drawing.Color.Black;
-            tabControlExtra5.DisplayStyleProvider.CloserColorHighlightedActive = System.Drawing.Color.White;
-            tabControlExtra5.DisplayStyleProvider.CloserColorSelected = System.Drawing.Color.Black;
-            tabControlExtra5.DisplayStyleProvider.CloserColorSelectedActive = System.Drawing.Color.White;
-            tabControlExtra5.DisplayStyleProvider.CloserColorUnselected = System.Drawing.Color.Empty;
-            tabControlExtra5.DisplayStyleProvider.FocusTrack = false;
-            tabControlExtra5.DisplayStyleProvider.HotTrack = true;
-            tabControlExtra5.DisplayStyleProvider.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            tabControlExtra5.DisplayStyleProvider.Opacity = 1F;
-            tabControlExtra5.DisplayStyleProvider.Overlap = 32;
-            tabControlExtra5.DisplayStyleProvider.Padding = new System.Drawing.Point(32, 10);
-            tabControlExtra5.DisplayStyleProvider.PageBackgroundColorDisabled = System.Drawing.SystemColors.Control;
-            tabControlExtra5.DisplayStyleProvider.PageBackgroundColorFocused = System.Drawing.SystemColors.ControlLight;
-            tabControlExtra5.DisplayStyleProvider.PageBackgroundColorHighlighted = System.Drawing.SystemColors.Control;
-            tabControlExtra5.DisplayStyleProvider.PageBackgroundColorSelected = System.Drawing.SystemColors.ControlLightLight;
-            tabControlExtra5.DisplayStyleProvider.PageBackgroundColorUnselected = System.Drawing.SystemColors.Control;
-            tabControlExtra5.DisplayStyleProvider.Radius = 2;
-            tabControlExtra5.DisplayStyleProvider.SelectedTabIsLarger = false;
-            tabControlExtra5.DisplayStyleProvider.ShowTabCloser = true;
-            tabControlExtra5.DisplayStyleProvider.TabColorDisabled1 = System.Drawing.SystemColors.Control;
-            tabControlExtra5.DisplayStyleProvider.TabColorDisabled2 = System.Drawing.SystemColors.Control;
-            tabControlExtra5.DisplayStyleProvider.TabColorFocused1 = System.Drawing.SystemColors.ControlLight;
-            tabControlExtra5.DisplayStyleProvider.TabColorFocused2 = System.Drawing.SystemColors.ControlLight;
-            tabControlExtra5.DisplayStyleProvider.TabColorHighlighted1 = System.Drawing.SystemColors.Control;
-            tabControlExtra5.DisplayStyleProvider.TabColorHighlighted2 = System.Drawing.SystemColors.Control;
-            tabControlExtra5.DisplayStyleProvider.TabColorSelected1 = System.Drawing.SystemColors.ControlLightLight;
-            tabControlExtra5.DisplayStyleProvider.TabColorSelected2 = System.Drawing.SystemColors.ControlLightLight;
-            tabControlExtra5.DisplayStyleProvider.TabColorUnselected1 = System.Drawing.SystemColors.Control;
-            tabControlExtra5.DisplayStyleProvider.TabColorUnselected2 = System.Drawing.SystemColors.Control;
-            tabControlExtra5.DisplayStyleProvider.TabPageMargin = new System.Windows.Forms.Padding(2);
-            tabControlExtra5.DisplayStyleProvider.TextColorDisabled = System.Drawing.SystemColors.ControlDark;
-            tabControlExtra5.DisplayStyleProvider.TextColorFocused = System.Drawing.SystemColors.ControlText;
-            tabControlExtra5.DisplayStyleProvider.TextColorHighlighted = System.Drawing.SystemColors.ControlText;
-            tabControlExtra5.DisplayStyleProvider.TextColorSelected = System.Drawing.SystemColors.ControlText;
-            tabControlExtra5.DisplayStyleProvider.TextColorUnselected = System.Drawing.SystemColors.ControlText;
-            tabControlExtra5.ImageList = imageList1;
-            tabControlExtra5.Location = new System.Drawing.Point(34, 488);
-            tabControlExtra5.Margin = new System.Windows.Forms.Padding(6);
-            tabControlExtra5.Name = "tabControlExtra5";
-            tabControlExtra5.RightToLeftLayout = true;
-            tabControlExtra5.SelectedIndex = 0;
-            tabControlExtra5.Size = new System.Drawing.Size(994, 140);
-            tabControlExtra5.TabIndex = 3;
+            tabControlExtra3.DisplayStyleProvider.BlendStyle = BlendStyle.Normal;
+            tabControlExtra3.DisplayStyleProvider.BorderColorDisabled = System.Drawing.SystemColors.ControlLight;
+            tabControlExtra3.DisplayStyleProvider.BorderColorFocused = System.Drawing.Color.FromArgb(127, 157, 185);
+            tabControlExtra3.DisplayStyleProvider.BorderColorHighlighted = System.Drawing.SystemColors.ControlDark;
+            tabControlExtra3.DisplayStyleProvider.BorderColorSelected = System.Drawing.SystemColors.ControlDark;
+            tabControlExtra3.DisplayStyleProvider.BorderColorUnselected = System.Drawing.SystemColors.ControlDark;
+            tabControlExtra3.DisplayStyleProvider.CloserButtonFillColorFocused = System.Drawing.Color.Empty;
+            tabControlExtra3.DisplayStyleProvider.CloserButtonFillColorFocusedActive = System.Drawing.Color.FromArgb(244, 159, 148);
+            tabControlExtra3.DisplayStyleProvider.CloserButtonFillColorHighlighted = System.Drawing.Color.Empty;
+            tabControlExtra3.DisplayStyleProvider.CloserButtonFillColorHighlightedActive = System.Drawing.Color.FromArgb(244, 159, 148);
+            tabControlExtra3.DisplayStyleProvider.CloserButtonFillColorSelected = System.Drawing.Color.Empty;
+            tabControlExtra3.DisplayStyleProvider.CloserButtonFillColorSelectedActive = System.Drawing.Color.FromArgb(244, 159, 148);
+            tabControlExtra3.DisplayStyleProvider.CloserButtonFillColorUnselected = System.Drawing.Color.Empty;
+            tabControlExtra3.DisplayStyleProvider.CloserButtonOutlineColorFocused = System.Drawing.Color.Empty;
+            tabControlExtra3.DisplayStyleProvider.CloserButtonOutlineColorFocusedActive = System.Drawing.Color.FromArgb(209, 106, 94);
+            tabControlExtra3.DisplayStyleProvider.CloserButtonOutlineColorHighlighted = System.Drawing.Color.Empty;
+            tabControlExtra3.DisplayStyleProvider.CloserButtonOutlineColorHighlightedActive = System.Drawing.Color.FromArgb(209, 106, 94);
+            tabControlExtra3.DisplayStyleProvider.CloserButtonOutlineColorSelected = System.Drawing.Color.Empty;
+            tabControlExtra3.DisplayStyleProvider.CloserButtonOutlineColorSelectedActive = System.Drawing.Color.FromArgb(209, 106, 94);
+            tabControlExtra3.DisplayStyleProvider.CloserButtonOutlineColorUnselected = System.Drawing.Color.Empty;
+            tabControlExtra3.DisplayStyleProvider.CloserColorFocused = System.Drawing.Color.Black;
+            tabControlExtra3.DisplayStyleProvider.CloserColorFocusedActive = System.Drawing.Color.White;
+            tabControlExtra3.DisplayStyleProvider.CloserColorHighlighted = System.Drawing.Color.Black;
+            tabControlExtra3.DisplayStyleProvider.CloserColorHighlightedActive = System.Drawing.Color.White;
+            tabControlExtra3.DisplayStyleProvider.CloserColorSelected = System.Drawing.Color.Black;
+            tabControlExtra3.DisplayStyleProvider.CloserColorSelectedActive = System.Drawing.Color.White;
+            tabControlExtra3.DisplayStyleProvider.CloserColorUnselected = System.Drawing.Color.Empty;
+            tabControlExtra3.DisplayStyleProvider.FocusTrack = false;
+            tabControlExtra3.DisplayStyleProvider.HotTrack = true;
+            tabControlExtra3.DisplayStyleProvider.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            tabControlExtra3.DisplayStyleProvider.Opacity = 1F;
+            tabControlExtra3.DisplayStyleProvider.Overlap = 32;
+            tabControlExtra3.DisplayStyleProvider.Padding = new System.Drawing.Point(32, 10);
+            tabControlExtra3.DisplayStyleProvider.PageBackgroundColorDisabled = System.Drawing.SystemColors.Control;
+            tabControlExtra3.DisplayStyleProvider.PageBackgroundColorFocused = System.Drawing.SystemColors.ControlLight;
+            tabControlExtra3.DisplayStyleProvider.PageBackgroundColorHighlighted = System.Drawing.SystemColors.Control;
+            tabControlExtra3.DisplayStyleProvider.PageBackgroundColorSelected = System.Drawing.SystemColors.ControlLightLight;
+            tabControlExtra3.DisplayStyleProvider.PageBackgroundColorUnselected = System.Drawing.SystemColors.Control;
+            tabControlExtra3.DisplayStyleProvider.Radius = 2;
+            tabControlExtra3.DisplayStyleProvider.SelectedTabIsLarger = false;
+            tabControlExtra3.DisplayStyleProvider.ShowTabCloser = true;
+            tabControlExtra3.DisplayStyleProvider.TabColorDisabled1 = System.Drawing.SystemColors.Control;
+            tabControlExtra3.DisplayStyleProvider.TabColorDisabled2 = System.Drawing.SystemColors.Control;
+            tabControlExtra3.DisplayStyleProvider.TabColorFocused1 = System.Drawing.SystemColors.ControlLight;
+            tabControlExtra3.DisplayStyleProvider.TabColorFocused2 = System.Drawing.SystemColors.ControlLight;
+            tabControlExtra3.DisplayStyleProvider.TabColorHighlighted1 = System.Drawing.SystemColors.Control;
+            tabControlExtra3.DisplayStyleProvider.TabColorHighlighted2 = System.Drawing.SystemColors.Control;
+            tabControlExtra3.DisplayStyleProvider.TabColorSelected1 = System.Drawing.SystemColors.ControlLightLight;
+            tabControlExtra3.DisplayStyleProvider.TabColorSelected2 = System.Drawing.SystemColors.ControlLightLight;
+            tabControlExtra3.DisplayStyleProvider.TabColorUnselected1 = System.Drawing.SystemColors.Control;
+            tabControlExtra3.DisplayStyleProvider.TabColorUnselected2 = System.Drawing.SystemColors.Control;
+            tabControlExtra3.DisplayStyleProvider.TabPageMargin = new System.Windows.Forms.Padding(2);
+            tabControlExtra3.DisplayStyleProvider.TextColorDisabled = System.Drawing.SystemColors.ControlDark;
+            tabControlExtra3.DisplayStyleProvider.TextColorFocused = System.Drawing.SystemColors.ControlText;
+            tabControlExtra3.DisplayStyleProvider.TextColorHighlighted = System.Drawing.SystemColors.ControlText;
+            tabControlExtra3.DisplayStyleProvider.TextColorSelected = System.Drawing.SystemColors.ControlText;
+            tabControlExtra3.DisplayStyleProvider.TextColorUnselected = System.Drawing.SystemColors.ControlText;
+            tabControlExtra3.ImageList = imageList1;
+            tabControlExtra3.Location = new System.Drawing.Point(34, 488);
+            tabControlExtra3.Margin = new System.Windows.Forms.Padding(6);
+            tabControlExtra3.Name = "tabControlExtra3";
+            tabControlExtra3.RightToLeftLayout = true;
+            tabControlExtra3.SelectedIndex = 0;
+            tabControlExtra3.Size = new System.Drawing.Size(994, 140);
+            tabControlExtra3.TabIndex = 3;
             // 
             // tabPage21
             // 
@@ -975,85 +977,85 @@ namespace CSCustomTabControlDemo
             tabPage25.Text = "tabPage25";
             tabPage25.UseVisualStyleBackColor = true;
             // 
-            // tabControlExtra9
+            // tabControlExtra6
             // 
-            tabControlExtra9.Alignment = System.Windows.Forms.TabAlignment.Left;
-            tabControlExtra9.Controls.Add(tabPage69);
-            tabControlExtra9.Controls.Add(tabPage70);
-            tabControlExtra9.Controls.Add(tabPage71);
-            tabControlExtra9.Controls.Add(tabPage72);
-            tabControlExtra9.Controls.Add(tabPage73);
-            tabControlExtra9.Controls.Add(tabPage74);
-            tabControlExtra9.Controls.Add(tabPage75);
-            tabControlExtra9.Controls.Add(tabPage76);
-            tabControlExtra9.DisplayStyle = Adiict.UI.Forms.TabStyle.Rectangular;
+            tabControlExtra6.Alignment = System.Windows.Forms.TabAlignment.Left;
+            tabControlExtra6.Controls.Add(tabPage69);
+            tabControlExtra6.Controls.Add(tabPage70);
+            tabControlExtra6.Controls.Add(tabPage71);
+            tabControlExtra6.Controls.Add(tabPage72);
+            tabControlExtra6.Controls.Add(tabPage73);
+            tabControlExtra6.Controls.Add(tabPage74);
+            tabControlExtra6.Controls.Add(tabPage75);
+            tabControlExtra6.Controls.Add(tabPage76);
+            tabControlExtra6.DisplayStyle = TabStyle.Rectangular;
             // 
             // 
             // 
-            tabControlExtra9.DisplayStyleProvider.BlendStyle = Adiict.UI.Forms.BlendStyle.Normal;
-            tabControlExtra9.DisplayStyleProvider.BorderColorDisabled = System.Drawing.SystemColors.Control;
-            tabControlExtra9.DisplayStyleProvider.BorderColorFocused = System.Drawing.Color.FromArgb(0, 122, 204);
-            tabControlExtra9.DisplayStyleProvider.BorderColorHighlighted = System.Drawing.Color.FromArgb(28, 151, 234);
-            tabControlExtra9.DisplayStyleProvider.BorderColorSelected = System.Drawing.Color.FromArgb(204, 206, 219);
-            tabControlExtra9.DisplayStyleProvider.BorderColorUnselected = System.Drawing.Color.Transparent;
-            tabControlExtra9.DisplayStyleProvider.CloserButtonFillColorFocused = System.Drawing.Color.Empty;
-            tabControlExtra9.DisplayStyleProvider.CloserButtonFillColorFocusedActive = System.Drawing.Color.FromArgb(28, 151, 234);
-            tabControlExtra9.DisplayStyleProvider.CloserButtonFillColorHighlighted = System.Drawing.Color.Empty;
-            tabControlExtra9.DisplayStyleProvider.CloserButtonFillColorHighlightedActive = System.Drawing.Color.FromArgb(82, 176, 239);
-            tabControlExtra9.DisplayStyleProvider.CloserButtonFillColorSelected = System.Drawing.Color.Empty;
-            tabControlExtra9.DisplayStyleProvider.CloserButtonFillColorSelectedActive = System.Drawing.Color.FromArgb(230, 231, 237);
-            tabControlExtra9.DisplayStyleProvider.CloserButtonFillColorUnselected = System.Drawing.Color.Empty;
-            tabControlExtra9.DisplayStyleProvider.CloserButtonOutlineColorFocused = System.Drawing.Color.Empty;
-            tabControlExtra9.DisplayStyleProvider.CloserButtonOutlineColorFocusedActive = System.Drawing.Color.Empty;
-            tabControlExtra9.DisplayStyleProvider.CloserButtonOutlineColorHighlighted = System.Drawing.Color.Empty;
-            tabControlExtra9.DisplayStyleProvider.CloserButtonOutlineColorHighlightedActive = System.Drawing.Color.Empty;
-            tabControlExtra9.DisplayStyleProvider.CloserButtonOutlineColorSelected = System.Drawing.Color.Empty;
-            tabControlExtra9.DisplayStyleProvider.CloserButtonOutlineColorSelectedActive = System.Drawing.Color.Empty;
-            tabControlExtra9.DisplayStyleProvider.CloserButtonOutlineColorUnselected = System.Drawing.Color.Empty;
-            tabControlExtra9.DisplayStyleProvider.CloserColorFocused = System.Drawing.Color.FromArgb(208, 230, 245);
-            tabControlExtra9.DisplayStyleProvider.CloserColorFocusedActive = System.Drawing.Color.White;
-            tabControlExtra9.DisplayStyleProvider.CloserColorHighlighted = System.Drawing.Color.FromArgb(129, 195, 241);
-            tabControlExtra9.DisplayStyleProvider.CloserColorHighlightedActive = System.Drawing.Color.White;
-            tabControlExtra9.DisplayStyleProvider.CloserColorSelected = System.Drawing.Color.FromArgb(109, 109, 112);
-            tabControlExtra9.DisplayStyleProvider.CloserColorSelectedActive = System.Drawing.Color.FromArgb(113, 113, 113);
-            tabControlExtra9.DisplayStyleProvider.CloserColorUnselected = System.Drawing.Color.Empty;
-            tabControlExtra9.DisplayStyleProvider.FocusTrack = false;
-            tabControlExtra9.DisplayStyleProvider.HotTrack = true;
-            tabControlExtra9.DisplayStyleProvider.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            tabControlExtra9.DisplayStyleProvider.Opacity = 1F;
-            tabControlExtra9.DisplayStyleProvider.Overlap = 0;
-            tabControlExtra9.DisplayStyleProvider.Padding = new System.Drawing.Point(12, 10);
-            tabControlExtra9.DisplayStyleProvider.PageBackgroundColorDisabled = System.Drawing.SystemColors.Control;
-            tabControlExtra9.DisplayStyleProvider.PageBackgroundColorFocused = System.Drawing.Color.FromArgb(0, 122, 204);
-            tabControlExtra9.DisplayStyleProvider.PageBackgroundColorHighlighted = System.Drawing.Color.FromArgb(28, 151, 234);
-            tabControlExtra9.DisplayStyleProvider.PageBackgroundColorSelected = System.Drawing.Color.FromArgb(204, 206, 219);
-            tabControlExtra9.DisplayStyleProvider.PageBackgroundColorUnselected = System.Drawing.Color.Transparent;
-            tabControlExtra9.DisplayStyleProvider.Radius = 2;
-            tabControlExtra9.DisplayStyleProvider.SelectedTabIsLarger = false;
-            tabControlExtra9.DisplayStyleProvider.ShowTabCloser = true;
-            tabControlExtra9.DisplayStyleProvider.TabColorDisabled1 = System.Drawing.SystemColors.Control;
-            tabControlExtra9.DisplayStyleProvider.TabColorDisabled2 = System.Drawing.SystemColors.Control;
-            tabControlExtra9.DisplayStyleProvider.TabColorFocused1 = System.Drawing.Color.FromArgb(0, 122, 204);
-            tabControlExtra9.DisplayStyleProvider.TabColorFocused2 = System.Drawing.Color.FromArgb(0, 122, 204);
-            tabControlExtra9.DisplayStyleProvider.TabColorHighlighted1 = System.Drawing.Color.FromArgb(28, 151, 234);
-            tabControlExtra9.DisplayStyleProvider.TabColorHighlighted2 = System.Drawing.Color.FromArgb(28, 151, 234);
-            tabControlExtra9.DisplayStyleProvider.TabColorSelected1 = System.Drawing.Color.FromArgb(204, 206, 219);
-            tabControlExtra9.DisplayStyleProvider.TabColorSelected2 = System.Drawing.Color.FromArgb(204, 206, 219);
-            tabControlExtra9.DisplayStyleProvider.TabColorUnselected1 = System.Drawing.Color.Transparent;
-            tabControlExtra9.DisplayStyleProvider.TabColorUnselected2 = System.Drawing.Color.Transparent;
-            tabControlExtra9.DisplayStyleProvider.TabPageMargin = new System.Windows.Forms.Padding(0, 4, 0, 4);
-            tabControlExtra9.DisplayStyleProvider.TextColorDisabled = System.Drawing.SystemColors.ControlDark;
-            tabControlExtra9.DisplayStyleProvider.TextColorFocused = System.Drawing.Color.White;
-            tabControlExtra9.DisplayStyleProvider.TextColorHighlighted = System.Drawing.Color.White;
-            tabControlExtra9.DisplayStyleProvider.TextColorSelected = System.Drawing.Color.FromArgb(113, 113, 113);
-            tabControlExtra9.DisplayStyleProvider.TextColorUnselected = System.Drawing.Color.White;
-            tabControlExtra9.Location = new System.Drawing.Point(86, 19);
-            tabControlExtra9.Margin = new System.Windows.Forms.Padding(6);
-            tabControlExtra9.Multiline = true;
-            tabControlExtra9.Name = "tabControlExtra9";
-            tabControlExtra9.SelectedIndex = 0;
-            tabControlExtra9.Size = new System.Drawing.Size(143, 1022);
-            tabControlExtra9.TabIndex = 8;
+            tabControlExtra6.DisplayStyleProvider.BlendStyle = BlendStyle.Normal;
+            tabControlExtra6.DisplayStyleProvider.BorderColorDisabled = System.Drawing.SystemColors.Control;
+            tabControlExtra6.DisplayStyleProvider.BorderColorFocused = System.Drawing.Color.FromArgb(0, 122, 204);
+            tabControlExtra6.DisplayStyleProvider.BorderColorHighlighted = System.Drawing.Color.FromArgb(28, 151, 234);
+            tabControlExtra6.DisplayStyleProvider.BorderColorSelected = System.Drawing.Color.FromArgb(204, 206, 219);
+            tabControlExtra6.DisplayStyleProvider.BorderColorUnselected = System.Drawing.Color.Transparent;
+            tabControlExtra6.DisplayStyleProvider.CloserButtonFillColorFocused = System.Drawing.Color.Empty;
+            tabControlExtra6.DisplayStyleProvider.CloserButtonFillColorFocusedActive = System.Drawing.Color.FromArgb(28, 151, 234);
+            tabControlExtra6.DisplayStyleProvider.CloserButtonFillColorHighlighted = System.Drawing.Color.Empty;
+            tabControlExtra6.DisplayStyleProvider.CloserButtonFillColorHighlightedActive = System.Drawing.Color.FromArgb(82, 176, 239);
+            tabControlExtra6.DisplayStyleProvider.CloserButtonFillColorSelected = System.Drawing.Color.Empty;
+            tabControlExtra6.DisplayStyleProvider.CloserButtonFillColorSelectedActive = System.Drawing.Color.FromArgb(230, 231, 237);
+            tabControlExtra6.DisplayStyleProvider.CloserButtonFillColorUnselected = System.Drawing.Color.Empty;
+            tabControlExtra6.DisplayStyleProvider.CloserButtonOutlineColorFocused = System.Drawing.Color.Empty;
+            tabControlExtra6.DisplayStyleProvider.CloserButtonOutlineColorFocusedActive = System.Drawing.Color.Empty;
+            tabControlExtra6.DisplayStyleProvider.CloserButtonOutlineColorHighlighted = System.Drawing.Color.Empty;
+            tabControlExtra6.DisplayStyleProvider.CloserButtonOutlineColorHighlightedActive = System.Drawing.Color.Empty;
+            tabControlExtra6.DisplayStyleProvider.CloserButtonOutlineColorSelected = System.Drawing.Color.Empty;
+            tabControlExtra6.DisplayStyleProvider.CloserButtonOutlineColorSelectedActive = System.Drawing.Color.Empty;
+            tabControlExtra6.DisplayStyleProvider.CloserButtonOutlineColorUnselected = System.Drawing.Color.Empty;
+            tabControlExtra6.DisplayStyleProvider.CloserColorFocused = System.Drawing.Color.FromArgb(208, 230, 245);
+            tabControlExtra6.DisplayStyleProvider.CloserColorFocusedActive = System.Drawing.Color.White;
+            tabControlExtra6.DisplayStyleProvider.CloserColorHighlighted = System.Drawing.Color.FromArgb(129, 195, 241);
+            tabControlExtra6.DisplayStyleProvider.CloserColorHighlightedActive = System.Drawing.Color.White;
+            tabControlExtra6.DisplayStyleProvider.CloserColorSelected = System.Drawing.Color.FromArgb(109, 109, 112);
+            tabControlExtra6.DisplayStyleProvider.CloserColorSelectedActive = System.Drawing.Color.FromArgb(113, 113, 113);
+            tabControlExtra6.DisplayStyleProvider.CloserColorUnselected = System.Drawing.Color.Empty;
+            tabControlExtra6.DisplayStyleProvider.FocusTrack = false;
+            tabControlExtra6.DisplayStyleProvider.HotTrack = true;
+            tabControlExtra6.DisplayStyleProvider.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            tabControlExtra6.DisplayStyleProvider.Opacity = 1F;
+            tabControlExtra6.DisplayStyleProvider.Overlap = 0;
+            tabControlExtra6.DisplayStyleProvider.Padding = new System.Drawing.Point(12, 10);
+            tabControlExtra6.DisplayStyleProvider.PageBackgroundColorDisabled = System.Drawing.SystemColors.Control;
+            tabControlExtra6.DisplayStyleProvider.PageBackgroundColorFocused = System.Drawing.Color.FromArgb(0, 122, 204);
+            tabControlExtra6.DisplayStyleProvider.PageBackgroundColorHighlighted = System.Drawing.Color.FromArgb(28, 151, 234);
+            tabControlExtra6.DisplayStyleProvider.PageBackgroundColorSelected = System.Drawing.Color.FromArgb(204, 206, 219);
+            tabControlExtra6.DisplayStyleProvider.PageBackgroundColorUnselected = System.Drawing.Color.Transparent;
+            tabControlExtra6.DisplayStyleProvider.Radius = 2;
+            tabControlExtra6.DisplayStyleProvider.SelectedTabIsLarger = false;
+            tabControlExtra6.DisplayStyleProvider.ShowTabCloser = true;
+            tabControlExtra6.DisplayStyleProvider.TabColorDisabled1 = System.Drawing.SystemColors.Control;
+            tabControlExtra6.DisplayStyleProvider.TabColorDisabled2 = System.Drawing.SystemColors.Control;
+            tabControlExtra6.DisplayStyleProvider.TabColorFocused1 = System.Drawing.Color.FromArgb(0, 122, 204);
+            tabControlExtra6.DisplayStyleProvider.TabColorFocused2 = System.Drawing.Color.FromArgb(0, 122, 204);
+            tabControlExtra6.DisplayStyleProvider.TabColorHighlighted1 = System.Drawing.Color.FromArgb(28, 151, 234);
+            tabControlExtra6.DisplayStyleProvider.TabColorHighlighted2 = System.Drawing.Color.FromArgb(28, 151, 234);
+            tabControlExtra6.DisplayStyleProvider.TabColorSelected1 = System.Drawing.Color.FromArgb(204, 206, 219);
+            tabControlExtra6.DisplayStyleProvider.TabColorSelected2 = System.Drawing.Color.FromArgb(204, 206, 219);
+            tabControlExtra6.DisplayStyleProvider.TabColorUnselected1 = System.Drawing.Color.Transparent;
+            tabControlExtra6.DisplayStyleProvider.TabColorUnselected2 = System.Drawing.Color.Transparent;
+            tabControlExtra6.DisplayStyleProvider.TabPageMargin = new System.Windows.Forms.Padding(0, 4, 0, 4);
+            tabControlExtra6.DisplayStyleProvider.TextColorDisabled = System.Drawing.SystemColors.ControlDark;
+            tabControlExtra6.DisplayStyleProvider.TextColorFocused = System.Drawing.Color.White;
+            tabControlExtra6.DisplayStyleProvider.TextColorHighlighted = System.Drawing.Color.White;
+            tabControlExtra6.DisplayStyleProvider.TextColorSelected = System.Drawing.Color.FromArgb(113, 113, 113);
+            tabControlExtra6.DisplayStyleProvider.TextColorUnselected = System.Drawing.Color.White;
+            tabControlExtra6.Location = new System.Drawing.Point(86, 19);
+            tabControlExtra6.Margin = new System.Windows.Forms.Padding(6);
+            tabControlExtra6.Multiline = true;
+            tabControlExtra6.Name = "tabControlExtra6";
+            tabControlExtra6.SelectedIndex = 0;
+            tabControlExtra6.Size = new System.Drawing.Size(143, 1022);
+            tabControlExtra6.TabIndex = 8;
             // 
             // tabPage69
             // 
@@ -1080,55 +1082,55 @@ namespace CSCustomTabControlDemo
             // 
             // tabPage70
             // 
-            tabPage70.Location = new System.Drawing.Point(46, 4);
+            tabPage70.Location = new System.Drawing.Point(87, 4);
             tabPage70.Margin = new System.Windows.Forms.Padding(6);
             tabPage70.Name = "tabPage70";
             tabPage70.Padding = new System.Windows.Forms.Padding(6);
-            tabPage70.Size = new System.Drawing.Size(93, 1014);
+            tabPage70.Size = new System.Drawing.Size(52, 1014);
             tabPage70.TabIndex = 1;
             tabPage70.Text = "tabPage70";
             tabPage70.UseVisualStyleBackColor = true;
             // 
             // tabPage71
             // 
-            tabPage71.Location = new System.Drawing.Point(46, 4);
+            tabPage71.Location = new System.Drawing.Point(87, 4);
             tabPage71.Margin = new System.Windows.Forms.Padding(6);
             tabPage71.Name = "tabPage71";
             tabPage71.Padding = new System.Windows.Forms.Padding(6);
-            tabPage71.Size = new System.Drawing.Size(93, 1014);
+            tabPage71.Size = new System.Drawing.Size(52, 1014);
             tabPage71.TabIndex = 2;
             tabPage71.Text = "tabPage71";
             tabPage71.UseVisualStyleBackColor = true;
             // 
             // tabPage72
             // 
-            tabPage72.Location = new System.Drawing.Point(46, 4);
+            tabPage72.Location = new System.Drawing.Point(87, 4);
             tabPage72.Margin = new System.Windows.Forms.Padding(6);
             tabPage72.Name = "tabPage72";
             tabPage72.Padding = new System.Windows.Forms.Padding(6);
-            tabPage72.Size = new System.Drawing.Size(93, 1014);
+            tabPage72.Size = new System.Drawing.Size(52, 1014);
             tabPage72.TabIndex = 3;
             tabPage72.Text = "tabPage72";
             tabPage72.UseVisualStyleBackColor = true;
             // 
             // tabPage73
             // 
-            tabPage73.Location = new System.Drawing.Point(46, 4);
+            tabPage73.Location = new System.Drawing.Point(87, 4);
             tabPage73.Margin = new System.Windows.Forms.Padding(6);
             tabPage73.Name = "tabPage73";
             tabPage73.Padding = new System.Windows.Forms.Padding(6);
-            tabPage73.Size = new System.Drawing.Size(93, 1014);
+            tabPage73.Size = new System.Drawing.Size(52, 1014);
             tabPage73.TabIndex = 4;
             tabPage73.Text = "tabPage73";
             tabPage73.UseVisualStyleBackColor = true;
             // 
             // tabPage74
             // 
-            tabPage74.Location = new System.Drawing.Point(46, 4);
+            tabPage74.Location = new System.Drawing.Point(87, 4);
             tabPage74.Margin = new System.Windows.Forms.Padding(6);
             tabPage74.Name = "tabPage74";
             tabPage74.Padding = new System.Windows.Forms.Padding(6);
-            tabPage74.Size = new System.Drawing.Size(93, 1014);
+            tabPage74.Size = new System.Drawing.Size(52, 1014);
             tabPage74.TabIndex = 5;
             tabPage74.Text = "tabPage74";
             tabPage74.UseVisualStyleBackColor = true;
@@ -1158,10 +1160,10 @@ namespace CSCustomTabControlDemo
             // panel2
             // 
             panel2.BackColor = System.Drawing.Color.Black;
-            panel2.Controls.Add(tabControlExtra9);
+            panel2.Controls.Add(tabControlExtra6);
             panel2.Location = new System.Drawing.Point(1831, 52);
             panel2.Name = "panel2";
-            panel2.Size = new System.Drawing.Size(247, 1062);
+            panel2.Size = new System.Drawing.Size(249, 1062);
             panel2.TabIndex = 11;
             // 
             // panel1
@@ -1181,7 +1183,7 @@ namespace CSCustomTabControlDemo
             textBox2.Name = "textBox2";
             textBox2.Size = new System.Drawing.Size(652, 754);
             textBox2.TabIndex = 0;
-            textBox2.Text = "In Program.cs\r\n\r\nApplication.SetHighDpiMode(HighDpiMode.PerMonitorV2);\r\n\r\nOn MainForm\r\n\r\nprotected override void OnDpiChanged(DpiChangedEventArgs e)\r\n{\r\n\tbase.OnDpiChanged(e);\r\n}";
+            textBox2.Text = "In Program.cs\r\n\r\nApplication.SetHighDpiMode(HighDpiMode.PerMonitorV2);\r\n\r\nOn Form\r\n\r\nprotected override void OnDpiChanged(DpiChangedEventArgs e)\r\n{\r\n\tbase.OnDpiChanged(e);\r\n}";
             // 
             // MainForm
             // 
@@ -1192,24 +1194,24 @@ namespace CSCustomTabControlDemo
             ClientSize = new System.Drawing.Size(2159, 1216);
             Controls.Add(panel1);
             Controls.Add(panel2);
-            Controls.Add(tabControlExtra8);
+            Controls.Add(tabControlExtra5);
             Controls.Add(tabControlExtra2);
             Controls.Add(tabControlExtra1);
-            Controls.Add(tabControlExtra6);
-            Controls.Add(tabControlExtra5);
+            Controls.Add(tabControlExtra4);
+            Controls.Add(tabControlExtra3);
             DoubleBuffered = true;
             KeyPreview = true;
             MinimumSize = new System.Drawing.Size(526, 521);
             Name = "MainForm";
             Text = "TabControl Demo";
-            tabControlExtra8.ResumeLayout(false);
+            tabControlExtra5.ResumeLayout(false);
             tabControlExtra2.ResumeLayout(false);
             tabControlExtra1.ResumeLayout(false);
             tabPage1.ResumeLayout(false);
             tabPage1.PerformLayout();
+            tabControlExtra4.ResumeLayout(false);
+            tabControlExtra3.ResumeLayout(false);
             tabControlExtra6.ResumeLayout(false);
-            tabControlExtra5.ResumeLayout(false);
-            tabControlExtra9.ResumeLayout(false);
             tabPage69.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
             panel2.ResumeLayout(false);
@@ -1225,13 +1227,13 @@ namespace CSCustomTabControlDemo
 		private System.Windows.Forms.TabPage tabPage28;
 		private System.Windows.Forms.TabPage tabPage27;
 		private System.Windows.Forms.TabPage tabPage26;
-		private Adiict.UI.Forms.TabControlExtra tabControlExtra6;
+		private Adiict.UI.Forms.TabControlExtra tabControlExtra4;
 		private System.Windows.Forms.TabPage tabPage25;
 		private System.Windows.Forms.TabPage tabPage24;
 		private System.Windows.Forms.TabPage tabPage23;
 		private System.Windows.Forms.TabPage tabPage22;
 		private System.Windows.Forms.TabPage tabPage21;
-		private Adiict.UI.Forms.TabControlExtra tabControlExtra5;
+		private Adiict.UI.Forms.TabControlExtra tabControlExtra3;
 		private System.Windows.Forms.TabPage tabPage10;
 		private System.Windows.Forms.TabPage tabPage9;
 		private System.Windows.Forms.TabPage tabPage8;
@@ -1245,7 +1247,7 @@ namespace CSCustomTabControlDemo
 		private System.Windows.Forms.TabPage tabPage1;
 		private Adiict.UI.Forms.TabControlExtra tabControlExtra1;
 		private System.Windows.Forms.ImageList imageList1;
-        private Adiict.UI.Forms.TabControlExtra tabControlExtra8;
+        private Adiict.UI.Forms.TabControlExtra tabControlExtra6;
         private System.Windows.Forms.TabPage tabPage36;
         private System.Windows.Forms.TabPage tabPage37;
         private System.Windows.Forms.TabPage tabPage38;
@@ -1264,7 +1266,7 @@ namespace CSCustomTabControlDemo
         private System.Windows.Forms.TabPage tabPage66;
         private System.Windows.Forms.TabPage tabPage67;
         private System.Windows.Forms.TabPage tabPage68;
-        private Adiict.UI.Forms.TabControlExtra tabControlExtra9;
+        private Adiict.UI.Forms.TabControlExtra tabControlExtra5;
         private System.Windows.Forms.TabPage tabPage69;
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.TabPage tabPage70;

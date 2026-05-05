@@ -55,12 +55,14 @@ namespace Adiict.UI.Forms
         protected override void OnCreateControl()
         {
             base.OnCreateControl();
+
 #if NETFRAMEWORK
             if (!DesignMode)
 #else
             if (!DesignMode || Application.HighDpiMode != HighDpiMode.DpiUnaware)
 #endif
                 ApplyDpi((int)_TabBufferGraphics.DpiX);
+
             OnFontChanged(EventArgs.Empty);
         }
 
@@ -858,7 +860,7 @@ namespace Adiict.UI.Forms
                             //	used by GetTabRect/TabStyleProvider do not bleed highlight paint
                             //	into adjacent rows (inter-tab gaps would otherwise remain highlighted).
                             Rectangle rowClip = ComputeRowClipBounds(row, SelectedIndex, TabCount,
-                                ClientRectangle.Width, GetTabRow, GetTabRect);
+                                ClientRectangle.Width, ClientRectangle.Height, Alignment, GetTabRow, GetTabRect);
                             if (!rowClip.IsEmpty)
                                 _TabBufferGraphics.Clip = new Region(rowClip);
 
@@ -1464,7 +1466,9 @@ namespace Adiict.UI.Forms
             if (index < 0)
                 return new Rectangle();
 
-            Rectangle pageBounds = TabPages[index].Bounds;
+            //	Use the native content rectangle (TCM_ADJUSTRECT) rather than TabPages[index].Bounds,
+            //	which can reflect a wrong DisplayRectangle when ItemSize is auto (0) for Left/Right alignment.
+            Rectangle pageBounds = IsHandleCreated ? base.DisplayRectangle : TabPages[index].Bounds;
 
             pageBounds.Width += _StyleProvider.TabPageMargin.Left + _StyleProvider.TabPageMargin.Right - 1;
             pageBounds.Height += _StyleProvider.TabPageMargin.Top + _StyleProvider.TabPageMargin.Bottom - 1;
@@ -1600,7 +1604,8 @@ namespace Adiict.UI.Forms
             GraphicsPath path = new GraphicsPath();
             if (IsTabVisible(tabBounds, pageBounds))
                 _StyleProvider.AddTabBorder(path, tabBounds);
-            AddPageBorder(path, pageBounds, tabBounds);
+            if (IsPageVisible(pageBounds))
+                AddPageBorder(path, pageBounds, tabBounds);
 
             path.CloseFigure();
             return path;
@@ -1705,22 +1710,27 @@ namespace Adiict.UI.Forms
         }
 
         internal static Rectangle ComputeRowClipBounds(
-            int row, int selectedIndex, int tabCount, int clientWidth,
+            int row, int selectedIndex, int tabCount,
+            int clientWidth, int clientHeight, TabAlignment alignment,
             Func<int, int> getTabRow, Func<int, Rectangle> getTabRect)
         {
-            int top = int.MaxValue, bottom = int.MinValue;
+            bool horizontal = alignment <= TabAlignment.Bottom;
+            int lo = int.MaxValue, hi = int.MinValue;
             for (int i = 0; i < tabCount; i++)
             {
                 if (i != selectedIndex && getTabRow(i) == row)
                 {
                     Rectangle r = getTabRect(i);
-                    if (r.Y < top) top = r.Y;
-                    if (r.Bottom > bottom) bottom = r.Bottom;
+                    int a = horizontal ? r.Y : r.X;
+                    int b = horizontal ? r.Bottom : r.Right;
+                    if (a < lo) lo = a;
+                    if (b > hi) hi = b;
                 }
             }
-            return top == int.MaxValue
-                ? Rectangle.Empty
-                : new Rectangle(0, top, clientWidth, bottom - top);
+            if (lo == int.MaxValue) return Rectangle.Empty;
+            return horizontal
+                ? new Rectangle(0, lo, clientWidth, hi - lo)
+                : new Rectangle(lo, 0, hi - lo, clientHeight);
         }
 
         private Rectangle GetTabTextRect(GraphicsPath tabBorder, Rectangle tabBounds, Rectangle closerRect, Rectangle imageRect)
@@ -1805,6 +1815,11 @@ namespace Adiict.UI.Forms
             return false;
         }
 
+        protected internal bool IsPageVisible(Rectangle pageBounds)
+        {
+            return pageBounds.X > 0 && pageBounds.Y > 0 && pageBounds.Height > 0 && pageBounds.Width > 0;
+        }
+
         private bool IsValidTabIndex(int index)
         {
             BackupTabPages();
@@ -1875,30 +1890,30 @@ namespace Adiict.UI.Forms
 
         #region DPI scaling
 
-        public void ApplyDpi(int dpi)
+        public void OnDpiChanged(DpiChangedEventArgs e)
+        {
+            ApplyDpi(e.DeviceDpiNew);
+        }
+
+        internal void ApplyDpi(int dpi)
         {
             if (dpi == 0 || _Dpi == dpi) return;
 
             _Dpi = dpi;
 
-            _tabCloserButtonSize = AdaptDpi(TabCloserButtonSizeBase);
-            _tabInnerPadding = AdaptDpi(TabInnerPaddingBase);
-            _StyleProvider.ApplyDpiScale(_Dpi / 96f);
 
-            int radius = AdaptDpi(_StyleProvider.Radius);
-            int tabPageRadius = AdaptDpi(_StyleProvider.TabPageRadius);
-            int overlap = AdaptDpi(_StyleProvider.Overlap);
-            Point padding = AdaptDpi(_StyleProvider.Padding);
-            Padding tabPageMargin = AdaptDpi(_StyleProvider.TabPageMargin);
 
             SuspendLayout();
             try
             {
-                _StyleProvider.Radius = radius;
-                _StyleProvider.TabPageRadius = tabPageRadius;
-                _StyleProvider.Overlap = overlap;
-                _StyleProvider.Padding = padding;
-                _StyleProvider.TabPageMargin = tabPageMargin;
+                _tabCloserButtonSize = AdaptDpi(TabCloserButtonSizeBase);
+                _tabInnerPadding = AdaptDpi(TabInnerPaddingBase);
+                _StyleProvider.ApplyDpiScale(_Dpi / 96f);
+                _StyleProvider.Radius = AdaptDpi(_StyleProvider.Radius); 
+                _StyleProvider.TabPageRadius = AdaptDpi(_StyleProvider.TabPageRadius);
+                _StyleProvider.Overlap = AdaptDpi(_StyleProvider.Overlap);
+                _StyleProvider.Padding = AdaptDpi(_StyleProvider.Padding);
+                _StyleProvider.TabPageMargin = AdaptDpi(_StyleProvider.TabPageMargin);
             }
             finally
             {
