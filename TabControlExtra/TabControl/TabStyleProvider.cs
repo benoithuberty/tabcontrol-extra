@@ -85,6 +85,14 @@ namespace Adiict.UI.Forms
                     provider = new TabStyleVS2012Provider(tabControl);
                     break;
 
+                case TabStyle.ThemeAware:
+                    provider = new TabStyleThemeAwareProvider(tabControl);
+                    break;
+
+                case TabStyle.Flashy:
+                    provider = new TabStyleFlashyProvider(tabControl);
+                    break;
+
             default:
 					provider = new TabStyleDefaultProvider(tabControl);
 					break;
@@ -112,6 +120,8 @@ namespace Adiict.UI.Forms
 		private float _Opacity = 1;
 		private bool _ShowTabCloser;
         private bool _SelectedTabIsLarger;
+        private bool _VisualFx;
+        private bool _SelectedTabBleed = true;
 
         private BlendStyle _BlendStyle = BlendStyle.Normal;
 
@@ -173,7 +183,11 @@ namespace Adiict.UI.Forms
         private Padding _TabPageMargin = new Padding(1);
 
         private int _TabPageRadius = 0;
-		
+
+        private Color _EdgeLineColor = Color.Empty;
+        private int _EdgeLineHeight = 0;
+        private Font _TabFont = null;
+
 		#endregion
 		
 		#region overridable Methods
@@ -309,6 +323,7 @@ namespace Adiict.UI.Forms
 		}
 
         [Category("Appearance"), DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+        [Description("The gradient blend algorithm used to paint tab backgrounds.")]
         public BlendStyle BlendStyle {
             get { return _BlendStyle; }
             set {
@@ -318,6 +333,7 @@ namespace Adiict.UI.Forms
         }
 
         [Category("Appearance"), DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+        [Description("Alignment of the tab image within the tab.")]
 		public ContentAlignment ImageAlign {
 			get { return _ImageAlign; }
 			set {
@@ -325,7 +341,8 @@ namespace Adiict.UI.Forms
 			}
 		}
 		
-		[Category("Appearance"), DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+		[Category("Appearance"), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        [Description("Additional spacing inside each tab around its content (X = horizontal, Y = vertical).")]
 		public Point Padding {
 			get { return _Padding; }
 			set {
@@ -347,7 +364,8 @@ namespace Adiict.UI.Forms
 		}
 
 
-		[Category("Appearance"), DefaultValue(1), Browsable(true)]
+		[Category("Appearance"), DefaultValue(1), Browsable(true), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        [Description("Corner radius of the tab shape. Minimum value is 1.")]
 		public int Radius {
 			get { return _Radius; }
 			set {
@@ -359,7 +377,8 @@ namespace Adiict.UI.Forms
 			}
 		}
 
-		[Category("Appearance"), DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+		[Category("Appearance"), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        [Description("Number of pixels by which adjacent tabs overlap each other.")]
 		public int Overlap {
 			get { return _Overlap; }
 			set {
@@ -372,6 +391,7 @@ namespace Adiict.UI.Forms
 		
 		
 		[Category("Appearance"), DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+        [Description("When true, draws a colored strip at the active edge of the focused tab.")]
 		public bool FocusTrack {
 			get { return _FocusTrack; }
 			set {
@@ -380,6 +400,7 @@ namespace Adiict.UI.Forms
 		}
 		
 		[Category("Appearance"), DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+        [Description("When true, highlights the tab under the mouse pointer.")]
 		public bool HotTrack {
 			get { return _HotTrack; }
 			set {
@@ -389,6 +410,7 @@ namespace Adiict.UI.Forms
 		}
 
         [Category("Appearance"), DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+        [Description("When true, the selected tab is rendered slightly larger than the others.")]
         public bool SelectedTabIsLarger {
             get { return _SelectedTabIsLarger; }
 			set {
@@ -396,8 +418,19 @@ namespace Adiict.UI.Forms
                 TabControl.Invalidate();
 			}
 		}
-		
+
+        [Category("Appearance"), DefaultValue(true)]
+        [Description("When true, the selected tab fill extends past the page border edge to hide the seam.")]
+        public bool SelectedTabBleed {
+            get { return _SelectedTabBleed; }
+            set {
+                _SelectedTabBleed = value;
+                TabControl.Invalidate();
+            }
+        }
+
         [Category("Appearance"), DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+        [Description("When true, each tab displays a close button.")]
 		public bool ShowTabCloser {
 			get { return _ShowTabCloser; }
 			set {
@@ -407,7 +440,18 @@ namespace Adiict.UI.Forms
 			}
 		}
 
+        [Category("Appearance"), DefaultValue(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+        [Description("When true, enables animated effects such as ripple on click and edge-line fade on tab selection.")]
+        public bool VisualFx {
+            get { return _VisualFx; }
+            set {
+                _VisualFx = value;
+                TabControl.Invalidate();
+            }
+        }
+
 		[Category("Appearance"), DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+        [Description("Overall opacity of the tab strip, from 0 (transparent) to 1 (fully opaque).")]
 		public float Opacity {
 			get { return _Opacity; }
 			set {
@@ -419,6 +463,7 @@ namespace Adiict.UI.Forms
 		}
 
         [Category("Appearance"), DefaultValue(typeof(Color), "")]
+        [Description("Page border color when the tab is disabled.")]
         public Color BorderColorDisabled {
             get {
                 if (_BorderColorDisabled.IsEmpty) {
@@ -437,6 +482,7 @@ namespace Adiict.UI.Forms
         }
 
         [Category("Appearance"), DefaultValue(typeof(Color), "")]
+        [Description("Page border color when the tab is focused.")]
         public Color BorderColorFocused {
             get {
                 if (_BorderColorFocused.IsEmpty) {
@@ -457,6 +503,7 @@ namespace Adiict.UI.Forms
         }
 
 		[Category("Appearance"), DefaultValue(typeof(Color), "")]
+        [Description("Page border color when the tab is highlighted (hovered).")]
 		public Color BorderColorHighlighted
 		{
 			get {
@@ -476,6 +523,7 @@ namespace Adiict.UI.Forms
 		}
 
         [Category("Appearance"), DefaultValue(typeof(Color), "")]
+        [Description("Page border color when the tab is selected.")]
         public Color BorderColorSelected {
             get {
                 if (_BorderColorSelected.IsEmpty) {
@@ -494,6 +542,7 @@ namespace Adiict.UI.Forms
         }
 
         [Category("Appearance"), DefaultValue(typeof(Color), "")]
+        [Description("Page border color when the tab is unselected.")]
 		public Color BorderColorUnselected
 		{
 			get {
@@ -513,6 +562,7 @@ namespace Adiict.UI.Forms
 		}
 
         [Category("Appearance"), DefaultValue(typeof(Color), "")]
+        [Description("Background fill color of the page area for a disabled tab.")]
         public Color PageBackgroundColorDisabled {
             get {
                 if (_PageBackgroundColorDisabled.IsEmpty) {
@@ -527,6 +577,7 @@ namespace Adiict.UI.Forms
         }
 
         [Category("Appearance"), DefaultValue(typeof(Color), "")]
+        [Description("Background fill color of the page area for the focused tab.")]
         public Color PageBackgroundColorFocused {
             get {
                 if (_PageBackgroundColorFocused.IsEmpty) {
@@ -541,6 +592,7 @@ namespace Adiict.UI.Forms
         }
 
         [Category("Appearance"), DefaultValue(typeof(Color), "")]
+        [Description("Background fill color of the page area for a highlighted (hovered) tab.")]
         public Color PageBackgroundColorHighlighted {
             get {
                 if (_PageBackgroundColorHighlighted.IsEmpty) {
@@ -555,6 +607,7 @@ namespace Adiict.UI.Forms
         }
 
         [Category("Appearance"), DefaultValue(typeof(Color), "")]
+        [Description("Background fill color of the page area for the selected tab.")]
         public Color PageBackgroundColorSelected {
             get {
                 if (_PageBackgroundColorSelected.IsEmpty) {
@@ -569,6 +622,7 @@ namespace Adiict.UI.Forms
         }
 
         [Category("Appearance"), DefaultValue(typeof(Color), "")]
+        [Description("Background fill color of the page area for unselected tabs.")]
         public Color PageBackgroundColorUnselected {
             get {
                 if (_PageBackgroundColorUnselected.IsEmpty) {
@@ -583,6 +637,7 @@ namespace Adiict.UI.Forms
         }
 
         [Category("Appearance"), DefaultValue(typeof(Color), "")]
+        [Description("Gradient start color of a disabled tab.")]
         public Color TabColorDisabled1 {
             get {
                 if (_TabColorDisabled1.IsEmpty) {
@@ -597,6 +652,7 @@ namespace Adiict.UI.Forms
         }
 
         [Category("Appearance"), DefaultValue(typeof(Color), "")]
+        [Description("Gradient end color of a disabled tab.")]
         public Color TabColorDisabled2 {
             get {
                 if (_TabColorDisabled2.IsEmpty) {
@@ -611,6 +667,7 @@ namespace Adiict.UI.Forms
         }
 
         [Category("Appearance"), DefaultValue(typeof(Color), "")]
+        [Description("Gradient start color of the focused tab.")]
         public Color TabColorFocused1 {
             get {
                 if (_TabColorFocused1.IsEmpty) {
@@ -625,6 +682,7 @@ namespace Adiict.UI.Forms
         }
 
         [Category("Appearance"), DefaultValue(typeof(Color), "")]
+        [Description("Gradient end color of the focused tab.")]
         public Color TabColorFocused2 {
             get {
                 if (_TabColorFocused2.IsEmpty) {
@@ -639,6 +697,7 @@ namespace Adiict.UI.Forms
         }
 
         [Category("Appearance"), DefaultValue(typeof(Color), "")]
+        [Description("Gradient start color of the selected tab.")]
         public Color TabColorSelected1 {
             get {
                 if (_TabColorSelected1.IsEmpty) {
@@ -653,6 +712,7 @@ namespace Adiict.UI.Forms
         }
 
         [Category("Appearance"), DefaultValue(typeof(Color), "")]
+        [Description("Gradient end color of the selected tab.")]
         public Color TabColorSelected2 {
             get {
                 if (_TabColorSelected2.IsEmpty) {
@@ -667,6 +727,7 @@ namespace Adiict.UI.Forms
         }
 
         [Category("Appearance"), DefaultValue(typeof(Color), "")]
+        [Description("Gradient start color of unselected tabs.")]
         public Color TabColorUnselected1 {
             get {
                 if (_TabColorUnselected1.IsEmpty) {
@@ -681,6 +742,7 @@ namespace Adiict.UI.Forms
         }
 
         [Category("Appearance"), DefaultValue(typeof(Color), "")]
+        [Description("Gradient end color of unselected tabs.")]
         public Color TabColorUnselected2 {
             get {
                 if (_TabColorUnselected2.IsEmpty) {
@@ -695,6 +757,7 @@ namespace Adiict.UI.Forms
         }
 
         [Category("Appearance"), DefaultValue(typeof(Color), "")]
+        [Description("Gradient start color of a highlighted (hovered) tab.")]
         public Color TabColorHighlighted1 {
             get {
                 if (_TabColorHighlighted1.IsEmpty) {
@@ -709,6 +772,7 @@ namespace Adiict.UI.Forms
         }
 
         [Category("Appearance"), DefaultValue(typeof(Color), "")]
+        [Description("Gradient end color of a highlighted (hovered) tab.")]
         public Color TabColorHighlighted2 {
             get {
                 if (_TabColorHighlighted2.IsEmpty) {
@@ -723,6 +787,7 @@ namespace Adiict.UI.Forms
         }
 
         [Category("Appearance"), DefaultValue(typeof(Color), "")]
+        [Description("Tab label text color when the tab is disabled.")]
         public Color TextColorDisabled {
             get {
                 if (_TextColorDisabled.IsEmpty) {
@@ -741,6 +806,7 @@ namespace Adiict.UI.Forms
         }
 
         [Category("Appearance"), DefaultValue(typeof(Color), "")]
+        [Description("Tab label text color when the tab is focused.")]
         public Color TextColorFocused {
             get {
                 if (_TextColorFocused.IsEmpty) {
@@ -755,6 +821,7 @@ namespace Adiict.UI.Forms
         }
 
         [Category("Appearance"), DefaultValue(typeof(Color), "")]
+        [Description("Tab label text color when the tab is highlighted (hovered).")]
         public Color TextColorHighlighted {
             get {
                 if (_TextColorHighlighted.IsEmpty) {
@@ -769,6 +836,7 @@ namespace Adiict.UI.Forms
         }
 
         [Category("Appearance"), DefaultValue(typeof(Color), "")]
+        [Description("Tab label text color when the tab is selected.")]
 		public Color TextColorSelected
 		{
 			get {
@@ -788,6 +856,7 @@ namespace Adiict.UI.Forms
 		}
 
         [Category("Appearance"), DefaultValue(typeof(Color), "")]
+        [Description("Tab label text color when the tab is unselected.")]
         public Color TextColorUnselected {
             get {
                 if (_TextColorUnselected.IsEmpty) {
@@ -806,6 +875,7 @@ namespace Adiict.UI.Forms
         }
 
         [Category("Appearance"), DefaultValue(typeof(Color), "Orange")]
+        [Description("Color of the focus indicator strip drawn at the active edge of the focused tab.")]
 		public Color FocusColor
 		{
 			get { return _FocusColor; }
@@ -813,7 +883,32 @@ namespace Adiict.UI.Forms
 			}
 		}
 
+        [Category("Appearance"), DefaultValue(typeof(Color), "")]
+        [Description("Accent line color at the active edge of the selected tab when VisualFx is enabled. Empty defaults to a darkened shade of TabColorSelected1.")]
+        public Color EdgeLineColor
+        {
+            get { return _EdgeLineColor; }
+            set { _EdgeLineColor = value; }
+        }
+
+        [Category("Appearance"), DefaultValue(0)]
+        [Description("Thickness in pixels of the VisualFx edge accent line. 0 uses half the tab padding.")]
+        public int EdgeLineHeight
+        {
+            get { return _EdgeLineHeight; }
+            set { _EdgeLineHeight = value; }
+        }
+
+        [Category("Appearance"), DefaultValue(null)]
+        [Description("Custom font for tab labels. Leave null to inherit the control font.")]
+        public Font TabFont
+        {
+            get { return _TabFont; }
+            set { _TabFont = value; }
+        }
+
         [Category("Appearance"), DefaultValue(typeof(SystemColors), "ControlDark")]
+        [Description("Color of the close button X icon on a focused tab.")]
         public Color CloserColorFocused {
             get { return _CloserColorFocused; }
             set {
@@ -822,6 +917,7 @@ namespace Adiict.UI.Forms
         }
 
         [Category("Appearance"), DefaultValue(typeof(SystemColors), "ControlDark")]
+        [Description("Color of the close button X icon when hovered on a focused tab.")]
         public Color CloserColorFocusedActive {
             get { return _CloserColorFocusedActive; }
             set {
@@ -830,6 +926,7 @@ namespace Adiict.UI.Forms
         }
 
         [Category("Appearance"), DefaultValue(typeof(SystemColors), "ControlDark")]
+        [Description("Color of the close button X icon on the selected tab.")]
         public Color CloserColorSelected {
             get { return _CloserColorSelected; }
             set {
@@ -838,6 +935,7 @@ namespace Adiict.UI.Forms
         }
 
         [Category("Appearance"), DefaultValue(typeof(SystemColors), "ControlDark")]
+        [Description("Color of the close button X icon when hovered on the selected tab.")]
         public Color CloserColorSelectedActive {
             get { return _CloserColorSelectedActive; }
             set {
@@ -846,6 +944,7 @@ namespace Adiict.UI.Forms
         }
 
         [Category("Appearance"), DefaultValue(typeof(SystemColors), "ControlDark")]
+        [Description("Color of the close button X icon on a highlighted (hovered) tab.")]
         public Color CloserColorHighlighted {
             get { return _CloserColorHighlighted; }
             set {
@@ -854,6 +953,7 @@ namespace Adiict.UI.Forms
         }
 
         [Category("Appearance"), DefaultValue(typeof(SystemColors), "ControlDark")]
+        [Description("Color of the close button X icon when hovered on a highlighted tab.")]
         public Color CloserColorHighlightedActive {
             get { return _CloserColorHighlightedActive; }
             set {
@@ -862,6 +962,7 @@ namespace Adiict.UI.Forms
         }
 
         [Category("Appearance"), DefaultValue(typeof(SystemColors), "Empty")]
+        [Description("Color of the close button X icon on unselected tabs. Empty hides the icon.")]
         public Color CloserColorUnselected {
             get { return _CloserColorUnselected; }
             set {
@@ -870,6 +971,7 @@ namespace Adiict.UI.Forms
         }
 
         [Category("Appearance"), DefaultValue(typeof(SystemColors), "Empty")]
+        [Description("Background fill color of the close button on a focused tab.")]
         public Color CloserButtonFillColorFocused {
             get { return _CloserButtonFillColorFocused; }
             set {
@@ -878,6 +980,7 @@ namespace Adiict.UI.Forms
         }
 
         [Category("Appearance"), DefaultValue(typeof(SystemColors), "Empty")]
+        [Description("Background fill color of the close button when hovered on a focused tab.")]
         public Color CloserButtonFillColorFocusedActive {
             get { return _CloserButtonFillColorFocusedActive; }
             set {
@@ -886,6 +989,7 @@ namespace Adiict.UI.Forms
         }
 
         [Category("Appearance"), DefaultValue(typeof(SystemColors), "Empty")]
+        [Description("Background fill color of the close button on the selected tab.")]
         public Color CloserButtonFillColorSelected {
             get { return _CloserButtonFillColorSelected ; }
             set {
@@ -894,6 +998,7 @@ namespace Adiict.UI.Forms
         }
 
         [Category("Appearance"), DefaultValue(typeof(SystemColors), "Empty")]
+        [Description("Background fill color of the close button when hovered on the selected tab.")]
         public Color CloserButtonFillColorSelectedActive {
             get { return _CloserButtonFillColorSelectedActive; }
             set {
@@ -902,6 +1007,7 @@ namespace Adiict.UI.Forms
         }
 
         [Category("Appearance"), DefaultValue(typeof(SystemColors), "Empty")]
+        [Description("Background fill color of the close button on a highlighted (hovered) tab.")]
         public Color CloserButtonFillColorHighlighted {
             get { return _CloserButtonFillColorHighlighted; }
             set {
@@ -910,6 +1016,7 @@ namespace Adiict.UI.Forms
         }
 
         [Category("Appearance"), DefaultValue(typeof(SystemColors), "Empty")]
+        [Description("Background fill color of the close button when hovered on a highlighted tab.")]
         public Color CloserButtonFillColorHighlightedActive {
             get { return _CloserButtonFillColorHighlightedActive; }
             set {
@@ -918,6 +1025,7 @@ namespace Adiict.UI.Forms
         }
 
         [Category("Appearance"), DefaultValue(typeof(SystemColors), "Empty")]
+        [Description("Background fill color of the close button on unselected tabs.")]
         public Color CloserButtonFillColorUnselected {
             get { return _CloserButtonFillColorUnselected; }
             set {
@@ -926,6 +1034,7 @@ namespace Adiict.UI.Forms
         }
 
         [Category("Appearance"), DefaultValue(typeof(SystemColors), "Empty")]
+        [Description("Border color of the close button on a focused tab.")]
         public Color CloserButtonOutlineColorFocused {
             get { return _CloserButtonOutlineColorFocused; }
             set {
@@ -934,6 +1043,7 @@ namespace Adiict.UI.Forms
         }
 
         [Category("Appearance"), DefaultValue(typeof(SystemColors), "Empty")]
+        [Description("Border color of the close button when hovered on a focused tab.")]
         public Color CloserButtonOutlineColorFocusedActive {
             get { return _CloserButtonOutlineColorFocusedActive; }
             set {
@@ -942,6 +1052,7 @@ namespace Adiict.UI.Forms
         }
 
         [Category("Appearance"), DefaultValue(typeof(SystemColors), "Empty")]
+        [Description("Border color of the close button on the selected tab.")]
         public Color CloserButtonOutlineColorSelected {
             get { return _CloserButtonOutlineColorSelected; }
             set {
@@ -950,6 +1061,7 @@ namespace Adiict.UI.Forms
         }
 
         [Category("Appearance"), DefaultValue(typeof(SystemColors), "Empty")]
+        [Description("Border color of the close button when hovered on the selected tab.")]
         public Color CloserButtonOutlineColorSelectedActive {
             get { return _CloserButtonOutlineColorSelectedActive; }
             set {
@@ -958,6 +1070,7 @@ namespace Adiict.UI.Forms
         }
 
         [Category("Appearance"), DefaultValue(typeof(SystemColors), "Empty")]
+        [Description("Border color of the close button on a highlighted (hovered) tab.")]
         public Color CloserButtonOutlineColorHighlighted {
             get { return _CloserButtonOutlineColorHighlighted; }
             set {
@@ -966,6 +1079,7 @@ namespace Adiict.UI.Forms
         }
 
         [Category("Appearance"), DefaultValue(typeof(SystemColors), "Empty")]
+        [Description("Border color of the close button when hovered on a highlighted tab.")]
         public Color CloserButtonOutlineColorHighlightedActive {
             get { return _CloserButtonOutlineColorHighlightedActive; }
             set {
@@ -974,6 +1088,7 @@ namespace Adiict.UI.Forms
         }
 
         [Category("Appearance"), DefaultValue(typeof(SystemColors), "Empty")]
+        [Description("Border color of the close button on unselected tabs.")]
         public Color CloserButtonOutlineColorUnselected {
             get { return _CloserButtonOutlineColorUnselected; }
             set {
@@ -981,8 +1096,9 @@ namespace Adiict.UI.Forms
             }
         }
 
-        [Category("Appearance"), DefaultValue(typeof(Padding), "{1,1,1,1}")]
-        public Padding TabPageMargin 
+        [Category("Appearance"), DefaultValue(typeof(Padding), "{1,1,1,1}"), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        [Description("Gap in pixels between the tab strip and the page content area on each side (clamped 0–4).")]
+        public Padding TabPageMargin
         {
             get {return _TabPageMargin;}
             set {
@@ -1000,7 +1116,8 @@ namespace Adiict.UI.Forms
             }
         }
 
-        [Category("Appearance"), DefaultValue(typeof(int), "0")]
+        [Category("Appearance"), DefaultValue(typeof(int), "0"), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        [Description("Corner radius of the page border rectangle (clamped 0–4).")]
         public int TabPageRadius {
             get { return _TabPageRadius; }
             set { 
@@ -1137,6 +1254,87 @@ namespace Adiict.UI.Forms
             using (Brush fillBrush = GetTabBackgroundBrush(state, tabBorder)) {
                 //	Paint the background
                 graphics.FillPath(fillBrush, tabBorder);
+            }
+        }
+
+        public void DrawTabVisualFx(
+            GraphicsPath tabBorder,
+            Rectangle tabBounds,
+            Graphics graphics,
+            Point rippleOrigin,
+            float rippleProgress,
+            float edgeLineOpacity)
+        {
+            if (!_VisualFx) return;
+
+            // Edge line: darker stripe at the selection edge, half the padding thick, fades in/out
+            if (edgeLineOpacity >= 0f)
+            {
+                (Color color1, Color _) = GetTabBackgroundColors(TabState.Selected);
+                Color lineColor = _EdgeLineColor.IsEmpty
+                    ? (color1.IsEmpty ? Color.Empty : Color.FromArgb(
+                        Math.Max(0, color1.R - 45),
+                        Math.Max(0, color1.G - 45),
+                        Math.Max(0, color1.B - 45)))
+                    : _EdgeLineColor;
+                if (!lineColor.IsEmpty)
+                {
+                    RectangleF pathRect = tabBorder.GetBounds();
+                    int thicknessH = _EdgeLineHeight > 0 ? _EdgeLineHeight : Math.Max(1, _Padding.Y / 2);
+                    int thicknessV = _EdgeLineHeight > 0 ? _EdgeLineHeight : Math.Max(1, _Padding.X / 2);
+                    Rectangle edgeRect;
+                    switch (TabControl.Alignment)
+                    {
+                        case TabAlignment.Top:
+                            edgeRect = new Rectangle((int)pathRect.X, (int)pathRect.Y, (int)pathRect.Width, thicknessH);
+                            break;
+                        case TabAlignment.Bottom:
+                            edgeRect = new Rectangle((int)pathRect.X, (int)pathRect.Bottom - thicknessH, (int)pathRect.Width, thicknessH);
+                            break;
+                        case TabAlignment.Left:
+                            edgeRect = new Rectangle((int)pathRect.X, (int)pathRect.Y, thicknessV, (int)pathRect.Height);
+                            break;
+                        default: // Right
+                            edgeRect = new Rectangle((int)pathRect.Right - thicknessV, (int)pathRect.Y, thicknessV, (int)pathRect.Height);
+                            break;
+                    }
+
+                    int alpha = Math.Max(0, Math.Min(255, (int)(edgeLineOpacity * 255f)));
+                    using (var edgeBrush = new SolidBrush(Color.FromArgb(alpha, lineColor)))
+                    {
+                        Region edgeRegion = new Region(edgeRect);
+                        edgeRegion.Intersect(tabBorder);
+                        graphics.FillRegion(edgeBrush, edgeRegion);
+                        edgeRegion.Dispose();
+                    }
+                }
+            }
+
+            // Ripple: expanding white translucent circle clipped to tab shape
+            if (rippleProgress >= 0f && rippleProgress < 1f && rippleOrigin != Point.Empty)
+            {
+                float maxRadius = (float)Math.Sqrt(
+                    (double)(tabBounds.Width * tabBounds.Width + tabBounds.Height * tabBounds.Height));
+
+                float radius = rippleProgress * maxRadius;
+                int alpha = Math.Max(0, (int)((1f - rippleProgress) * 100f));
+
+                RectangleF rippleRect = new RectangleF(
+                    rippleOrigin.X - radius,
+                    rippleOrigin.Y - radius,
+                    radius * 2f,
+                    radius * 2f);
+
+                using (var ellipsePath = new GraphicsPath())
+                using (var rippleBrush = new SolidBrush(Color.FromArgb(alpha, Color.White)))
+                {
+                    ellipsePath.AddEllipse(rippleRect);
+                    Region ellipseRegion = new Region(ellipsePath);
+                    ellipseRegion.Intersect(tabBorder);
+                    graphics.SmoothingMode = SmoothingMode.AntiAlias;
+                    graphics.FillRegion(rippleBrush, ellipseRegion);
+                    ellipseRegion.Dispose();
+                }
             }
         }
 

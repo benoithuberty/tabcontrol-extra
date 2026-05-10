@@ -14,7 +14,9 @@
       "Bash(dotnet sln *)",
       "Bash(dotnet test *)",
       "PowerShell(dotnet build *)",
-      "PowerShell(dotnet test *)"
+      "PowerShell(dotnet test *)",
+      "Bash(git -C \"D:\\\\Programming\\\\git\\\\tabcontrol-extra\" diff feature/3.0.3 -- TabControlExtra/TabControl/TabStyleProvider.cs)",
+      "Bash(Get-ChildItem *)"
     ]
   }
 }

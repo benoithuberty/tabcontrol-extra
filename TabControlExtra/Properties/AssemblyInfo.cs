@@ -30,5 +30,5 @@ using System.Runtime.Versioning;
 [assembly: System.Runtime.CompilerServices.InternalsVisibleTo("TabControlExtra.Tests")]
 #endif
 
-[assembly: AssemblyVersion("3.0.3")]
+[assembly: AssemblyVersion("3.0.4")]
 [assembly: Guid("8C5AD640-CEDA-49F7-A709-610779ADB760")]
