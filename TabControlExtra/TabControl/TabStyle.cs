@@ -17,7 +17,9 @@ namespace Adiict.UI.Forms
 		IE8 = 6,
 		VS2010 = 7, 
         Rectangular = 8,
-        VS2012 = 9
+        VS2012 = 9,
+        ThemeAware = 10,
+        Flashy = 11
 	}
 
 }

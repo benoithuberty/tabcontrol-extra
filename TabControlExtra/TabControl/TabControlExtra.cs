@@ -53,12 +53,8 @@ namespace Adiict.UI.Forms
         {
             base.OnCreateControl();
 
-#if NETFRAMEWORK
             if (!DesignMode)
-#else
-            if (!DesignMode || Application.HighDpiMode != HighDpiMode.DpiUnaware)
-#endif
-                ApplyDpi((int)_TabBufferGraphics.DpiX);
+                ApplyDpi(DeviceDpi);  // _TabBufferGraphics.DpiX is always 96 (bitmap default); DeviceDpi is correct
 
             OnFontChanged(EventArgs.Empty);
         }
@@ -89,6 +85,9 @@ namespace Adiict.UI.Forms
                 _TabBufferGraphics?.Dispose();
                 _TabBuffer?.Dispose();
                 _StyleProvider?.Dispose();
+                _fxTimer?.Stop();
+                _fxTimer?.Dispose();
+                _fxTimer = null;
             }
         }
 
@@ -114,6 +113,15 @@ namespace Adiict.UI.Forms
 
         private bool _SuspendDrawing;
 
+        // VisualFx animation
+        private System.Windows.Forms.Timer _fxTimer;
+        private int   _rippleTabIndex = -1;
+        private Point _rippleOrigin   = Point.Empty;
+        private float _rippleProgress = -1f;
+        private float[] _edgeLineOpacity = Array.Empty<float>();
+        private const float RippleProgressStep = 1f / (350f / 16f);  // ~350 ms at 16 ms ticks
+        private const float EdgeLineFadeStep   = 1f / (200f / 16f);  // ~200 ms fade
+
         private int _Dpi;
         private int _tabCloserButtonSize = TabCloserButtonSizeBase;
         private int _tabInnerPadding = TabInnerPaddingBase;
@@ -122,9 +130,11 @@ namespace Adiict.UI.Forms
 
         #region Public properties
 
+        [Description("Scaled size in pixels of the tab close button.")]
         public int TabCloserButtonSize => _tabCloserButtonSize;
 
         [Category("Appearance"), DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
+        [Description("The style provider that controls the visual rendering of tabs. Expand to configure individual appearance properties.")]
         public TabStyleProvider DisplayStyleProvider
         {
             get
@@ -143,6 +153,7 @@ namespace Adiict.UI.Forms
         }
 
         [Category("Appearance"), DefaultValue(typeof(TabStyle), "Default"), RefreshProperties(RefreshProperties.All)]
+        [Description("The visual style applied to the tab strip.")]
         public TabStyle DisplayStyle
         {
             get { return _Style; }
@@ -167,9 +178,10 @@ namespace Adiict.UI.Forms
             }
         }
 
-        [Category("Appearance"), 
-            RefreshProperties(RefreshProperties.All), 
+        [Category("Appearance"),
+            RefreshProperties(RefreshProperties.All),
             DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+        [Description("When true, tabs wrap to additional rows instead of scrolling.")]
         public new bool Multiline
         {
             get
@@ -197,6 +209,7 @@ namespace Adiict.UI.Forms
         }
 
         [Category("Appearance"), RefreshProperties(RefreshProperties.All)]
+        [Description("When true, mirrors the tab strip layout for right-to-left languages.")]
         public override bool RightToLeftLayout
         {
             get { return base.RightToLeftLayout; }
@@ -221,6 +234,7 @@ namespace Adiict.UI.Forms
         }
 
         [Category("Appearance"), DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+        [Description("The edge of the control on which the tab strip is displayed.")]
         public new TabAlignment Alignment
         {
             get { return base.Alignment; }
@@ -467,6 +481,18 @@ namespace Adiict.UI.Forms
             }
             else
             {
+                if (_StyleProvider != null && _StyleProvider.VisualFx && e.Button == MouseButtons.Left)
+                {
+                    int fxIdx = GetActiveIndex(mousePosition);
+                    if (fxIdx >= 0)
+                    {
+                        _rippleTabIndex = fxIdx;
+                        _rippleOrigin   = mousePosition;
+                        _rippleProgress = 0f;
+                        EnsureFxTimer();
+                    }
+                }
+
                 base.OnMouseDown(e);
                 if (AllowDrop)
                 {
@@ -614,7 +640,33 @@ namespace Adiict.UI.Forms
             {
                 e.Cancel = true;
             }
+
+            if (!e.Cancel && _StyleProvider != null && _StyleProvider.VisualFx
+                && e.Action == TabControlAction.Selecting)
+            {
+                EnsureEdgeLineArraySize();
+                EnsureFxTimer();
+            }
+
             base.OnSelecting(e);
+        }
+
+        protected override void OnControlAdded(ControlEventArgs e)
+        {
+            base.OnControlAdded(e);
+            if (_StyleProvider != null && _StyleProvider.VisualFx)
+                EnsureEdgeLineArraySize();
+        }
+
+        protected override void OnControlRemoved(ControlEventArgs e)
+        {
+            base.OnControlRemoved(e);
+            _rippleProgress = -1f;
+            _rippleTabIndex = -1;
+            _rippleOrigin   = Point.Empty;
+            if (_StyleProvider != null && _StyleProvider.VisualFx)
+                EnsureEdgeLineArraySize();
+            StopFxTimerIfIdle();
         }
 
         protected override void OnMove(EventArgs e)
@@ -883,10 +935,16 @@ namespace Adiict.UI.Forms
                     }
 
                     //	The selected tab must be drawn last so it appears on top.
+                    //	Reset any clip (non-multiline Top/Bottom sets one above to protect scroll-button
+                    //	areas while drawing unselected tabs; the selected tab — especially its bleed —
+                    //	must be allowed to paint across the full width).
+                    _TabBufferGraphics.ResetClip();
                     if (SelectedIndex > -1)
                     {
                         DrawTabPage(SelectedIndex, mousePosition, _TabBufferGraphics);
                     }
+
+
                 }
                 _TabBufferGraphics.Flush();
 
@@ -980,6 +1038,10 @@ namespace Adiict.UI.Forms
             var isTabEnabled = TabPages[index].Enabled;
             var isTabVisible = _Style != TabStyle.None && IsTabVisible(tabBounds, pageBounds);
 
+            // Bleed: selected tab fill extends 1 px past the page border edge so the tab fill
+            // covers the 1 px seam at the junction. Border must be drawn first for this to work.
+            bool applyBleed = isTabVisible && index == SelectedIndex && _StyleProvider.SelectedTabBleed;
+
             using (GraphicsPath tabPageBorder = GetTabPageBorder(pageBounds, tabBounds),
                     tabBorder = _StyleProvider.GetTabBorder(tabBounds))
             {
@@ -1003,26 +1065,58 @@ namespace Adiict.UI.Forms
                     graphics.FillPath(fillBrush, tabPageBorder);
                 }
 
+                //	For selected tab with bleed: draw border first so the tab fill can cover the seam
+                if (applyBleed)
+                    DrawTabPageBorder(tabPageBorder, state, graphics);
+
                 if (isTabVisible)
                 {
-                    //	Paint the tab
-                    PaintTab(tabBorder, tabCloserButtonRect, state, graphics, mousePosition);
+                    if (applyBleed)
+                    {
+                        //	Build a fill path extended toward the page to cover both our custom border
+                        //	and any native TabPage.BorderStyle border on the connection side.
+                        int bleed = GetTabBleedAmount(index);
+                        Rectangle bleedBounds = tabBounds;
+                        switch (Alignment)
+                        {
+                            case TabAlignment.Top:    bleedBounds.Height += bleed; break;
+                            case TabAlignment.Bottom: bleedBounds.Y -= bleed; bleedBounds.Height += bleed; break;
+                            case TabAlignment.Left:   bleedBounds.Width += bleed; break;
+                            case TabAlignment.Right:  bleedBounds.X -= bleed; bleedBounds.Width += bleed; break;
+                        }
+                        using (GraphicsPath tabBorderBleed = _StyleProvider.GetTabBorder(bleedBounds))
+                        {
+                            PaintTab(tabBorderBleed, tabCloserButtonRect, state, graphics, mousePosition, index, tabBounds);
+                        }
 
-                    //	Draw any image
-                    if (tabImageRect != Rectangle.Empty) DrawTabImage(tabImage, tabImageRect, graphics, isTabEnabled);
+                        //	Draw any image
+                        if (tabImageRect != Rectangle.Empty) DrawTabImage(tabImage, tabImageRect, graphics, isTabEnabled);
 
-                    //	Draw the text
-                    DrawTabText(TabPages[index].Text, state, graphics, tabTextRect);
+                        //	Draw the text
+                        DrawTabText(TabPages[index].Text, state, graphics, tabTextRect);
+                    }
+                    else
+                    {
+                        //	Paint the tab
+                        PaintTab(tabBorder, tabCloserButtonRect, state, graphics, mousePosition, index, tabBounds);
 
+                        //	Draw any image
+                        if (tabImageRect != Rectangle.Empty) DrawTabImage(tabImage, tabImageRect, graphics, isTabEnabled);
+
+                        //	Draw the text
+                        DrawTabText(TabPages[index].Text, state, graphics, tabTextRect);
+                    }
                 }
 
-                //	Paint the border
-                DrawTabPageBorder(tabPageBorder, state, graphics);
+                //	Paint the border (normal order for unselected tabs; already drawn above for bleed)
+                if (!applyBleed)
+                    DrawTabPageBorder(tabPageBorder, state, graphics);
+
 
             }
         }
 
-        private void PaintTab(GraphicsPath tabBorder, Rectangle tabCloserButtonRect, TabState state, Graphics graphics, Point mousePosition)
+        private void PaintTab(GraphicsPath tabBorder, Rectangle tabCloserButtonRect, TabState state, Graphics graphics, Point mousePosition, int tabIndex, Rectangle tabBounds)
         {
             _StyleProvider.PaintTabBackground(tabBorder, state, graphics);
 
@@ -1030,6 +1124,72 @@ namespace Adiict.UI.Forms
             _StyleProvider.DrawTabFocusIndicator(tabBorder, state, graphics);
             //	Paint the closer
             _StyleProvider.DrawTabCloser(tabCloserButtonRect, graphics, state, mousePosition);
+
+            if (_StyleProvider.VisualFx)
+            {
+                EnsureEdgeLineArraySize();
+                float rp     = (_rippleTabIndex == tabIndex) ? _rippleProgress : -1f;
+                Point ro     = (_rippleTabIndex == tabIndex) ? _rippleOrigin   : Point.Empty;
+                float edgeOp = (tabIndex < _edgeLineOpacity.Length) ? _edgeLineOpacity[tabIndex] : -1f;
+                _StyleProvider.DrawTabVisualFx(tabBorder, tabBounds, graphics, ro, rp, edgeOp);
+            }
+        }
+
+        private void EnsureEdgeLineArraySize()
+        {
+            int count = TabCount;
+            if (_edgeLineOpacity.Length == count) return;
+            float[] newArr = new float[count];
+            int copyLen = Math.Min(_edgeLineOpacity.Length, count);
+            Array.Copy(_edgeLineOpacity, newArr, copyLen);
+            int sel = SelectedIndex;
+            for (int i = copyLen; i < count; i++)
+                newArr[i] = (i == sel) ? 1f : 0f;
+            _edgeLineOpacity = newArr;
+        }
+
+        private void EnsureFxTimer()
+        {
+            if (DesignMode || _fxTimer != null) return;
+            _fxTimer = new System.Windows.Forms.Timer { Interval = 16 };
+            _fxTimer.Tick += OnFxTimerTick;
+            _fxTimer.Start();
+        }
+
+        private void StopFxTimerIfIdle()
+        {
+            if (_rippleProgress >= 0f) return;
+            foreach (float op in _edgeLineOpacity)
+                if (op > 0f && op < 1f) return;
+            _fxTimer?.Stop();
+            _fxTimer?.Dispose();
+            _fxTimer = null;
+        }
+
+        private void OnFxTimerTick(object sender, EventArgs e)
+        {
+            if (_StyleProvider == null || !_StyleProvider.VisualFx) { StopFxTimerIfIdle(); return; }
+
+            bool dirty = false;
+
+            if (_rippleProgress >= 0f)
+            {
+                _rippleProgress += RippleProgressStep;
+                if (_rippleProgress >= 1f) { _rippleProgress = -1f; _rippleTabIndex = -1; _rippleOrigin = Point.Empty; }
+                dirty = true;
+            }
+
+            EnsureEdgeLineArraySize();
+            int sel = SelectedIndex;
+            for (int i = 0; i < _edgeLineOpacity.Length; i++)
+            {
+                float op = _edgeLineOpacity[i];
+                if (i == sel && op < 1f) { _edgeLineOpacity[i] = Math.Min(1f, op + EdgeLineFadeStep); dirty = true; }
+                else if (i != sel && op > 0f) { _edgeLineOpacity[i] = Math.Max(0f, op - EdgeLineFadeStep); dirty = true; }
+            }
+
+            if (dirty) CustomPaint(MousePosition);
+            StopFxTimerIfIdle();
         }
 
         private void DrawTabPageBorder(GraphicsPath path, TabState state, Graphics graphics)
@@ -1091,6 +1251,7 @@ namespace Adiict.UI.Forms
                     break;
             }
 
+            Font drawFont = _StyleProvider.TabFont ?? Font;
             using (Brush textBrush = new SolidBrush(textColor))
             {
                 using (StringFormat format = GetStringFormat())
@@ -1101,13 +1262,13 @@ namespace Adiict.UI.Forms
                         {
                             m.Translate(Width - textBounds.Right - textBounds.Left, 0f);
                             graphics.Transform = m;
-                            graphics.DrawString(text, Font, textBrush, textBounds, format);
+                            graphics.DrawString(text, drawFont, textBrush, textBounds, format);
                             graphics.Transform = oldTransform;
                         }
                     }
                     else
                     {
-                        graphics.DrawString(text, Font, textBrush, textBounds, format);
+                        graphics.DrawString(text, drawFont, textBrush, textBounds, format);
                     }
                 }
             }
@@ -1473,6 +1634,27 @@ namespace Adiict.UI.Forms
             pageBounds.Y -= _StyleProvider.TabPageMargin.Top;
 
             return pageBounds;
+        }
+
+        // Returns how many pixels the selected tab fill must extend past pageBounds.
+        // The goal is to cover our own 1 px DrawTabPageBorder line and fill the TabPageMargin
+        // gap between pageBounds and the actual TabPage client edge — staying entirely within
+        // the tab-strip area so that the TabPage child (which repaints after us) does not cover
+        // the bleed.  TabPage.BorderStyle borders live inside the TabPage and are not reachable.
+        // marginGap derivation: GetPageBounds sets pageBounds.Top = DisplayRect.Y - Margin.Top
+        // but pageBounds.Bottom = DisplayRect.Bottom + Margin.Bottom - 1 (asymmetric -1 in Height).
+        private int GetTabBleedAmount(int tabIndex)
+        {
+            int marginGap;
+            switch (Alignment)
+            {
+                case TabAlignment.Top:    marginGap = _StyleProvider.TabPageMargin.Top; break;
+                case TabAlignment.Left:   marginGap = _StyleProvider.TabPageMargin.Left; break;
+                case TabAlignment.Bottom: marginGap = Math.Max(0, _StyleProvider.TabPageMargin.Bottom - 1); break;
+                default:                  marginGap = Math.Max(0, _StyleProvider.TabPageMargin.Right - 1); break;
+            }
+
+            return Math.Max(1, marginGap);
         }
 
         public Rectangle GetTabBounds(int index)
