@@ -125,7 +125,7 @@
         AAEAAAD/////AQAAAAAAAAAMAgAAAEZTeXN0ZW0uV2luZG93cy5Gb3JtcywgQ3VsdHVyZT1uZXV0cmFs
         LCBQdWJsaWNLZXlUb2tlbj1iNzdhNWM1NjE5MzRlMDg5BQEAAAAmU3lzdGVtLldpbmRvd3MuRm9ybXMu
         SW1hZ2VMaXN0U3RyZWFtZXIBAAAABERhdGEHAgIAAAAJAwAAAA8DAAAAQg4AAAJNU0Z0AUkBTAIBAQcB
-        AAGcAQQBnAEEARABAAEQAQAE/wEJAQAI/wFCAU0BNgEEBgABNgEEAgABKAMAAUADAAEgAwABAQEAAQgG
+        AAGsAQQBrAEEARABAAEQAQAE/wEJAQAI/wFCAU0BNgEEBgABNgEEAgABKAMAAUADAAEgAwABAQEAAQgG
         AAEIGAABgAIAAYADAAKAAQABgAMAAYABAAGAAQACgAIAA8ABAAHAAdwBwAEAAfABygGmAQABMwUAATMB
         AAEzAQABMwEAAjMCAAMWAQADHAEAAyIBAAMpAQADVQEAA00BAANCAQADOQEAAYABfAH/AQACUAH/AQAB
         kwEAAdYBAAH/AewBzAEAAcYB1gHvAQAB1gLnAQABkAGpAa0CAAH/ATMDAAFmAwABmQMAAcwCAAEzAwAC
@@ -188,6 +188,27 @@
         wAEDAeABBwH4AT8B/wHBAcABAwHgAQcB/AF/Af8BwQHAAQMI/ws=
 </value>
   </data>
+  <data name="textBox2.Text" xml:space="preserve">
+    <value>In Program.cs
+
+Application.SetHighDpiMode(HighDpiMode.PerMonitorV2);
+
+On Form
+
+protected override void OnDpiChanged(DpiChangedEventArgs e)
+{
+	base.OnDpiChanged(e);
+	tabControlExtra1.OnDpiChanged(e);
+	tabControlExtra2.OnDpiChanged(e);
+	tabControlExtra3.OnDpiChanged(e);
+	tabControlExtra4.OnDpiChanged(e);
+	tabControlExtra5.OnDpiChanged(e);
+	tabControlExtra6.OnDpiChanged(e);
+}</value>
+  </data>
+  <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>86</value>
+  </metadata>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="$this.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>

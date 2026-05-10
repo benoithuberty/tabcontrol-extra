@@ -194,6 +194,7 @@ namespace CSCustomTabControlDemo
             tabControlExtra5.DisplayStyleProvider.TextColorHighlighted = System.Drawing.Color.White;
             tabControlExtra5.DisplayStyleProvider.TextColorSelected = System.Drawing.SystemColors.ControlText;
             tabControlExtra5.DisplayStyleProvider.TextColorUnselected = System.Drawing.Color.White;
+            tabControlExtra5.DisplayStyleProvider.VisualFx = true;
             tabControlExtra5.Location = new System.Drawing.Point(42, 962);
             tabControlExtra5.Margin = new System.Windows.Forms.Padding(6);
             tabControlExtra5.Name = "tabControlExtra5";
@@ -338,6 +339,8 @@ namespace CSCustomTabControlDemo
             tabControlExtra2.DisplayStyleProvider.CloserColorSelected = System.Drawing.SystemColors.ControlDark;
             tabControlExtra2.DisplayStyleProvider.CloserColorSelectedActive = System.Drawing.SystemColors.ControlDark;
             tabControlExtra2.DisplayStyleProvider.CloserColorUnselected = System.Drawing.Color.Empty;
+            tabControlExtra2.DisplayStyleProvider.EdgeLineColor = System.Drawing.Color.Orange;
+            tabControlExtra2.DisplayStyleProvider.EdgeLineHeight = 4;
             tabControlExtra2.DisplayStyleProvider.FocusTrack = false;
             tabControlExtra2.DisplayStyleProvider.HotTrack = true;
             tabControlExtra2.DisplayStyleProvider.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -364,6 +367,7 @@ namespace CSCustomTabControlDemo
             tabControlExtra2.DisplayStyleProvider.TextColorHighlighted = System.Drawing.SystemColors.ControlText;
             tabControlExtra2.DisplayStyleProvider.TextColorSelected = System.Drawing.SystemColors.ControlText;
             tabControlExtra2.DisplayStyleProvider.TextColorUnselected = System.Drawing.SystemColors.ControlText;
+            tabControlExtra2.DisplayStyleProvider.VisualFx = true;
             tabControlExtra2.ImageList = imageList1;
             tabControlExtra2.Location = new System.Drawing.Point(30, 280);
             tabControlExtra2.Margin = new System.Windows.Forms.Padding(6);
@@ -521,11 +525,11 @@ namespace CSCustomTabControlDemo
             tabPage1.Controls.Add(textBox1);
             tabPage1.Controls.Add(button1);
             tabPage1.ImageKey = "(none)";
-            tabPage1.Location = new System.Drawing.Point(4, 31);
+            tabPage1.Location = new System.Drawing.Point(4, 43);
             tabPage1.Margin = new System.Windows.Forms.Padding(6);
             tabPage1.Name = "tabPage1";
             tabPage1.Padding = new System.Windows.Forms.Padding(6);
-            tabPage1.Size = new System.Drawing.Size(986, 151);
+            tabPage1.Size = new System.Drawing.Size(986, 139);
             tabPage1.TabIndex = 0;
             tabPage1.Text = "Allge&mein";
             tabPage1.UseVisualStyleBackColor = true;
@@ -552,11 +556,11 @@ namespace CSCustomTabControlDemo
             // 
             tabPage2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             tabPage2.ImageKey = "(none)";
-            tabPage2.Location = new System.Drawing.Point(4, 31);
+            tabPage2.Location = new System.Drawing.Point(4, 43);
             tabPage2.Margin = new System.Windows.Forms.Padding(6);
             tabPage2.Name = "tabPage2";
             tabPage2.Padding = new System.Windows.Forms.Padding(6);
-            tabPage2.Size = new System.Drawing.Size(986, 151);
+            tabPage2.Size = new System.Drawing.Size(986, 139);
             tabPage2.TabIndex = 1;
             tabPage2.Text = "tabPage&2";
             tabPage2.UseVisualStyleBackColor = true;
@@ -564,11 +568,11 @@ namespace CSCustomTabControlDemo
             // tabPage3
             // 
             tabPage3.ImageKey = "brush3.png";
-            tabPage3.Location = new System.Drawing.Point(4, 31);
+            tabPage3.Location = new System.Drawing.Point(4, 43);
             tabPage3.Margin = new System.Windows.Forms.Padding(6);
             tabPage3.Name = "tabPage3";
             tabPage3.Padding = new System.Windows.Forms.Padding(6);
-            tabPage3.Size = new System.Drawing.Size(986, 151);
+            tabPage3.Size = new System.Drawing.Size(986, 139);
             tabPage3.TabIndex = 2;
             tabPage3.Text = "tabPage3";
             tabPage3.UseVisualStyleBackColor = true;
@@ -576,11 +580,11 @@ namespace CSCustomTabControlDemo
             // tabPage4
             // 
             tabPage4.ImageKey = "(none)";
-            tabPage4.Location = new System.Drawing.Point(4, 31);
+            tabPage4.Location = new System.Drawing.Point(4, 43);
             tabPage4.Margin = new System.Windows.Forms.Padding(6);
             tabPage4.Name = "tabPage4";
             tabPage4.Padding = new System.Windows.Forms.Padding(6);
-            tabPage4.Size = new System.Drawing.Size(986, 151);
+            tabPage4.Size = new System.Drawing.Size(986, 139);
             tabPage4.TabIndex = 3;
             tabPage4.Text = "tabPage4";
             tabPage4.UseVisualStyleBackColor = true;
@@ -588,109 +592,109 @@ namespace CSCustomTabControlDemo
             // tabPage5
             // 
             tabPage5.ImageKey = "cd_music.png";
-            tabPage5.Location = new System.Drawing.Point(4, 31);
+            tabPage5.Location = new System.Drawing.Point(4, 43);
             tabPage5.Margin = new System.Windows.Forms.Padding(6);
             tabPage5.Name = "tabPage5";
-            tabPage5.Size = new System.Drawing.Size(986, 151);
+            tabPage5.Size = new System.Drawing.Size(986, 139);
             tabPage5.TabIndex = 4;
             tabPage5.Text = "tabPage5";
             tabPage5.UseVisualStyleBackColor = true;
             // 
             // tabPage60
             // 
-            tabPage60.Location = new System.Drawing.Point(4, 31);
+            tabPage60.Location = new System.Drawing.Point(4, 43);
             tabPage60.Margin = new System.Windows.Forms.Padding(6);
             tabPage60.Name = "tabPage60";
             tabPage60.Padding = new System.Windows.Forms.Padding(6);
-            tabPage60.Size = new System.Drawing.Size(986, 151);
+            tabPage60.Size = new System.Drawing.Size(986, 139);
             tabPage60.TabIndex = 5;
             tabPage60.Text = "tabPage60";
             tabPage60.UseVisualStyleBackColor = true;
             // 
             // tabPage61
             // 
-            tabPage61.Location = new System.Drawing.Point(4, 31);
+            tabPage61.Location = new System.Drawing.Point(4, 43);
             tabPage61.Margin = new System.Windows.Forms.Padding(6);
             tabPage61.Name = "tabPage61";
             tabPage61.Padding = new System.Windows.Forms.Padding(6);
-            tabPage61.Size = new System.Drawing.Size(986, 151);
+            tabPage61.Size = new System.Drawing.Size(986, 139);
             tabPage61.TabIndex = 6;
             tabPage61.Text = "tabPage61";
             tabPage61.UseVisualStyleBackColor = true;
             // 
             // tabPage62
             // 
-            tabPage62.Location = new System.Drawing.Point(4, 31);
+            tabPage62.Location = new System.Drawing.Point(4, 43);
             tabPage62.Margin = new System.Windows.Forms.Padding(6);
             tabPage62.Name = "tabPage62";
             tabPage62.Padding = new System.Windows.Forms.Padding(6);
-            tabPage62.Size = new System.Drawing.Size(986, 151);
+            tabPage62.Size = new System.Drawing.Size(986, 139);
             tabPage62.TabIndex = 7;
             tabPage62.Text = "tabPage62";
             tabPage62.UseVisualStyleBackColor = true;
             // 
             // tabPage63
             // 
-            tabPage63.Location = new System.Drawing.Point(4, 31);
+            tabPage63.Location = new System.Drawing.Point(4, 43);
             tabPage63.Margin = new System.Windows.Forms.Padding(6);
             tabPage63.Name = "tabPage63";
             tabPage63.Padding = new System.Windows.Forms.Padding(6);
-            tabPage63.Size = new System.Drawing.Size(986, 151);
+            tabPage63.Size = new System.Drawing.Size(986, 139);
             tabPage63.TabIndex = 8;
             tabPage63.Text = "tabPage63";
             tabPage63.UseVisualStyleBackColor = true;
             // 
             // tabPage64
             // 
-            tabPage64.Location = new System.Drawing.Point(4, 31);
+            tabPage64.Location = new System.Drawing.Point(4, 43);
             tabPage64.Margin = new System.Windows.Forms.Padding(6);
             tabPage64.Name = "tabPage64";
             tabPage64.Padding = new System.Windows.Forms.Padding(6);
-            tabPage64.Size = new System.Drawing.Size(986, 151);
+            tabPage64.Size = new System.Drawing.Size(986, 139);
             tabPage64.TabIndex = 9;
             tabPage64.Text = "tabPage64";
             tabPage64.UseVisualStyleBackColor = true;
             // 
             // tabPage65
             // 
-            tabPage65.Location = new System.Drawing.Point(4, 31);
+            tabPage65.Location = new System.Drawing.Point(4, 43);
             tabPage65.Margin = new System.Windows.Forms.Padding(6);
             tabPage65.Name = "tabPage65";
             tabPage65.Padding = new System.Windows.Forms.Padding(6);
-            tabPage65.Size = new System.Drawing.Size(986, 151);
+            tabPage65.Size = new System.Drawing.Size(986, 139);
             tabPage65.TabIndex = 10;
             tabPage65.Text = "tabPage65";
             tabPage65.UseVisualStyleBackColor = true;
             // 
             // tabPage66
             // 
-            tabPage66.Location = new System.Drawing.Point(4, 31);
+            tabPage66.Location = new System.Drawing.Point(4, 43);
             tabPage66.Margin = new System.Windows.Forms.Padding(6);
             tabPage66.Name = "tabPage66";
             tabPage66.Padding = new System.Windows.Forms.Padding(6);
-            tabPage66.Size = new System.Drawing.Size(986, 151);
+            tabPage66.Size = new System.Drawing.Size(986, 139);
             tabPage66.TabIndex = 11;
             tabPage66.Text = "tabPage66";
             tabPage66.UseVisualStyleBackColor = true;
             // 
             // tabPage67
             // 
-            tabPage67.Location = new System.Drawing.Point(4, 31);
+            tabPage67.Location = new System.Drawing.Point(4, 43);
             tabPage67.Margin = new System.Windows.Forms.Padding(6);
             tabPage67.Name = "tabPage67";
             tabPage67.Padding = new System.Windows.Forms.Padding(6);
-            tabPage67.Size = new System.Drawing.Size(986, 151);
+            tabPage67.Size = new System.Drawing.Size(986, 139);
             tabPage67.TabIndex = 12;
             tabPage67.Text = "tabPage67";
             tabPage67.UseVisualStyleBackColor = true;
             // 
             // tabPage68
             // 
-            tabPage68.Location = new System.Drawing.Point(4, 31);
+            tabPage68.Location = new System.Drawing.Point(4, 43);
             tabPage68.Margin = new System.Windows.Forms.Padding(6);
             tabPage68.Name = "tabPage68";
             tabPage68.Padding = new System.Windows.Forms.Padding(6);
-            tabPage68.Size = new System.Drawing.Size(986, 151);
+            tabPage68.Size = new System.Drawing.Size(986, 139);
             tabPage68.TabIndex = 13;
             tabPage68.Text = "tabPage68";
             tabPage68.UseVisualStyleBackColor = true;
@@ -760,6 +764,7 @@ namespace CSCustomTabControlDemo
             tabControlExtra4.DisplayStyleProvider.TextColorHighlighted = System.Drawing.SystemColors.ControlText;
             tabControlExtra4.DisplayStyleProvider.TextColorSelected = System.Drawing.SystemColors.HighlightText;
             tabControlExtra4.DisplayStyleProvider.TextColorUnselected = System.Drawing.SystemColors.ControlText;
+            tabControlExtra4.DisplayStyleProvider.VisualFx = true;
             tabControlExtra4.ImageList = imageList1;
             tabControlExtra4.Location = new System.Drawing.Point(38, 703);
             tabControlExtra4.Margin = new System.Windows.Forms.Padding(6);
@@ -866,6 +871,8 @@ namespace CSCustomTabControlDemo
             tabControlExtra3.DisplayStyleProvider.CloserColorSelected = System.Drawing.SystemColors.ControlDark;
             tabControlExtra3.DisplayStyleProvider.CloserColorSelectedActive = System.Drawing.SystemColors.ControlDark;
             tabControlExtra3.DisplayStyleProvider.CloserColorUnselected = System.Drawing.Color.Empty;
+            tabControlExtra3.DisplayStyleProvider.EdgeLineColor = System.Drawing.Color.White;
+            tabControlExtra3.DisplayStyleProvider.EdgeLineHeight = 4;
             tabControlExtra3.DisplayStyleProvider.FocusTrack = false;
             tabControlExtra3.DisplayStyleProvider.HotTrack = false;
             tabControlExtra3.DisplayStyleProvider.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -1002,6 +1009,8 @@ namespace CSCustomTabControlDemo
             tabControlExtra6.DisplayStyleProvider.CloserColorSelected = System.Drawing.Color.FromArgb(109, 109, 112);
             tabControlExtra6.DisplayStyleProvider.CloserColorSelectedActive = System.Drawing.Color.FromArgb(113, 113, 113);
             tabControlExtra6.DisplayStyleProvider.CloserColorUnselected = System.Drawing.Color.Empty;
+            tabControlExtra6.DisplayStyleProvider.EdgeLineColor = System.Drawing.Color.FromArgb(255, 255, 128);
+            tabControlExtra6.DisplayStyleProvider.EdgeLineHeight = 2;
             tabControlExtra6.DisplayStyleProvider.FocusTrack = false;
             tabControlExtra6.DisplayStyleProvider.HotTrack = true;
             tabControlExtra6.DisplayStyleProvider.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -1028,6 +1037,7 @@ namespace CSCustomTabControlDemo
             tabControlExtra6.DisplayStyleProvider.TextColorHighlighted = System.Drawing.Color.White;
             tabControlExtra6.DisplayStyleProvider.TextColorSelected = System.Drawing.Color.FromArgb(113, 113, 113);
             tabControlExtra6.DisplayStyleProvider.TextColorUnselected = System.Drawing.Color.White;
+            tabControlExtra6.DisplayStyleProvider.VisualFx = true;
             tabControlExtra6.Location = new System.Drawing.Point(86, 19);
             tabControlExtra6.Margin = new System.Windows.Forms.Padding(6);
             tabControlExtra6.Multiline = true;
@@ -1039,11 +1049,11 @@ namespace CSCustomTabControlDemo
             // tabPage69
             // 
             tabPage69.Controls.Add(pictureBox2);
-            tabPage69.Location = new System.Drawing.Point(67, 4);
+            tabPage69.Location = new System.Drawing.Point(87, 4);
             tabPage69.Margin = new System.Windows.Forms.Padding(6);
             tabPage69.Name = "tabPage69";
             tabPage69.Padding = new System.Windows.Forms.Padding(6);
-            tabPage69.Size = new System.Drawing.Size(138, 1014);
+            tabPage69.Size = new System.Drawing.Size(118, 1014);
             tabPage69.TabIndex = 0;
             tabPage69.Text = "tabPage69";
             tabPage69.UseVisualStyleBackColor = true;
@@ -1061,77 +1071,77 @@ namespace CSCustomTabControlDemo
             // 
             // tabPage70
             // 
-            tabPage70.Location = new System.Drawing.Point(67, 4);
+            tabPage70.Location = new System.Drawing.Point(46, 4);
             tabPage70.Margin = new System.Windows.Forms.Padding(6);
             tabPage70.Name = "tabPage70";
             tabPage70.Padding = new System.Windows.Forms.Padding(6);
-            tabPage70.Size = new System.Drawing.Size(138, 1014);
+            tabPage70.Size = new System.Drawing.Size(159, 1014);
             tabPage70.TabIndex = 1;
             tabPage70.Text = "tabPage70";
             tabPage70.UseVisualStyleBackColor = true;
             // 
             // tabPage71
             // 
-            tabPage71.Location = new System.Drawing.Point(67, 4);
+            tabPage71.Location = new System.Drawing.Point(87, 4);
             tabPage71.Margin = new System.Windows.Forms.Padding(6);
             tabPage71.Name = "tabPage71";
             tabPage71.Padding = new System.Windows.Forms.Padding(6);
-            tabPage71.Size = new System.Drawing.Size(138, 1014);
+            tabPage71.Size = new System.Drawing.Size(118, 1014);
             tabPage71.TabIndex = 2;
             tabPage71.Text = "tabPage71";
             tabPage71.UseVisualStyleBackColor = true;
             // 
             // tabPage72
             // 
-            tabPage72.Location = new System.Drawing.Point(67, 4);
+            tabPage72.Location = new System.Drawing.Point(46, 4);
             tabPage72.Margin = new System.Windows.Forms.Padding(6);
             tabPage72.Name = "tabPage72";
             tabPage72.Padding = new System.Windows.Forms.Padding(6);
-            tabPage72.Size = new System.Drawing.Size(138, 1014);
+            tabPage72.Size = new System.Drawing.Size(159, 1014);
             tabPage72.TabIndex = 3;
             tabPage72.Text = "tabPage72";
             tabPage72.UseVisualStyleBackColor = true;
             // 
             // tabPage73
             // 
-            tabPage73.Location = new System.Drawing.Point(67, 4);
+            tabPage73.Location = new System.Drawing.Point(46, 4);
             tabPage73.Margin = new System.Windows.Forms.Padding(6);
             tabPage73.Name = "tabPage73";
             tabPage73.Padding = new System.Windows.Forms.Padding(6);
-            tabPage73.Size = new System.Drawing.Size(138, 1014);
+            tabPage73.Size = new System.Drawing.Size(159, 1014);
             tabPage73.TabIndex = 4;
             tabPage73.Text = "tabPage73";
             tabPage73.UseVisualStyleBackColor = true;
             // 
             // tabPage74
             // 
-            tabPage74.Location = new System.Drawing.Point(67, 4);
+            tabPage74.Location = new System.Drawing.Point(46, 4);
             tabPage74.Margin = new System.Windows.Forms.Padding(6);
             tabPage74.Name = "tabPage74";
             tabPage74.Padding = new System.Windows.Forms.Padding(6);
-            tabPage74.Size = new System.Drawing.Size(138, 1014);
+            tabPage74.Size = new System.Drawing.Size(159, 1014);
             tabPage74.TabIndex = 5;
             tabPage74.Text = "tabPage74";
             tabPage74.UseVisualStyleBackColor = true;
             // 
             // tabPage75
             // 
-            tabPage75.Location = new System.Drawing.Point(67, 4);
+            tabPage75.Location = new System.Drawing.Point(46, 4);
             tabPage75.Margin = new System.Windows.Forms.Padding(6);
             tabPage75.Name = "tabPage75";
             tabPage75.Padding = new System.Windows.Forms.Padding(6);
-            tabPage75.Size = new System.Drawing.Size(138, 1014);
+            tabPage75.Size = new System.Drawing.Size(159, 1014);
             tabPage75.TabIndex = 6;
             tabPage75.Text = "tabPage75";
             tabPage75.UseVisualStyleBackColor = true;
             // 
             // tabPage76
             // 
-            tabPage76.Location = new System.Drawing.Point(67, 4);
+            tabPage76.Location = new System.Drawing.Point(87, 4);
             tabPage76.Margin = new System.Windows.Forms.Padding(6);
             tabPage76.Name = "tabPage76";
             tabPage76.Padding = new System.Windows.Forms.Padding(6);
-            tabPage76.Size = new System.Drawing.Size(138, 1014);
+            tabPage76.Size = new System.Drawing.Size(118, 1014);
             tabPage76.TabIndex = 7;
             tabPage76.Text = "tabPage76";
             tabPage76.UseVisualStyleBackColor = true;
@@ -1162,7 +1172,7 @@ namespace CSCustomTabControlDemo
             textBox2.Name = "textBox2";
             textBox2.Size = new System.Drawing.Size(652, 754);
             textBox2.TabIndex = 0;
-            textBox2.Text = "In Program.cs\r\n\r\nApplication.SetHighDpiMode(HighDpiMode.PerMonitorV2);\r\n\r\nOn Form\r\n\r\nprotected override void OnDpiChanged(DpiChangedEventArgs e)\r\n{\r\n\tbase.OnDpiChanged(e);\r\n}";
+            textBox2.Text = resources.GetString("textBox2.Text");
             // 
             // MainForm
             // 

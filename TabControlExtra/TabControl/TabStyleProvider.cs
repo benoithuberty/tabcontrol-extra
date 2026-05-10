@@ -1310,30 +1310,74 @@ namespace Adiict.UI.Forms
                 }
             }
 
-            // Ripple: expanding white translucent circle clipped to tab shape
+            // Ripple: expanding ring (~10 px wide) with contrast-aware color and feathered edges
             if (rippleProgress >= 0f && rippleProgress < 1f && rippleOrigin != Point.Empty)
             {
+                const float ringWidth = 10f;
+                const float feather   = 2.5f;   // soft transition width at each radial boundary
+
                 float maxRadius = (float)Math.Sqrt(
                     (double)(tabBounds.Width * tabBounds.Width + tabBounds.Height * tabBounds.Height));
+                float outerR = rippleProgress * maxRadius;
+                float innerR = Math.Max(0f, outerR - ringWidth);
 
-                float radius = rippleProgress * maxRadius;
-                int alpha = Math.Max(0, (int)((1f - rippleProgress) * 100f));
+                // Ripple color = same hue as the tab, shifted ~30% in luminance
+                // (darker on light tabs, lighter on dark tabs) for a subtle, visible contrast
+                (Color bgColor, Color _) = GetTabBackgroundColors(TabState.Selected);
+                Color baseColor = bgColor.IsEmpty ? SystemColors.Control : bgColor;
+                float lum = (0.299f * baseColor.R + 0.587f * baseColor.G + 0.114f * baseColor.B) / 255f;
+                int shift = (int)(0.30f * 255f);   // ≈ 76 — keeps luminance delta ≤ 30 %
+                Color rippleColor = lum > 0.5f
+                    ? Color.FromArgb(Math.Max(0,   baseColor.R - shift),
+                                     Math.Max(0,   baseColor.G - shift),
+                                     Math.Max(0,   baseColor.B - shift))
+                    : Color.FromArgb(Math.Min(255, baseColor.R + shift),
+                                     Math.Min(255, baseColor.G + shift),
+                                     Math.Min(255, baseColor.B + shift));
 
-                RectangleF rippleRect = new RectangleF(
-                    rippleOrigin.X - radius,
-                    rippleOrigin.Y - radius,
-                    radius * 2f,
-                    radius * 2f);
+                // Overall alpha fades linearly as the ring expands
+                float baseA = (1f - rippleProgress) * 0.55f;
 
-                using (var ellipsePath = new GraphicsPath())
-                using (var rippleBrush = new SolidBrush(Color.FromArgb(alpha, Color.White)))
+                if (outerR > 0.5f && baseA > 0.004f)
                 {
-                    ellipsePath.AddEllipse(rippleRect);
-                    Region ellipseRegion = new Region(ellipsePath);
-                    ellipseRegion.Intersect(tabBorder);
+                    // Clip to tab shape; FillPath (not FillRegion) gives anti-aliased edges
+                    GraphicsState savedState = graphics.Save();
                     graphics.SmoothingMode = SmoothingMode.AntiAlias;
-                    graphics.FillRegion(rippleBrush, ellipseRegion);
-                    ellipseRegion.Dispose();
+                    graphics.SetClip(tabBorder, CombineMode.Intersect);
+
+                    // Draws a filled annulus (ring) from innerRadius to outerRadius
+                    void DrawAnnulus(float ri, float ro, float alphaFactor)
+                    {
+                        if (ro <= ri || ro <= 0f) return;
+                        int a = Math.Min(255, (int)(baseA * alphaFactor * 255f));
+                        if (a < 1) return;
+                        using (var path = new GraphicsPath(FillMode.Alternate))
+                        using (var brush = new SolidBrush(Color.FromArgb(a, rippleColor)))
+                        {
+                            path.AddEllipse(rippleOrigin.X - ro, rippleOrigin.Y - ro, ro * 2f, ro * 2f);
+                            if (ri > 0f)
+                                path.AddEllipse(rippleOrigin.X - ri, rippleOrigin.Y - ri, ri * 2f, ri * 2f);
+                            graphics.FillPath(brush, path);
+                        }
+                    }
+
+                    float coreIn  = innerR + feather;
+                    float coreOut = outerR - feather;
+
+                    if (coreOut > coreIn)
+                    {
+                        // Full three-layer feathered ring
+                        DrawAnnulus(innerR,   coreIn,  0.4f);   // inner soft edge
+                        DrawAnnulus(coreIn,   coreOut, 1.0f);   // opaque core
+                        DrawAnnulus(coreOut,  outerR,  0.4f);   // outer soft edge
+                    }
+                    else
+                    {
+                        // Ring narrower than 2×feather (early animation): single faded band
+                        DrawAnnulus(innerR, outerR, 0.7f);
+                    }
+
+                    graphics.Restore(savedState);
                 }
             }
         }
